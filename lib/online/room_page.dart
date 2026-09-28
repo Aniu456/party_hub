@@ -74,104 +74,175 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text(widget.game == null ? '加入房间' : '创建房间')),
-    body: Form(
-      key: form,
-      child: PageContent(
-        children: [
-          const SizedBox(height: 12),
-          if (widget.game != null)
-            GameArtwork(game: widget.game!, height: 160)
-          else
-            SurfaceCard(
-              color: partyMist,
-              child: Column(
-                children: [
-                  const PartyIllustration(),
-                  const SizedBox(height: 8),
-                  Text(
-                    '快乐，就差你了',
-                    style: Theme.of(context).textTheme.headlineSmall
-                        ?.copyWith(color: partyInk),
-                  ),
-                ],
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final game = widget.game;
+    final joining = game == null;
+    return Scaffold(
+      appBar: AppBar(title: Text(joining ? '加入房间' : '创建房间')),
+      body: Form(
+        key: form,
+        child: PageContent(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final artwork = SizedBox(
+                    width: 68,
+                    height: 68,
+                    child: joining
+                        ? const PlayerAvatar(index: 2, size: 68)
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: GameArtwork(game: game, height: 68),
+                          ),
+                  );
+                  final details = Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        joining ? '朋友的邀请' : '即将开局',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: colors.primary,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        joining ? '快乐，就差你了' : game.name,
+                        style: TextStyle(
+                          color: colors.onSurface,
+                          fontSize: 20,
+                          height: 1.25,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  );
+                  if (MediaQuery.textScalerOf(context).scale(16) > 24) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [artwork, const SizedBox(height: 14), details],
+                    );
+                  }
+                  return Row(
+                    children: [
+                      artwork,
+                      const SizedBox(width: 16),
+                      Expanded(child: details),
+                    ],
+                  );
+                },
               ),
             ),
-          const SizedBox(height: 28),
-          Text(
-            widget.game == null ? '找到朋友的那一局' : '开一局${widget.game!.name}',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            widget.game == null
-                ? '填好昵称和房间码，马上与朋友会合。'
-                : '创建后把房间码告诉朋友，大家准备好就能开始。',
-          ),
-          const SizedBox(height: 28),
-          const Text('昵称会保存在本机，下次自动填写。'),
-          const SizedBox(height: 12),
-          TextFormField(
-            controller: name,
-            enabled: !entering,
-            maxLength: 20,
-            textInputAction: widget.game == null
-                ? TextInputAction.next
-                : TextInputAction.done,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: UserProfile.validateNickname,
-            decoration: const InputDecoration(
-              labelText: '你的昵称',
-              hintText: '朋友们怎么称呼你',
-              counterText: '',
-              prefixIcon: Icon(Icons.person_outline_rounded),
-            ),
-          ),
-          if (widget.game == null) ...[
+            const SizedBox(height: 16),
+            const Divider(height: 1),
             const SizedBox(height: 20),
+            Text(
+              joining ? '填好昵称和房间码，马上与朋友会合。' : '创建后把房间码告诉朋友，大家准备好就能开始。',
+              style: TextStyle(fontSize: 13, color: colors.onSurfaceVariant),
+            ),
+            const SizedBox(height: 24),
             TextFormField(
-              controller: code,
+              controller: name,
               enabled: !entering,
-              maxLength: 6,
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.done,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              maxLength: 20,
+              textInputAction: joining
+                  ? TextInputAction.next
+                  : TextInputAction.done,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) =>
-                  RegExp(r'^\d{6}$').hasMatch(value?.trim() ?? '')
-                  ? null
-                  : '请输入完整的 6 位房间码',
+              validator: UserProfile.validateNickname,
               decoration: const InputDecoration(
-                labelText: '六位房间码',
-                hintText: '向开房的朋友获取',
+                labelText: '你的昵称',
+                hintText: '朋友们怎么称呼你',
                 counterText: '',
-                prefixIcon: Icon(Icons.tag_rounded),
+                errorMaxLines: 4,
+                prefixIcon: Icon(Icons.person_outline_rounded, size: 20),
               ),
-              onFieldSubmitted: (_) => enter(),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              '昵称会保存在本机，下次自动填写。',
+              style: TextStyle(fontSize: 12, color: colors.onSurfaceVariant),
+            ),
+            if (joining) ...[
+              const SizedBox(height: 24),
+              Padding(
+                padding: EdgeInsets.zero,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '六位房间码',
+                      style: TextStyle(
+                        color: colors.onSecondaryContainer,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    TextFormField(
+                      controller: code,
+                      enabled: !entering,
+                      maxLength: 6,
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) =>
+                          RegExp(r'^\d{6}$').hasMatch(value?.trim() ?? '')
+                          ? null
+                          : '请输入完整的 6 位房间码',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 4,
+                        color: colors.primary,
+                      ),
+                      decoration: const InputDecoration(
+                        hintText: '000000',
+                        prefixIcon: Icon(Icons.tag_rounded, size: 20),
+                        counterText: '',
+                        errorMaxLines: 4,
+                      ),
+                      onFieldSubmitted: (_) => enter(),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      '向开房的朋友获取',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: colors.onSecondaryContainer,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            const SizedBox(height: 24),
+            if (saveError != null) InfoNote(saveError!, error: true),
+            FilledButton(
+              onPressed: entering ? null : enter,
+              child: Text(
+                entering
+                    ? '正在进入…'
+                    : joining
+                    ? '加入房间'
+                    : '创建房间',
+              ),
+            ),
+            const SizedBox(height: 12),
+            const InfoNote(
+              '每人使用自己的设备。讨论、口述和动作类玩法，需要面对面或自行语音通话。',
+              icon: Icons.chat_bubble_outline_rounded,
             ),
           ],
-          const SizedBox(height: 28),
-          if (saveError != null) InfoNote(saveError!, error: true),
-          FilledButton.icon(
-            onPressed: entering ? null : enter,
-            icon: const Icon(Icons.arrow_forward_rounded),
-            label: Text(
-              entering
-                  ? '正在进入…'
-                  : widget.game == null
-                  ? '加入房间'
-                  : '创建房间',
-            ),
-          ),
-          const InfoNote(
-            '每人使用自己的设备。讨论、口述和动作类玩法，需要面对面或自行语音通话。',
-            icon: Icons.chat_bubble_outline_rounded,
-          ),
-        ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class RoomPage extends StatefulWidget {

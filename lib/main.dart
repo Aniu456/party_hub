@@ -101,7 +101,7 @@ class _GameLobbyPageState extends State<GameLobbyPage> {
                           selected: (partySize ?? 0) == count,
                           labelStyle: TextStyle(
                             color: (partySize ?? 0) == count
-                                ? colors.surface
+                                ? colors.onPrimary
                                 : colors.onSurface,
                           ),
                           onSelected: (_) => Navigator.pop(context, count),
@@ -150,24 +150,22 @@ class _GameLobbyPageState extends State<GameLobbyPage> {
         children: [
           Row(
             children: [
-              Container(
-                width: 38,
-                height: 38,
-                decoration: BoxDecoration(
-                  color: colors.primary,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(
-                  Icons.casino_outlined,
-                  color: colors.onPrimary,
-                  size: 24,
-                ),
-              ),
-              const SizedBox(width: 10),
               Expanded(
-                child: Text(
-                  '康师傅',
-                  style: Theme.of(context).textTheme.titleLarge,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      profile?.nickname.isNotEmpty == true
+                          ? '嗨，${profile!.nickname}'
+                          : '朋友，欢迎来玩',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      '今天玩什么？',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ],
                 ),
               ),
               IconButton(
@@ -193,7 +191,7 @@ class _GameLobbyPageState extends State<GameLobbyPage> {
                           builder: (_) => UserCenterPage(profile: profile),
                         ),
                       ),
-                icon: const PlayerAvatar(index: 0, size: 34),
+                icon: const PlayerAvatar(index: 0, size: 38),
               ),
             ],
           ),
@@ -207,6 +205,9 @@ class _GameLobbyPageState extends State<GameLobbyPage> {
               textInputAction: TextInputAction.search,
               onSubmitted: (_) => FocusScope.of(context).unfocus(),
               decoration: InputDecoration(
+                labelText: '搜索游戏',
+                hintText: '试试「你画我猜」',
+                prefixIcon: const Icon(Icons.search_rounded),
                 suffixIcon: query.isEmpty
                     ? null
                     : IconButton(
@@ -217,139 +218,82 @@ class _GameLobbyPageState extends State<GameLobbyPage> {
                         },
                         icon: const Icon(Icons.close_rounded),
                       ),
-                labelText: '搜索游戏',
-                hintText: '试试「你画我猜」',
-                prefixIcon: const Icon(Icons.search_rounded),
               ),
               onChanged: (value) => setState(() => query = value.trim()),
             ),
-            const SizedBox(height: 16),
-          ],
-          if (!searching) ...[
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: partyMist,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: LayoutBuilder(
-                builder: (context, constraints) => Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'LET’S PLAY TOGETHER',
-                            style: TextStyle(
-                              color: partyInk,
-                              fontSize: 10,
-                              letterSpacing: 1.3,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          const Text(
-                            '好朋友，\n来一局。',
-                            style: TextStyle(
-                              color: partyInk,
-                              fontSize: 30,
-                              height: 1.25,
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: -1,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            '${plannedGames.length} 款游戏 · 快乐不重样',
-                            style: const TextStyle(
-                              color: partyInk,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (constraints.maxWidth >= 280 &&
-                        MediaQuery.textScalerOf(context).scale(16) < 24)
-                      const SizedBox(
-                        width: 130,
-                        height: 150,
-                        child: Center(child: PartyIllustration()),
-                      ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Semantics(
-              button: true,
-              child: Material(
-                color: colors.surface,
-                borderRadius: BorderRadius.circular(20),
-                clipBehavior: Clip.antiAlias,
-                child: InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (_) => const RoomEntryPage(),
-                    ),
+          ] else
+            Material(
+              color: colors.secondaryContainer,
+              borderRadius: BorderRadius.circular(16),
+              clipBehavior: Clip.antiAlias,
+              child: InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const RoomEntryPage(),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.meeting_room_outlined,
-                          color: colors.primary,
-                          size: 28,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.meeting_room_outlined,
+                        color: colors.primary,
+                        size: 26,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '朋友已经开好房间？',
+                              style: Theme.of(context).textTheme.titleSmall
+                                  ?.copyWith(fontWeight: FontWeight.w700),
+                            ),
+                            const SizedBox(height: 3),
+                            Text(
+                              '输入房间码加入',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: colors.primary),
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 14),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '朋友已经开好房间？',
-                                style: TextStyle(
-                                  color: colors.onSurface,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                '输入房间码加入',
-                                style: TextStyle(
-                                  color: colors.onSurfaceVariant,
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_rounded,
-                          color: colors.primary,
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.arrow_forward_rounded,
+                        color: colors.primary,
+                        size: 20,
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-          ],
-          SectionHeading(
-            searching ? '找一局好玩的' : '今天玩什么',
-            trailing: '${games.length} 款游戏',
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              onPressed: choosePlayerCount,
-              icon: const Icon(Icons.people_outline_rounded, size: 20),
-              label: Text(partySize == null ? '按人数挑游戏' : '$partySize 人可玩'),
-            ),
+          const SizedBox(height: 20),
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            children: [
+              Text(
+                searching ? '搜索结果 · ${games.length}' : '${games.length} 款游戏',
+                style: Theme.of(context).textTheme.titleSmall
+                    ?.copyWith(fontWeight: FontWeight.w700),
+              ),
+              TextButton.icon(
+                onPressed: choosePlayerCount,
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  textStyle: Theme.of(context).textTheme.labelLarge
+                      ?.copyWith(fontSize: 12, fontWeight: FontWeight.w600),
+                ),
+                icon: const Icon(Icons.tune_rounded, size: 16),
+                label: Text(partySize == null ? '按人数挑游戏' : '$partySize 人可玩'),
+              ),
+            ],
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -363,32 +307,55 @@ class _GameLobbyPageState extends State<GameLobbyPage> {
                   '轻松破冰',
                   '双人 PK',
                 ])
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: ChoiceChip(
-                      label: Text(item),
-                      selected: category == item,
-                      labelStyle: TextStyle(
-                        color: category == item
-                            ? colors.surface
-                            : colors.onSurface,
-                        fontWeight: FontWeight.w600,
+                  Semantics(
+                    selected: category == item,
+                    button: true,
+                    child: InkWell(
+                      splashFactory: NoSplash.splashFactory,
+                      highlightColor: Colors.transparent,
+                      onTap: () => setState(() => category = item),
+                      child: Container(
+                        constraints: const BoxConstraints(minHeight: 48),
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(right: 24),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: category == item
+                                  ? colors.primary
+                                  : Colors.transparent,
+                              width: 3,
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          item,
+                          style: Theme.of(context).textTheme.labelLarge
+                              ?.copyWith(
+                                color: category == item
+                                    ? colors.primary
+                                    : colors.onSurfaceVariant,
+                                fontWeight: category == item
+                                    ? FontWeight.w700
+                                    : FontWeight.w500,
+                                fontSize: 13,
+                              ),
+                        ),
                       ),
-                      onSelected: (_) => setState(() => category = item),
                     ),
                   ),
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 8),
           if (games.isEmpty)
             SurfaceCard(
               child: Column(
                 children: [
-                  Icon(Icons.search_off_rounded, size: 40),
-                  SizedBox(height: 12),
-                  Text('暂时没找到这个游戏'),
-                  SizedBox(height: 8),
+                  const Icon(Icons.search_off_rounded, size: 36),
+                  const SizedBox(height: 12),
+                  const Text('暂时没找到这个游戏'),
+                  const SizedBox(height: 8),
                   const Text('换个名字、人数或分类，再找找看。'),
                   TextButton(
                     onPressed: resetFilters,
@@ -397,35 +364,11 @@ class _GameLobbyPageState extends State<GameLobbyPage> {
                 ],
               ),
             ),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              final largeText =
-                  MediaQuery.textScalerOf(context).scale(16) >= 24;
-              final columns = largeText
-                  ? 1
-                  : constraints.maxWidth > 650
-                  ? 3
-                  : 2;
-              final width =
-                  (constraints.maxWidth - 12 * (columns - 1)) / columns;
-              return Wrap(
-                spacing: 12,
-                runSpacing: 16,
-                children: [
-                  for (final game in games)
-                    SizedBox(
-                      width: width,
-                      child: _GameCard(game: game),
-                    ),
-                ],
-              );
-            },
-          ),
-          const SizedBox(height: 24),
-          const Text(
-            '两个人也好，一群人也好。\n总有一局，适合现在的你们。',
-            textAlign: TextAlign.center,
-          ),
+          for (final game in games) ...[
+            _GameCard(game: game),
+            if (game != games.last)
+              Divider(height: 1, color: colors.outlineVariant),
+          ],
         ],
       ),
     );
@@ -437,40 +380,67 @@ class _GameCard extends StatelessWidget {
   final PartyGame game;
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final look = gameLooks[game.id]!;
     return Semantics(
       button: true,
       child: Material(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        clipBehavior: Clip.antiAlias,
+        color: Colors.transparent,
         child: InkWell(
+          borderRadius: BorderRadius.circular(12),
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute<void>(builder: (_) => GameDetailPage(game: game)),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                GameArtwork(game: game),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(6, 14, 6, 8),
+                if (MediaQuery.textScalerOf(context).scale(16) < 24) ...[
+                  SizedBox(
+                    width: 52,
+                    child: GameArtwork(game: game, height: 60),
+                  ),
+                  const SizedBox(width: 12),
+                ],
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        game.name,
-                        style: Theme.of(context).textTheme.titleMedium,
+                      Wrap(
+                        spacing: 12,
+                        runSpacing: 4,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text(
+                            game.name,
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                          Text(
+                            '${playerCountLabel(game)}  ·  ${look.category}',
+                            style: Theme.of(context).textTheme.labelSmall
+                                ?.copyWith(color: colors.primary, fontSize: 11),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 4),
                       Text(
-                        playerCountLabel(game),
-                        style: Theme.of(context).textTheme.bodyMedium
-                            ?.copyWith(fontSize: 12),
+                        look.teaser,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: colors.onSurfaceVariant,
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(width: 8),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  size: 20,
+                  color: colors.onSurfaceVariant,
                 ),
               ],
             ),
@@ -531,47 +501,65 @@ class GameDetailPage extends StatelessWidget {
       ),
       body: PageContent(
         children: [
-          GameArtwork(game: game, height: 168),
-          const SizedBox(height: 24),
-          Text(game.name, style: Theme.of(context).textTheme.headlineLarge),
-          const SizedBox(height: 8),
-          Text(
-            look.teaser,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const SizedBox(height: 20),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
+          Row(
             children: [
-              _DetailTag(Icons.people_outline_rounded, playerCountLabel(game)),
-              const _DetailTag(Icons.wifi_rounded, '支持联机'),
-              const _DetailTag(Icons.smartphone_rounded, '可同机玩'),
+              if (MediaQuery.textScalerOf(context).scale(16) < 24) ...[
+                SizedBox(width: 76, child: GameArtwork(game: game, height: 80)),
+                const SizedBox(width: 16),
+              ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      game.name,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      look.teaser,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      playerCountLabel(game),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
-          const SectionHeading('怎么玩'),
-          SurfaceCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(game.rules, style: Theme.of(context).textTheme.bodyLarge),
-                const SizedBox(height: 16),
-                const Divider(height: 1),
-                InfoNote(
-                  game.id == 'undercover'
-                      ? '至少 1 名主持人 + 3 名玩家才能开局。'
-                      : game.minPlayers == game.maxPlayers
-                      ? '需要 ${game.minPlayers} 名玩家对战。'
-                      : '至少 ${game.minPlayers} 名玩家才能开局。',
-                  icon: Icons.people_outline_rounded,
-                ),
-                if (game.id == 'undercover')
-                  const Text('主持人拥有上帝视角，能查看全部身份和词语，不参与拿词、发言和投票。'),
-              ],
-            ),
+          const SizedBox(height: 20),
+          const Wrap(
+            spacing: 24,
+            runSpacing: 12,
+            children: [
+              _DetailTag(Icons.wifi_rounded, '支持联机'),
+              _DetailTag(Icons.smartphone_rounded, '可同机玩'),
+            ],
           ),
+          const SizedBox(height: 20),
+          const Divider(height: 1),
+          const SectionHeading('怎么玩'),
+          Text(game.rules, style: Theme.of(context).textTheme.bodyLarge),
+          const SizedBox(height: 20),
+          const Divider(height: 1),
+          const SectionHeading('开局须知'),
+          Text(
+            game.id == 'undercover'
+                ? '至少 1 名主持人 + 3 名玩家才能开局。'
+                : game.minPlayers == game.maxPlayers
+                ? '需要 ${game.minPlayers} 名玩家对战。'
+                : '至少 ${game.minPlayers} 名玩家才能开局。',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          if (game.id == 'undercover') ...[
+            const SizedBox(height: 8),
+            const Text('主持人拥有上帝视角，能查看全部身份和词语，不参与拿词、发言和投票。'),
+          ],
           const InfoNote('联机时每人使用自己的设备；同机时围坐一起，轮流传递手机。讨论和表演需要面对面或自行语音通话。'),
         ],
       ),
@@ -584,18 +572,21 @@ class _DetailTag extends StatelessWidget {
   final IconData icon;
   final String label;
   @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-    decoration: BoxDecoration(
-      color: Theme.of(context).colorScheme.surface,
-      borderRadius: BorderRadius.circular(12),
-    ),
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4),
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 18),
+        Icon(icon, size: 16, color: Theme.of(context).colorScheme.primary),
         const SizedBox(width: 6),
-        Text(label, style: Theme.of(context).textTheme.bodyMedium),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
       ],
     ),
   );

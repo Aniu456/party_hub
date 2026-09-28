@@ -26,54 +26,52 @@ ThemeData partyTheme(Brightness brightness) {
   final base = ThemeData(useMaterial3: true, colorScheme: scheme);
   final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(16));
   return base.copyWith(
-    scaffoldBackgroundColor: dark
-        ? const Color(0xFF131A2A)
-        : const Color(0xFFF6F8FC),
+    scaffoldBackgroundColor: dark ? const Color(0xFF131A2A) : Colors.white,
     textTheme: base.textTheme.copyWith(
       headlineLarge: TextStyle(
-        fontSize: 34,
+        fontSize: 28,
         fontWeight: FontWeight.w800,
         letterSpacing: -1.2,
         color: scheme.onSurface,
       ),
       headlineMedium: TextStyle(
-        fontSize: 28,
+        fontSize: 26,
         fontWeight: FontWeight.w800,
         letterSpacing: -.8,
         color: scheme.onSurface,
       ),
       headlineSmall: TextStyle(
-        fontSize: 24,
+        fontSize: 22,
         fontWeight: FontWeight.w700,
         color: scheme.onSurface,
       ),
       titleLarge: TextStyle(
-        fontSize: 21,
+        fontSize: 18,
         fontWeight: FontWeight.w700,
         color: scheme.onSurface,
       ),
       titleMedium: TextStyle(
-        fontSize: 17,
+        fontSize: 16,
         fontWeight: FontWeight.w600,
         color: scheme.onSurface,
       ),
-      bodyLarge: TextStyle(fontSize: 16, height: 1.6, color: scheme.onSurface),
+      bodyLarge: TextStyle(fontSize: 15, height: 1.55, color: scheme.onSurface),
       bodyMedium: TextStyle(
         fontSize: 14,
         height: 1.5,
         color: scheme.onSurfaceVariant,
       ),
-      labelLarge: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+      labelLarge: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: dark ? const Color(0xFF131A2A) : const Color(0xFFF6F8FC),
+      backgroundColor: dark ? const Color(0xFF131A2A) : Colors.white,
       foregroundColor: scheme.onSurface,
       surfaceTintColor: Colors.transparent,
       centerTitle: true,
       elevation: 0,
       titleTextStyle: TextStyle(
         color: scheme.onSurface,
-        fontSize: 17,
+        fontSize: 16,
         fontWeight: FontWeight.w600,
       ),
     ),
@@ -81,16 +79,16 @@ ThemeData partyTheme(Brightness brightness) {
       style: FilledButton.styleFrom(
         minimumSize: const Size(48, 54),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-        shape: shape,
+        shape: const StadiumBorder(),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         minimumSize: const Size(48, 52),
-        foregroundColor: scheme.onSurface,
+        foregroundColor: scheme.primary,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-        shape: shape,
-        side: BorderSide(color: scheme.outlineVariant),
+        shape: const StadiumBorder(),
+        side: BorderSide(color: scheme.primary),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -104,8 +102,8 @@ ThemeData partyTheme(Brightness brightness) {
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: scheme.surface,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+      fillColor: dark ? const Color(0xFF20283B) : const Color(0xFFF7F8FC),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: scheme.outlineVariant),
@@ -123,10 +121,10 @@ ThemeData partyTheme(Brightness brightness) {
     chipTheme: base.chipTheme.copyWith(
       shape: const StadiumBorder(),
       showCheckmark: false,
-      selectedColor: scheme.onSurface,
+      selectedColor: scheme.primary,
       backgroundColor: scheme.surface,
-      side: BorderSide.none,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      side: BorderSide(color: scheme.primary.withValues(alpha: .35)),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
     ),
     dialogTheme: DialogThemeData(
       backgroundColor: scheme.surface,
@@ -232,7 +230,7 @@ class SectionHeading extends StatelessWidget {
         ? null
         : Text(trailing!, style: Theme.of(context).textTheme.bodyMedium);
     return Padding(
-      padding: const EdgeInsets.only(top: 24, bottom: 16),
+      padding: const EdgeInsets.only(top: 22, bottom: 12),
       child: MediaQuery.textScalerOf(context).scale(16) > 24
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -520,29 +518,12 @@ class GameArtwork extends StatelessWidget {
     final index = plannedGames.indexWhere((item) => item.id == game.id);
     final social = look.category == '推理社交' || look.category == '轻松破冰';
     return ExcludeSemantics(
-      child: Container(
+      child: SizedBox(
         height: height,
         width: double.infinity,
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(
-          color: look.color,
-          borderRadius: BorderRadius.circular(16),
-        ),
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Positioned(
-              right: -20,
-              bottom: -40,
-              child: Container(
-                width: height * 1.1,
-                height: height * 1.1,
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: .38),
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
             if (social)
               Padding(
                 padding: const EdgeInsets.only(top: 4),
@@ -552,15 +533,19 @@ class GameArtwork extends StatelessWidget {
               Icon(look.icon, size: height * .48, color: partyInk),
             if (social)
               Positioned(
-                right: 10,
-                bottom: 10,
+                right: height < 100 ? 5 : 10,
+                bottom: height < 100 ? 5 : 10,
                 child: Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(height < 100 ? 5 : 8),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(look.icon, size: 22, color: partyInk),
+                  child: Icon(
+                    look.icon,
+                    size: height < 100 ? 16 : 22,
+                    color: partyInk,
+                  ),
                 ),
               ),
           ],
