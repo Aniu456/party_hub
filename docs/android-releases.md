@@ -1,6 +1,6 @@
 # Android 本机发布与 OTA
 
-默认使用本机构建、后台上传。GitHub 可保留源码和构建备份，用户下载与更新不依赖 GitHub。仅 Android 支持 APK 覆盖安装，iOS 暂不接入。
+推送 `main` 后由 GitHub Actions 自动构建并上传到自己的下载服务器。用户下载 APK、检查 OTA 都访问服务器，不访问 GitHub；服务器保存完整文件，不做逐次请求 GitHub 的透传代理。仅 Android 支持 APK 覆盖安装，iOS 暂不接入。
 
 ## 一次配置
 
@@ -17,7 +17,34 @@
 
 下载地址必须是 HTTPS，不带结尾斜杠。该路径应为后台已发布作品的地址加 `/downloads`；作品 slug 发布后保持不变，否则已安装 App 的更新地址会失效。
 
-## 发布新版
+## 自动发布
+
+- 推送 `main` 自动触发；其他分支不发布。Actions 页面也可手动运行当前 `main`。
+- 每次构建读取服务器版本，构建号取 `max(pubspec 构建号, 线上构建号 + 1)`，只修改运行器中的版本，不回写 Git。版本名称仍由 `pubspec.yaml` 决定，禁止版本名称倒退。
+- 检查、测试、原签名 APK 构建、网站构建全部成功后，再把整包上传服务器。服务器只允许更新预先指定的作品，校验 APK 的 SHA-256 和版本，复用后台 ZIP 校验和原子切换，保留旧站点文件。
+- 发布后从公网重新读取清单并下载 APK 核验 SHA-256，成功才将工作流标为成功。若文件已发布、后续公网验证因网络失败，则线上可能已经更新，以实际清单为准。
+- 工作流串行执行，不中断正在进行的上传；发布前再次检查提交仍是当前 `main`，防止旧任务覆盖较新的代码。若另一个发布已推进版本，停止本次发布。
+- GitHub 无法访问只会延迟新版发布，服务器已有的下载与 OTA 不受影响。
+
+仓库 Actions Secrets：已有的 `ANDROID_KEYSTORE_BASE64`、`ANDROID_KEYSTORE_PASSWORD`、`ANDROID_KEY_ALIAS`、`ANDROID_KEY_PASSWORD`、`PARTY_HUB_WS`，另加 `PARTY_HUB_DOWNLOAD_BASE`、`PARTY_HUB_DEPLOY_HOST`、`PARTY_HUB_DEPLOY_KEY`、`PARTY_HUB_DEPLOY_KNOWN_HOSTS`。
+
+发布 SSH 密钥必须由服务器强制限制为固定作品的 `publish` / `status` 命令，禁用 Shell、PTY 和转发；CI 不持有服务器现有管理员私钥或博客登录凭据。主机密钥需事先核验并固定，不能关闭主机校验。
+
+## 本机备用发布
+
+GitHub 不可用时可从本机直接构建、上传同一服务器。已有签名配置和专用发布密钥需在本机可用。
+
+```sh
+python3 tool/publish_release.py --prepare
+python3 tool/build_release.py
+python3 tool/publish_release.py \
+  --archive build/releases/v版本+构建号/party-hub-v版本+构建号-website-android.zip \
+  --host 服务器地址 --identity deploy/github_publish --known-hosts deploy/github_publish_known_hosts
+```
+
+`--prepare` 会更新本机 `pubspec.yaml` 构建号。也可以只运行构建脚本，再按下面流程手动上传。
+
+## 手动上传新版
 
 1. 提高 `pubspec.yaml` 的版本号，例如 `1.0.1+2`。构建号必须大于服务器已发布版本。
 2. 在项目根目录执行：
@@ -47,10 +74,6 @@ ZIP 包含：
 正式版冷启动时自动检查；用户中心也可手动检查。仅更高构建号提示更新。用户确认后下载 APK，校验 SHA-256，再交给系统确认安装。这不是静默更新或 Dart 热补丁。对局中不自动更新。
 
 App 只接受构建时指定的 HTTPS 下载目录和清单版本对应的 APK 路径，不能被清单引导到任意源。网络错误或损坏清单会报告检查失败，不会伪装成最新版。
-
-## 可选 GitHub Actions
-
-原 Android Release 工作流保留为可选构建/备份渠道，不负责更新你的服务器。使用前除原签名 Secrets、`PARTY_HUB_WS` 外，还须配置 `PARTY_HUB_DOWNLOAD_BASE`。推送与版本一致的标签可生成 GitHub Release；仅生成 GitHub Release 不会让服务器出现新版。本机发布不需要推送标签或配置 Actions。
 
 ## 验证边界
 

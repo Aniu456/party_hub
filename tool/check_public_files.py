@@ -14,7 +14,7 @@ PRIVATE_FILES = {
     "android/key.properties", "android/local.properties",
     "ios/Flutter/Signing.local.xcconfig",
 }
-PUBLIC_TOOLS = {"tool/release_metadata.py", "tool/check_public_files.py", "tool/build_release.py"}
+PUBLIC_TOOLS = {"tool/release_metadata.py", "tool/check_public_files.py", "tool/build_release.py", "tool/publish_release.py"}
 PUBLIC_DOCS = {"docs/android-releases.md", "docs/design_sources.md"}
 PRIVATE_SUFFIXES = {".jks", ".keystore", ".pem", ".key", ".p8", ".p12", ".pfx", ".mobileprovision", ".db", ".sqlite", ".sql"}
 PATTERNS = {
