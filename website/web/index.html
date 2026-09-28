@@ -9,31 +9,90 @@
   <title>康师傅 · 好朋友，就要玩在一起</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <style>
-    body { margin: 0; background: #f8f9fc; color: #182343; }
-    #loading { box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; font-family: sans-serif; }
-    #loading img { width: 84px; height: 84px; border-radius: 22px; }
-    #loading h1 { margin: 24px 0 8px; font-size: 28px; }
-    #loading p { line-height: 1.8; color: #56617b; }
-    #loading a { display: inline-block; padding: 16px 24px; border-radius: 14px; background: #3155e7; color: white; text-decoration: none; margin: 16px 0; }
+    body { margin: 0; background: #f8f9fc; }
+    #startup {
+      position: fixed; inset: 0; z-index: 2147483647;
+      display: grid; place-items: center; box-sizing: border-box;
+      padding: 32px 24px; background: #f8f9fc; color: #182343;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .startup-content { width: min(100%, 320px); text-align: center; }
+    .startup-icon {
+      display: block; width: 104px; height: 104px; margin: 0 auto 24px;
+      border-radius: 26px; box-shadow: 0 12px 32px #1823430b;
+    }
+    .startup-title { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: 2px; }
+    .startup-subtitle { margin: 8px 0 32px; color: #677287; font-size: 13px; letter-spacing: 4px; }
+    .startup-track { width: 112px; height: 3px; margin: 0 auto 18px; overflow: hidden; background: #e2e7f4; border-radius: 3px; }
+    .startup-track::after {
+      content: ""; display: block; width: 44px; height: 100%; border-radius: inherit;
+      background: #3155e7; animation: loading 1.6s ease-in-out infinite;
+    }
+    @keyframes loading { from { transform: translateX(-44px); } to { transform: translateX(112px); } }
+    .startup-status { margin: 0; color: #59647b; font-size: 14px; line-height: 1.7; }
+    .startup-help { margin: 12px 0 0; color: #59647b; font-size: 13px; line-height: 1.8; }
+    .startup-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .startup-actions button, .startup-actions a {
+      box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px; padding: 10px 18px; border-radius: 12px; border: 1px solid #d9e0ed;
+      background: transparent; color: #3155e7; font: inherit; font-size: 14px;
+      text-decoration: none; cursor: pointer;
+    }
+    .startup-actions a { color: white; background: #3155e7; border-color: #3155e7; }
+    .startup-actions :focus-visible { outline: 3px solid #3155e7; outline-offset: 4px; }
+    #startup [hidden] { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .startup-track::after { animation: none; transform: translateX(34px); }
+    }
   </style>
 </head>
 <body>
-  <div id="loading">
-    <img src="favicon.png" alt="康师傅 App 图标">
-    <h1>好朋友，就要玩在一起。</h1>
-    <p>康师傅 · 聚会游戏<br>下载 Android 最新正式版</p>
-    <a href="downloads/party-hub.apk">下载 Android APK</a>
-    <p id="loading-status">正在打开下载页…</p>
-    <noscript><p>完整页面需要 JavaScript，你也可以直接使用上方下载链接。</p></noscript>
-  </div>
+  <main id="startup" aria-label="页面加载">
+    <div class="startup-content">
+      <img class="startup-icon" src="assets/assets/app_icon.png" alt="" width="104" height="104">
+      <h1 class="startup-title">康师傅</h1>
+      <p class="startup-subtitle">聚会游戏</p>
+      <div class="startup-track" aria-hidden="true"></div>
+      <p id="startup-status" class="startup-status" role="status">正在加载页面…</p>
+      <div id="startup-recovery" hidden>
+        <p id="startup-help" class="startup-help">你可以继续等待，或直接下载 Android 安装包。</p>
+        <div class="startup-actions">
+          <button id="startup-retry" type="button">重新加载</button>
+          <a href="downloads/party-hub.apk" download="party-hub.apk">直接下载</a>
+        </div>
+      </div>
+      <noscript>
+        <style>.startup-track, #startup-status { display: none; }</style>
+        <p class="startup-help">浏览器未启用 JavaScript，你仍可下载安装包。</p>
+        <div class="startup-actions"><a href="downloads/party-hub.apk" download="party-hub.apk">下载 Android 版</a></div>
+      </noscript>
+    </div>
+  </main>
   <script>
-    window.addEventListener('flutter-first-frame', function () {
-      document.getElementById('loading')?.remove();
-    });
-    window.setTimeout(function () {
-      const status = document.getElementById('loading-status');
-      if (status) status.textContent = '页面加载较慢，可以直接使用上方按钮下载。';
-    }, 15000);
+    (() => {
+      const startup = document.getElementById('startup');
+      const status = document.getElementById('startup-status');
+      const recovery = document.getElementById('startup-recovery');
+      const showRecovery = (message) => {
+        if (!startup.isConnected) return;
+        status.textContent = message;
+        recovery.hidden = false;
+      };
+      const slowLoad = window.setTimeout(() => showRecovery('加载比平时久一点'), 12000);
+      document.getElementById('startup-retry').addEventListener('click', () => window.location.reload());
+      window.addEventListener('flutter-first-frame', () => {
+        window.clearTimeout(slowLoad);
+        startup.remove();
+      }, { once: true });
+      window.addEventListener('error', (event) => {
+        if (startup.isConnected && event.target instanceof HTMLScriptElement) {
+          window.clearTimeout(slowLoad);
+          startup.querySelector('.startup-track').hidden = true;
+          document.getElementById('startup-help').textContent = '请检查网络后重试，或直接下载 Android 安装包。';
+          showRecovery('页面未能加载，请重试');
+        }
+      }, true);
+    })();
   </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>

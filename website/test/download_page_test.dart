@@ -16,12 +16,16 @@ void main() {
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
       final links = tester.widgetList<Link>(find.byType(Link));
-      expect(links.where((link) => link.uri.toString() == apkUrl).length, 3);
+      expect(
+        links.where((link) => link.uri == Uri.base.resolve(apkUrl)).length,
+        3,
+      );
       expect(
         links.every(
           (link) =>
-              link.uri?.hasScheme == false &&
-              link.uri?.path.startsWith('downloads/') == true,
+              link.uri?.hasScheme == true &&
+              link.uri?.hasFragment == false &&
+              link.uri?.path.contains('/downloads/') == true,
         ),
         isTrue,
       );

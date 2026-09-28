@@ -10,6 +10,9 @@ import '../game_surface.dart';
 import '../games/create_session.dart';
 import '../profile/user_profile.dart';
 import 'room_client.dart';
+import 'undercover_game_view.dart';
+import 'room_invite.dart';
+import 'room_scan_page.dart';
 
 class RoomEntryPage extends StatefulWidget {
   const RoomEntryPage({super.key, this.game});
@@ -24,6 +27,7 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
   final code = TextEditingController();
   bool entering = false;
   String? saveError;
+  bool scanning = false;
   @override
   void initState() {
     super.initState();
@@ -70,6 +74,31 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
       if (mounted) {
         setState(() => entering = false);
       }
+    }
+  }
+
+  Future<void> scan() async {
+    if (entering || scanning) {
+      return;
+    }
+    FocusScope.of(context).unfocus();
+    setState(() => scanning = true);
+    final result = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(builder: (_) => const RoomScanPage()),
+    );
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      scanning = false;
+      if (result != null) {
+        code.text = result;
+      }
+    });
+    if (result != null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('已识别房间码，确认昵称后点击加入房间')));
     }
   }
 
@@ -141,7 +170,7 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
             const Divider(height: 1),
             const SizedBox(height: 20),
             Text(
-              joining ? '填好昵称和房间码，马上与朋友会合。' : '创建后把房间码告诉朋友，大家准备好就能开始。',
+              joining ? '扫码或输入房间码，马上与朋友会合。' : '创建后邀请朋友扫码或输入房间码，大家准备好就能开始。',
               style: TextStyle(fontSize: 13, color: colors.onSurfaceVariant),
             ),
             const SizedBox(height: 24),
@@ -169,6 +198,12 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
             ),
             if (joining) ...[
               const SizedBox(height: 24),
+              OutlinedButton.icon(
+                onPressed: entering || scanning ? null : scan,
+                icon: const Icon(Icons.qr_code_scanner_rounded),
+                label: const Text('扫码加入'),
+              ),
+              const SizedBox(height: 20),
               Padding(
                 padding: EdgeInsets.zero,
                 child: Column(
@@ -444,99 +479,116 @@ class _RoomPageState extends State<RoomPage> {
                         icon: const Icon(Icons.copy_rounded, size: 18),
                         label: const Text('复制房间码'),
                       ),
+                      const SizedBox(height: 8),
+                      OutlinedButton.icon(
+                        onPressed: !enabled
+                            ? null
+                            : () => showDialog<void>(
+                                context: context,
+                                builder: (_) =>
+                                    RoomInviteDialog(code: state.code),
+                              ),
+                        icon: const Icon(Icons.qr_code_rounded, size: 18),
+                        label: const Text('邀请二维码'),
+                      ),
                     ],
                   ),
                 ),
-                SectionHeading(
-                  '等朋友，等开场',
-                  trailing: '${state.members.length} / ${game!.maxPlayers} 人',
-                ),
-                SurfaceCard(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
+                if (game!.id == 'undercover')
+                  UndercoverLobbyView(
+                    state: state,
+                    enabled: enabled,
+                    onSelectModerator: (seat) => client.send(
+                      'moderator',
+                      input: '$seat',
+                      action: state.members[seat].name,
+                    ),
+                  )
+                else ...[
+                  SectionHeading(
+                    '等朋友，等开场',
+                    trailing: '${state.members.length} / ${game.maxPlayers} 人',
                   ),
-                  child: Column(
-                    children: [
-                      for (var i = 0; i < state.members.length; i++) ...[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: Row(
-                            children: [
-                              PlayerAvatar(index: i),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      state.members[i].name,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium,
-                                    ),
-                                    Text(
-                                      [
-                                        if (i == state.seat) '你',
-                                        if (i == state.host) '房主',
-                                        if (game.id == 'undercover' &&
-                                            i == state.host)
-                                          '主持人',
-                                        if (teamGameIds.contains(game.id))
-                                          i.isEven ? '橙队' : '蓝队',
-                                        if (!state.members[i].online) '离线',
-                                      ].join(' · '),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Flexible(
-                                child: Text(
-                                  state.members[i].online
-                                      ? state.members[i].ready
-                                            ? '已准备'
-                                            : '未准备'
-                                      : '已离线',
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                    color: colors.onSurface,
-                                    fontWeight: state.members[i].ready
-                                        ? FontWeight.w700
-                                        : FontWeight.w400,
+                  SurfaceCard(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: Column(
+                      children: [
+                        for (var i = 0; i < state.members.length; i++) ...[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: Row(
+                              children: [
+                                PlayerAvatar(index: i),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        state.members[i].name,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium,
+                                      ),
+                                      Text(
+                                        [
+                                          if (i == state.seat) '你',
+                                          if (i == state.host) '房主',
+                                          if (teamGameIds.contains(game.id))
+                                            i.isEven ? '橙队' : '蓝队',
+                                          if (!state.members[i].online) '离线',
+                                        ].join(' · '),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(width: 8),
+                                Flexible(
+                                  child: Text(
+                                    state.members[i].online
+                                        ? state.members[i].ready
+                                              ? '已准备'
+                                              : '未准备'
+                                        : '已离线',
+                                    textAlign: TextAlign.end,
+                                    style: TextStyle(
+                                      color: colors.onSurface,
+                                      fontWeight: state.members[i].ready
+                                          ? FontWeight.w700
+                                          : FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        if (i != state.members.length - 1)
-                          const Divider(height: 1),
+                          if (i != state.members.length - 1)
+                            const Divider(height: 1),
+                        ],
                       ],
-                    ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  '开局准备 ${state.members.where((member) => member.online && member.ready).length} / ${max(game.minPlayers, state.members.length)} 人',
-                ),
-                const SizedBox(height: 8),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: LinearProgressIndicator(
-                    value:
-                        state.members
-                            .where((member) => member.online && member.ready)
-                            .length /
-                        max(game.minPlayers, state.members.length),
-                    minHeight: 6,
+                  const SizedBox(height: 16),
+                  Text(
+                    '开局准备 ${state.members.where((member) => member.online && member.ready).length} / ${max(game.minPlayers, state.members.length)} 人',
                   ),
-                ),
-                if (game.id == 'undercover')
-                  const InfoNote(
-                    '房主担任主持人：至少 1 名主持人 + 3 名玩家；主持人不参与拿词、发言和投票。',
-                    icon: Icons.visibility_outlined,
+                  const SizedBox(height: 8),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: LinearProgressIndicator(
+                      value:
+                          state.members
+                              .where((member) => member.online && member.ready)
+                              .length /
+                          max(game.minPlayers, state.members.length),
+                      minHeight: 6,
+                    ),
                   ),
+                ],
                 if (!dockControls && controls != null) controls,
                 const SizedBox(height: 20),
                 ExpansionTile(
@@ -551,50 +603,47 @@ class _RoomPageState extends State<RoomPage> {
                   ],
                 ),
               ] else ...[
-                ScoreStrip(
-                  names: state.members.map((member) => member.name).toList(),
-                  scores: state.scores,
-                  teamScores: teamGameIds.contains(game!.id)
-                      ? state.teamScores
-                      : null,
-                  moderator: game.id == 'undercover' ? 0 : null,
-                ),
-                const SizedBox(height: 20),
-                if (state.moderatorOverview != null)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: OutlinedButton.icon(
-                      onPressed: () => showModeratorOverview(
-                        context,
-                        state.members[state.seat].name,
-                        state.moderatorOverview!,
-                      ),
-                      icon: const Icon(Icons.visibility_outlined),
-                      label: const Text('主持人上帝视角'),
-                    ),
-                  ),
-                if (client.pending)
+                if (client.pending && game!.id == 'undercover')
                   const InfoNote('正在同步操作…', icon: Icons.sync_rounded),
-                GameSurface(
-                  step: state.step!,
-                  ink: state.ink,
-                  version: state.revision,
-                  canDraw: state.canDraw,
-                  enabled: enabled,
-                  finished: state.finished,
-                  onAction: (action, input) =>
-                      client.send('action', action: action, input: input),
-                  onInkChanged: () => client.send('ink', ink: state.ink),
-                  remainingSeconds: displayedSeconds,
-                  hideClock: game.id == 'reaction_duel',
-                ),
-                if (!state.finished &&
-                    state.step!.options.isEmpty &&
-                    state.step!.cells.every((cell) => cell.id.isEmpty))
-                  const InfoNote(
-                    '等待其他玩家操作。公开裁定或回合确认由房主完成。',
-                    icon: Icons.hourglass_empty_rounded,
+                if (game!.id == 'undercover')
+                  UndercoverGameView(
+                    state: state,
+                    enabled: enabled,
+                    remainingSeconds: displayedSeconds,
+                    onAction: (action) => client.send('action', action: action),
+                  )
+                else ...[
+                  ScoreStrip(
+                    names: state.members.map((member) => member.name).toList(),
+                    scores: state.scores,
+                    teamScores: teamGameIds.contains(game.id)
+                        ? state.teamScores
+                        : null,
                   ),
+                  const SizedBox(height: 20),
+                  if (client.pending)
+                    const InfoNote('正在同步操作…', icon: Icons.sync_rounded),
+                  GameSurface(
+                    step: state.step!,
+                    ink: state.ink,
+                    version: state.revision,
+                    canDraw: state.canDraw,
+                    enabled: enabled,
+                    finished: state.finished,
+                    onAction: (action, input) =>
+                        client.send('action', action: action, input: input),
+                    onInkChanged: () => client.send('ink', ink: state.ink),
+                    remainingSeconds: displayedSeconds,
+                    hideClock: game.id == 'reaction_duel',
+                  ),
+                  if (!state.finished &&
+                      state.step!.options.isEmpty &&
+                      state.step!.cells.every((cell) => cell.id.isEmpty))
+                    const InfoNote(
+                      '等待其他玩家操作。公开裁定或回合确认由房主完成。',
+                      icon: Icons.hourglass_empty_rounded,
+                    ),
+                ],
                 const SizedBox(height: 20),
                 if (state.host == state.seat)
                   OutlinedButton(
@@ -635,7 +684,10 @@ class _RoomControls extends StatelessWidget {
     final unready = state.members
         .where((member) => member.online && !member.ready)
         .length;
+    final needsModerator =
+        game.id == 'undercover' && state.moderatorSeat == null;
     final canStart =
+        !needsModerator &&
         game.supportsPlayerCount(state.members.length) &&
         offline == 0 &&
         unready == 0;
@@ -644,6 +696,8 @@ class _RoomControls extends StatelessWidget {
         ? '连接恢复后就能继续准备'
         : pending
         ? '正在同步，请稍候'
+        : needsModerator
+        ? '请先选择主持人'
         : missing > 0
         ? '再邀请 $missing 人，就能凑齐这一局'
         : offline > 0

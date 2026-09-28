@@ -575,7 +575,8 @@ class _WebLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Link(
-    uri: Uri.parse(url),
+    // Link treats relative URIs as Flutter routes; resolve static downloads first.
+    uri: Uri.base.resolve(url),
     target: url == apkUrl ? LinkTarget.self : LinkTarget.blank,
     builder: (context, followLink) {
       final contents = Row(

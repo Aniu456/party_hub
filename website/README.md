@@ -33,7 +33,7 @@ flutter run -d chrome
 python3 tool/subset_font.py /path/to/NotoSansSC.ttf
 ```
 
-渲染资源和字体随站点提供。初始 HTML 保留直接下载链接，JavaScript 未启用时也可下载。iOS 暂无下载入口。
+渲染资源和字体随站点提供。启动时显示小熊图标、名称和不表示百分比的加载动画，首帧完成后自动移除；超过 12 秒或脚本加载失败时提供重试和直接下载。未启用 JavaScript 时也保留原生下载链接。iOS 暂无下载入口。
 
 ```sh
 flutter analyze

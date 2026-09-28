@@ -10,9 +10,13 @@ GameSession createSession(
   PartyGame game,
   List<String> players, {
   Random? random,
+  bool online = false,
 }) {
   return switch (game.id) {
-    'undercover' ||
+    'undercover' =>
+      online
+          ? OnlineUndercoverSession(game, players, random: random)
+          : DeductionSession(game, players, random: random),
     'werewolf' => DeductionSession(game, players, random: random),
     'avalon' => AvalonSession(game, players, random: random),
     'draw_guess' ||

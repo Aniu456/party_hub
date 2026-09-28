@@ -41,7 +41,7 @@ class ReleaseBundleTest(unittest.TestCase):
             self.assertEqual(archive.read("assets/NOTICES.txt"), b"licenses")
             self.assertIn(b'load("NOTICES.txt")', archive.read("main.dart.js"))
             self.assertIn(b'load("AssetManifest.bin.json")', archive.read("main.dart.js"))
-            self.assertIn(b'v1.0.1+2/party-hub.apk', archive.read("index.html"))
+            self.assertIn(b'href="downloads/v1.0.1+2/party-hub.apk"', archive.read("index.html"))
             self.assertIn(self.manifest["sha256"].encode(), archive.read("downloads/SHA256SUMS.txt"))
 
     def test_bad_checksum_cannot_replace_existing_bundle(self):

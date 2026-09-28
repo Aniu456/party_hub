@@ -31,6 +31,13 @@ class RoomSnapshot {
       finished = wireBool(data, 'finished'),
       canDraw = wireBool(data, 'canDraw'),
       message = wireString(data, 'message'),
+      moderatorSeat = data['moderatorSeat'] == null
+          ? null
+          : wireInt(data, 'moderatorSeat'),
+      ownWord = data['ownWord'] == null ? null : wireString(data, 'ownWord'),
+      undercover = data['undercover'] == null
+          ? null
+          : UndercoverSnapshot(wireMap(data['undercover'])),
       moderatorOverview = data['moderatorOverview'] == null
           ? null
           : wireString(data, 'moderatorOverview'),
@@ -45,7 +52,9 @@ class RoomSnapshot {
         seat < 0 ||
         seat >= members.length ||
         host < 0 ||
-        host >= members.length) {
+        host >= members.length ||
+        (moderatorSeat != null &&
+            (moderatorSeat! < 0 || moderatorSeat! >= members.length))) {
       throw const FormatException('房间成员格式不正确');
     }
   }
@@ -75,12 +84,62 @@ class RoomSnapshot {
   final bool finished;
   final bool canDraw;
   final String message;
+  final int? moderatorSeat;
+  final String? ownWord;
+  final UndercoverSnapshot? undercover;
   final String? moderatorOverview;
   final List<RoomMember> members;
   final List<int> scores;
   final List<int> teamScores;
   final Sketch ink;
   final GameStep? step;
+}
+
+class UndercoverRole {
+  UndercoverRole(Map<String, Object?> data)
+    : seat = wireInt(data, 'seat'),
+      name = wireString(data, 'name'),
+      role = wireString(data, 'role'),
+      word = wireString(data, 'word'),
+      alive = wireBool(data, 'alive');
+
+  final int seat;
+  final String name;
+  final String role;
+  final String word;
+  final bool alive;
+}
+
+class UndercoverSnapshot {
+  UndercoverSnapshot(Map<String, Object?> data)
+    : phase = wireString(data, 'phase'),
+      tiebreak = data['tiebreak'] == true,
+      round = wireInt(data, 'round'),
+      speaker = data['speaker'] == null ? null : wireInt(data, 'speaker'),
+      alive = _seats(data, 'alive'),
+      confirmed = _seats(data, 'confirmed'),
+      voted = _seats(data, 'voted'),
+      roles = [
+        for (final role in wireList(data, 'roles'))
+          UndercoverRole(wireMap(role)),
+      ];
+
+  static List<int> _seats(Map<String, Object?> data, String key) => [
+    for (final seat in wireList(data, key))
+      if (seat is int && seat >= 0)
+        seat
+      else
+        throw const FormatException('玩家座位格式不正确'),
+  ];
+
+  final String phase;
+  final bool tiebreak;
+  final int round;
+  final int? speaker;
+  final List<int> alive;
+  final List<int> confirmed;
+  final List<int> voted;
+  final List<UndercoverRole> roles;
 }
 
 class RoomClient extends ChangeNotifier {

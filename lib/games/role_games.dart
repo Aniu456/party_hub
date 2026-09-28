@@ -281,6 +281,93 @@ class DeductionSession extends GameSession {
   }
 }
 
+/// 联机卧底按连接身份分发词语与选项，不使用同机交接顺序。
+class OnlineUndercoverSession extends DeductionSession {
+  OnlineUndercoverSession(super.game, super.players, {super.random});
+
+  final confirmed = <int>{};
+  bool get concurrentActions =>
+      !finished && (phase == 'reveal' || phase == 'vote');
+
+  String? wordFor(int seat) => seat > 0 && seat < count
+      ? (bad.contains(seat) ? pair.$2 : pair.$1)
+      : null;
+
+  GameStep stepFor(int seat) {
+    if (finished) {
+      return step;
+    }
+    if (phase == 'reveal') {
+      final progress = '已确认 ${confirmed.length} / ${count - 1} 人';
+      if (seat == moderatorSeat || confirmed.contains(seat)) {
+        return GameStep(
+          title: seat == moderatorSeat ? '等待玩家查看词语' : '已记住词语',
+          body: '$progress，所有玩家确认后开始发言。',
+        );
+      }
+      return GameStep(
+        title: '查看你的词语',
+        body: '你的词语：${wordFor(seat)}\n不要直接说出词语，也不要给其他人看。',
+        privateFor: player(seat),
+        options: const [GameOption('confirm_word', '我记住了')],
+      );
+    }
+    if (phase == 'vote') {
+      final progress = '已提交 ${votes.length} / ${alive.length} 票';
+      if (seat == moderatorSeat ||
+          !alive.contains(seat) ||
+          votes.containsKey(seat)) {
+        return GameStep(
+          title: votes.containsKey(seat) ? '已提交投票' : '等待玩家投票',
+          body: '$progress，全部提交后公布结果。',
+        );
+      }
+      return GameStep(
+        title: '投票淘汰一人',
+        body: '不能投自己，提交后不能更改。\n$progress',
+        options: [
+          ...picks(candidates.where((id) => id != seat)),
+          const GameOption('abstain', '弃票'),
+        ],
+      );
+    }
+    return step;
+  }
+
+  bool canActFor(int seat, String action) {
+    if (finished || seat < 0 || seat >= count || action == 'timeout') {
+      return false;
+    }
+    final view = stepFor(seat);
+    if (!view.options.any((option) => option.id == action)) {
+      return false;
+    }
+    return concurrentActions ||
+        seat == (view.controller ?? moderatorSeat) ||
+        (phase == 'talk' && seat == moderatorSeat);
+  }
+
+  void actFor(int seat, String action, String input, Duration elapsed) {
+    if (!canActFor(seat, action)) {
+      throw StateError('当前不能执行此操作');
+    }
+    if (phase == 'reveal') {
+      confirmed.add(seat);
+      if (confirmed.length == count - 1) {
+        candidates = List.of(alive);
+        _talk();
+      }
+    } else if (phase == 'vote') {
+      votes[seat] = action == 'abstain' ? -1 : int.parse(action.substring(1));
+      if (votes.length == alive.length) {
+        _resolveVotes();
+      }
+    } else {
+      act(action, input: input, elapsed: elapsed);
+    }
+  }
+}
+
 class AvalonSession extends GameSession {
   AvalonSession(super.game, super.players, {super.random}) {
     final seats = List.generate(count, (i) => i)..shuffle(random);
