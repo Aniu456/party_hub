@@ -2,7 +2,11 @@ import 'content.dart';
 import 'session.dart';
 
 Sketch copySketch(Sketch sketch) => [
-  for (final stroke in sketch) List.of(stroke),
+  for (final stroke in sketch)
+    if (stroke is SketchStroke)
+      SketchStroke(stroke, color: stroke.color)
+    else
+      List.of(stroke),
 ];
 
 class DrawingSession extends GameSession {
@@ -61,8 +65,10 @@ class DrawingSession extends GameSession {
     }
     return GameStep(
       title: '${player(turn)}正在画图',
-      body: '画者不能写出答案或拼音。每人猜对加 1 分，画者也加 1 分。\n$notice',
+      body: '画者不能写答案或拼音，其他人可以边看边猜。\n$notice',
       drawing: true,
+      drawingHint: '${words[turn % words.length].runes.length} 个字',
+      guessMessages: List.unmodifiable(history),
       controller: turn,
       inputLabel: '其他玩家输入猜测',
       seconds: 75,
@@ -110,6 +116,7 @@ class DrawingSession extends GameSession {
       }
       phase = 'secret';
       correct.clear();
+      history.clear();
       ink.clear();
       notice = '';
       resetClock();
@@ -131,7 +138,11 @@ class DrawingSession extends GameSession {
         resetClock();
       }
     } else {
-      notice = '${player(guesser)}还没猜对，再试一下。';
+      notice = '${player(guesser)}：$input';
+    }
+    history.add(notice);
+    if (history.length > 20) {
+      history.removeAt(0);
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:math';
 
 import '../game_catalog.dart';
@@ -19,6 +20,35 @@ class BoardCell {
 /// 坐标归一化到 0–1，避免设备尺寸变化时笔迹错位。
 typedef Sketch = List<List<Point<double>>>;
 
+const sketchColors = [
+  0xFF222222,
+  0xFFE53935,
+  0xFFFF9800,
+  0xFF2E7D32,
+  0xFF3957ED,
+  0xFF8E44AD,
+];
+
+/// 保留逐笔颜色；普通坐标列表仍按原来的黑色笔迹处理。
+class SketchStroke extends ListBase<Point<double>> {
+  SketchStroke(Iterable<Point<double>> points, {required this.color})
+    : _points = List.of(points);
+
+  final int color;
+  final List<Point<double>> _points;
+
+  @override
+  int get length => _points.length;
+  @override
+  set length(int value) => _points.length = value;
+  @override
+  Point<double> operator [](int index) => _points[index];
+  @override
+  void operator []=(int index, Point<double> value) => _points[index] = value;
+  @override
+  void add(Point<double> element) => _points.add(element);
+}
+
 class GameStep {
   const GameStep({
     required this.title,
@@ -33,6 +63,8 @@ class GameStep {
     this.cells = const [],
     this.columns = 5,
     this.controller,
+    this.drawingHint,
+    this.guessMessages = const [],
   });
   final String title;
   final String body;
@@ -48,6 +80,8 @@ class GameStep {
 
   /// 联机公开回合的操作玩家；未指定时由房主主持。
   final int? controller;
+  final String? drawingHint;
+  final List<String> guessMessages;
 }
 
 abstract class GameSession {

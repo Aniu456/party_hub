@@ -612,13 +612,26 @@ class _RoomPageState extends State<RoomPage> {
                     onAction: (action) => client.send('action', action: action),
                   )
                 else ...[
-                  ScoreStrip(
-                    names: state.members.map((member) => member.name).toList(),
-                    scores: state.scores,
-                    teamScores: teamGameIds.contains(game.id)
-                        ? state.teamScores
-                        : null,
-                  ),
+                  if (game.id == 'draw_guess')
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: ScoreStrip(
+                        names: state.members
+                            .map((member) => member.name)
+                            .toList(),
+                        scores: state.scores,
+                      ),
+                    )
+                  else
+                    ScoreStrip(
+                      names: state.members
+                          .map((member) => member.name)
+                          .toList(),
+                      scores: state.scores,
+                      teamScores: teamGameIds.contains(game.id)
+                          ? state.teamScores
+                          : null,
+                    ),
                   const SizedBox(height: 20),
                   if (client.pending)
                     const InfoNote('正在同步操作…', icon: Icons.sync_rounded),

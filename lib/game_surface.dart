@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class GameSurface extends StatefulWidget {
     required this.onInkChanged,
     required this.canDraw,
     required this.version,
+    this.onInkProgress,
     this.remainingSeconds,
     this.hideClock = false,
     this.enabled = true,
@@ -24,6 +26,7 @@ class GameSurface extends StatefulWidget {
   final Sketch ink;
   final void Function(String, String) onAction;
   final VoidCallback onInkChanged;
+  final VoidCallback? onInkProgress;
   final bool canDraw;
   final int version;
   final int? remainingSeconds;
@@ -37,6 +40,7 @@ class GameSurface extends StatefulWidget {
 class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
   final input = TextEditingController();
   bool revealed = false;
+  int selectedColor = sketchColors.first;
   @override
   void initState() {
     super.initState();
@@ -67,8 +71,14 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
   }
 
   void act(String action) {
-    FocusScope.of(context).unfocus();
+    final guessing = widget.step.drawing && action.startsWith('g');
+    if (!guessing) {
+      FocusScope.of(context).unfocus();
+    }
     widget.onAction(action, input.text);
+    if (guessing) {
+      input.clear();
+    }
   }
 
   Future<void> clearDrawing() async {
@@ -103,11 +113,222 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
     }
   }
 
+  Widget liveDrawing(BuildContext context) {
+    final step = widget.step;
+    final colors = Theme.of(context).colorScheme;
+    final guesses = step.options
+        .where((option) => option.id.startsWith('g'))
+        .toList();
+    final endings = step.options.where((option) => !option.id.startsWith('g'));
+    const colorNames = ['黑色', '红色', '橙色', '绿色', '蓝色', '紫色'];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                step.title,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+            if (widget.remainingSeconds case final seconds?)
+              Chip(
+                avatar: Icon(
+                  Icons.timer_outlined,
+                  size: 18,
+                  color: seconds <= 10 ? colors.error : colors.primary,
+                ),
+                label: Text(
+                  '$seconds 秒',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: seconds <= 10 ? colors.error : colors.primary,
+                  ),
+                ),
+              ),
+          ],
+        ),
+        Text(
+          widget.canDraw
+              ? '你来画，其他人随时猜 · 禁止写答案或拼音'
+              : guesses.isNotEmpty
+              ? '边看边猜，想到答案就提交'
+              : '你已猜中，继续观看画画吧',
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+        if (step.drawingHint case final hint?)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              hint,
+              style: TextStyle(
+                color: colors.primary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        const SizedBox(height: 8),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final media = MediaQuery.of(context);
+            final size = min(
+              constraints.maxWidth,
+              max(140.0, media.size.height - media.viewInsets.bottom - 350),
+            );
+            return Center(
+              child: SizedBox(
+                width: size,
+                child: _SketchBoard(
+                  sketch: widget.ink,
+                  editable: widget.canDraw && widget.enabled,
+                  version: widget.version,
+                  color: selectedColor,
+                  onProgress: widget.onInkProgress,
+                  onChanged: () {
+                    setState(() {});
+                    widget.onInkChanged();
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+        const SizedBox(height: 8),
+        if (widget.canDraw) ...[
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            alignment: WrapAlignment.center,
+            children: [
+              for (var i = 0; i < sketchColors.length; i++)
+                Semantics(
+                  selected: selectedColor == sketchColors[i],
+                  child: IconButton(
+                    tooltip: '${colorNames[i]}画笔',
+                    constraints: const BoxConstraints(
+                      minWidth: 48,
+                      minHeight: 48,
+                    ),
+                    onPressed: widget.enabled
+                        ? () => setState(() => selectedColor = sketchColors[i])
+                        : null,
+                    icon: Container(
+                      width: 28,
+                      height: 28,
+                      decoration: BoxDecoration(
+                        color: Color(sketchColors[i]),
+                        shape: BoxShape.circle,
+                      ),
+                      child: selectedColor == sketchColors[i]
+                          ? Icon(
+                              Icons.check_rounded,
+                              size: 20,
+                              color: i == 2 ? Colors.black : Colors.white,
+                            )
+                          : null,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          Row(
+            children: [
+              IconButton(
+                tooltip: '撤销一笔',
+                onPressed: widget.enabled && widget.ink.isNotEmpty
+                    ? () {
+                        setState(() => widget.ink.removeLast());
+                        widget.onInkChanged();
+                      }
+                    : null,
+                icon: const Icon(Icons.undo_rounded),
+              ),
+              IconButton(
+                tooltip: '清空画板',
+                onPressed: widget.enabled && widget.ink.isNotEmpty
+                    ? clearDrawing
+                    : null,
+                icon: const Icon(Icons.delete_outline_rounded),
+              ),
+              const Spacer(),
+              for (final option in endings)
+                TextButton(
+                  onPressed: widget.enabled ? () => act(option.id) : null,
+                  child: Text(option.label),
+                ),
+            ],
+          ),
+        ],
+        if (guesses.isNotEmpty) ...[
+          TextField(
+            controller: input,
+            enabled: widget.enabled,
+            maxLength: 120,
+            textInputAction: TextInputAction.send,
+            decoration: InputDecoration(
+              labelText: '输入你的猜测',
+              counterText: '',
+              suffixIcon: guesses.length == 1
+                  ? IconButton(
+                      tooltip: '提交猜词',
+                      onPressed: widget.enabled
+                          ? () => act(guesses.single.id)
+                          : null,
+                      icon: const Icon(Icons.send_rounded),
+                    )
+                  : null,
+            ),
+            onSubmitted: guesses.length == 1
+                ? (_) => act(guesses.single.id)
+                : null,
+          ),
+          if (guesses.length > 1)
+            Wrap(
+              spacing: 8,
+              children: [
+                for (final option in guesses)
+                  TextButton(
+                    onPressed: widget.enabled ? () => act(option.id) : null,
+                    child: Text(option.label),
+                  ),
+              ],
+            ),
+        ],
+        if (step.guessMessages.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 88),
+              child: ListView(
+                shrinkWrap: true,
+                reverse: true,
+                padding: EdgeInsets.zero,
+                children: [
+                  for (final message in step.guessMessages.reversed)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Text(
+                        message,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final step = widget.step;
     final hidden = step.privateFor != null && !revealed;
     final colors = Theme.of(context).colorScheme;
+    final liveGuessing = step.drawing && step.inputLabel != null;
+    if (liveGuessing && !hidden) {
+      return liveDrawing(context);
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -321,6 +542,8 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
             _SketchBoard(
               sketch: widget.ink,
               editable: widget.canDraw && widget.enabled,
+              version: widget.version,
+              onProgress: widget.onInkProgress,
               onChanged: () {
                 setState(() {});
                 widget.onInkChanged();
@@ -594,19 +817,58 @@ class _SketchBoard extends StatefulWidget {
     required this.sketch,
     required this.editable,
     required this.onChanged,
+    this.onProgress,
+    this.version = 0,
+    this.color = 0xFF222222,
   });
   final Sketch sketch;
   final bool editable;
   final VoidCallback onChanged;
+  final VoidCallback? onProgress;
+  final int version;
+  final int color;
   @override
   State<_SketchBoard> createState() => _SketchBoardState();
 }
 
 class _SketchBoardState extends State<_SketchBoard> {
   final repaint = ValueNotifier(0);
+  Timer? progressTimer;
+  List<Point<double>>? activeStroke;
+
+  void publishProgress() {
+    if (widget.onProgress == null || progressTimer != null) {
+      return;
+    }
+    progressTimer = Timer(const Duration(milliseconds: 80), () {
+      progressTimer = null;
+      widget.onProgress?.call();
+    });
+  }
+
+  void finishStroke() {
+    progressTimer?.cancel();
+    progressTimer = null;
+    if (activeStroke == null) {
+      return;
+    }
+    activeStroke = null;
+    widget.onChanged();
+  }
+
+  @override
+  void didUpdateWidget(_SketchBoard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.version != widget.version || !widget.editable) {
+      progressTimer?.cancel();
+      progressTimer = null;
+      activeStroke = null;
+    }
+  }
 
   @override
   void dispose() {
+    progressTimer?.cancel();
     repaint.dispose();
     super.dispose();
   }
@@ -623,23 +885,28 @@ class _SketchBoardState extends State<_SketchBoard> {
                 if (widget.sketch.length >= 300) {
                   return;
                 }
-                widget.sketch.add([
+                final stroke = SketchStroke([
                   point(
                     details.localPosition,
                     constraints.maxWidth,
                     constraints.maxHeight,
                   ),
-                ]);
+                ], color: widget.color);
+                activeStroke = stroke;
+                widget.sketch.add(stroke);
                 repaint.value++;
+                publishProgress();
               }
             : null,
         onPanUpdate: widget.editable
             ? (details) {
-                if (widget.sketch.isEmpty ||
-                    widget.sketch.last.length >= 2000) {
+                final stroke = activeStroke;
+                if (stroke == null ||
+                    !widget.sketch.contains(stroke) ||
+                    stroke.length >= 2000) {
                   return;
                 }
-                widget.sketch.last.add(
+                stroke.add(
                   point(
                     details.localPosition,
                     constraints.maxWidth,
@@ -647,10 +914,11 @@ class _SketchBoardState extends State<_SketchBoard> {
                   ),
                 );
                 repaint.value++;
+                publishProgress();
               }
             : null,
-        onPanEnd: widget.editable ? (_) => widget.onChanged() : null,
-        onPanCancel: widget.editable ? widget.onChanged : null,
+        onPanEnd: widget.editable ? (_) => finishStroke() : null,
+        onPanCancel: widget.editable ? finishStroke : null,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(18),
           child: RepaintBoundary(
@@ -680,6 +948,9 @@ class _SketchPainter extends CustomPainter {
       if (stroke.isEmpty) {
         continue;
       }
+      paint.color = Color(
+        stroke is SketchStroke ? stroke.color : sketchColors.first,
+      );
       final path = Path()
         ..moveTo(stroke.first.x * size.width, stroke.first.y * size.height);
       for (final point in stroke.skip(1)) {
@@ -689,7 +960,7 @@ class _SketchPainter extends CustomPainter {
         canvas.drawCircle(
           Offset(stroke.first.x * size.width, stroke.first.y * size.height),
           1.5,
-          Paint()..color = const Color(0xFF222222),
+          Paint()..color = paint.color,
         );
       } else {
         canvas.drawPath(path, paint);

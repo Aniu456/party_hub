@@ -91,7 +91,8 @@ class RoomSnapshot {
   final List<RoomMember> members;
   final List<int> scores;
   final List<int> teamScores;
-  final Sketch ink;
+  // 本机画者复用同一画板，避免回包打断手势或清空确认。
+  Sketch ink;
   final GameStep? step;
 }
 
@@ -148,6 +149,7 @@ class RoomClient extends ChangeNotifier {
   WebSocket? _socket;
   Timer? _retry;
   bool _closed = false;
+  bool _preserveInk = false;
   bool connecting = false;
   bool connected = false;
   bool pending = false;
@@ -184,12 +186,25 @@ class RoomClient extends ChangeNotifier {
                 _token = wireString(data, 'token');
                 _code = wireString(data, 'room');
               case 'state':
-                state = RoomSnapshot(data);
+                final next = RoomSnapshot(data);
+                final previous = state;
+                // 同一画者回合内，服务器回包可能落后于手指；保留本机最新笔迹。
+                if (_preserveInk &&
+                    previous != null &&
+                    previous.gameId == 'draw_guess' &&
+                    previous.canDraw &&
+                    next.canDraw &&
+                    previous.clockRevision == next.clockRevision) {
+                  next.ink = previous.ink;
+                }
+                state = next;
+                _preserveInk = true;
                 snapshotAge
                   ..reset()
                   ..start();
                 pending = false;
               case 'error':
+                _preserveInk = false;
                 error = wireString(data, 'message');
                 pending = false;
               default:
@@ -251,6 +266,7 @@ class RoomClient extends ChangeNotifier {
       return;
     }
     connected = false;
+    _preserveInk = false;
     pending = false;
     error = '连接已断开，正在尝试恢复原来的座位';
     _scheduleRetry();
@@ -274,7 +290,9 @@ class RoomClient extends ChangeNotifier {
         if (ink != null) 'ink': encodeSketch(ink),
       }),
     );
-    notifyListeners();
+    if (type != 'ink') {
+      notifyListeners();
+    }
   }
 
   @override

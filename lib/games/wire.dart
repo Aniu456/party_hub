@@ -2,11 +2,19 @@ import 'dart:math';
 
 import 'session.dart';
 
-List<List<List<double>>> encodeSketch(Sketch sketch) => [
+List<Object> encodeSketch(Sketch sketch) => [
   for (final stroke in sketch)
-    [
-      for (final point in stroke) [point.x, point.y],
-    ],
+    if (stroke is SketchStroke && stroke.color != sketchColors.first)
+      {
+        'color': stroke.color,
+        'points': [
+          for (final point in stroke) [point.x, point.y],
+        ],
+      }
+    else
+      [
+        for (final point in stroke) [point.x, point.y],
+      ],
 ];
 
 Sketch decodeSketch(Object? value) {
@@ -16,15 +24,20 @@ Sketch decodeSketch(Object? value) {
   var total = 0;
   final result = <List<Point<double>>>[];
   for (final rawStroke in value) {
-    if (rawStroke is! List || rawStroke.length > 2000) {
+    final points = rawStroke is Map ? rawStroke['points'] : rawStroke;
+    final color = rawStroke is Map ? rawStroke['color'] : sketchColors.first;
+    if (color is! int || !sketchColors.contains(color)) {
+      throw const FormatException('画笔颜色无效');
+    }
+    if (points is! List || points.length > 2000) {
       throw const FormatException('笔迹太长');
     }
-    total += rawStroke.length;
+    total += points.length;
     if (total > 12000) {
       throw const FormatException('画作太复杂，请清空重画');
     }
-    final stroke = <Point<double>>[];
-    for (final point in rawStroke) {
+    final stroke = SketchStroke([], color: color);
+    for (final point in points) {
       if (point is! List ||
           point.length != 2 ||
           point[0] is! num ||
@@ -54,6 +67,8 @@ Map<String, Object?> encodeStep(GameStep step) => {
   'gallery': [for (final sketch in step.gallery) encodeSketch(sketch)],
   'columns': step.columns,
   'controller': step.controller,
+  'drawingHint': step.drawingHint,
+  'guessMessages': step.guessMessages,
   'options': [
     for (final option in step.options)
       {'id': option.id, 'label': option.label, 'actor': option.actor},
@@ -80,6 +95,18 @@ GameStep decodeStep(Map<String, Object?> data) {
         : wireString(data, 'inputLabel'),
     seconds: data['seconds'] == null ? null : wireInt(data, 'seconds'),
     controller: data['controller'] == null ? null : wireInt(data, 'controller'),
+    drawingHint: data['drawingHint'] == null
+        ? null
+        : wireString(data, 'drawingHint'),
+    guessMessages: data['guessMessages'] == null
+        ? const []
+        : [
+            for (final message in wireList(data, 'guessMessages'))
+              if (message is String)
+                message
+              else
+                throw const FormatException('猜词记录格式不正确'),
+          ],
     drawing: wireBool(data, 'drawing'),
     sketch: data['sketch'] == null ? null : decodeSketch(data['sketch']),
     gallery: wireList(data, 'gallery').map(decodeSketch).toList(),
