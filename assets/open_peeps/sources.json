@@ -1,0 +1,67 @@
+{
+  "author": "Pablo Stanley",
+  "website": "https://www.openpeeps.com/",
+  "license": "CC0-1.0",
+  "assets": [
+    {
+      "file": "peep_00.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53588fd399239e9b54dc11_peep-59.png",
+      "bytes": 68904
+    },
+    {
+      "file": "peep_01.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5356c67371bb2b069e35e3_peep-44.png",
+      "bytes": 58184
+    },
+    {
+      "file": "peep_02.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e532a5133d3686ff53d2a74_peep-2.png",
+      "bytes": 62219
+    },
+    {
+      "file": "peep_03.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535b08f5fa1a4620fbf083_peep-80.png",
+      "bytes": 55732
+    },
+    {
+      "file": "peep_04.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53599be35d38774267afad_peep-68.png",
+      "bytes": 55338
+    },
+    {
+      "file": "peep_05.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535b5e8becbf0e0b545ab7_peep-83.png",
+      "bytes": 74996
+    },
+    {
+      "file": "peep_06.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5350729b55b0696e50c9ab_peep-4.png",
+      "bytes": 69489
+    },
+    {
+      "file": "peep_07.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535a69d87131574f1028d5_peep-75.png",
+      "bytes": 60160
+    },
+    {
+      "file": "peep_08.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5353362b568a99fd167467_peep-21.png",
+      "bytes": 57378
+    },
+    {
+      "file": "peep_09.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5355f3f5fa1a1fd7f79760_peep-37.png",
+      "bytes": 56428
+    },
+    {
+      "file": "peep_10.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535a877371bbe27fa0b695_peep-76.png",
+      "bytes": 69422
+    },
+    {
+      "file": "peep_11.png",
+      "source": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535197550b7608d7f1ef77_peep-12.png",
+      "bytes": 58942
+    }
+  ]
+}

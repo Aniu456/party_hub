@@ -1,0 +1,10 @@
+*
+!lib
+!lib/game_catalog.dart
+!lib/games
+!lib/games/**
+!lib/room_server.dart
+!server
+!server/**
+!deploy
+!deploy/**
