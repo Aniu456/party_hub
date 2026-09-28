@@ -2,6 +2,8 @@
 
 Flutter 聚会游戏 App，支持 iOS、Android，包含 26 款已接入对局的游戏。
 
+用户下载网站位于 [`website/`](website/README.md)，使用独立 Flutter Web 项目实现。构建后可将 `website/build/web/` 内的文件放入 1Panel 静态网站目录，Android 下载按钮始终指向最新 GitHub Release。
+
 人数按各游戏分别设置；**谁是卧底至少 1 名主持人 + 3 名玩家，五子棋和反应力对决恰好 2 人**。
 
 ## 怎么玩

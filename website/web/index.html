@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <base href="./">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#3155e7">
+  <meta name="description" content="康师傅聚会游戏：谁是卧底、你画我猜、双人 PK，26 款游戏陪朋友快乐开局。下载 Android 最新版 APK，支持同机与联机。">
+  <title>康师傅 · 好朋友，就要玩在一起</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    body { margin: 0; background: #f8f9fc; color: #182343; }
+    #loading { box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; font-family: sans-serif; }
+    #loading img { width: 84px; height: 84px; border-radius: 22px; }
+    #loading h1 { margin: 24px 0 8px; font-size: 28px; }
+    #loading p { line-height: 1.8; color: #56617b; }
+    #loading a { display: inline-block; padding: 16px 24px; border-radius: 14px; background: #3155e7; color: white; text-decoration: none; margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <img src="favicon.png" alt="康师傅 App 图标">
+    <h1>好朋友，就要玩在一起。</h1>
+    <p>康师傅 · 聚会游戏<br>下载 Android 最新正式版</p>
+    <a href="https://github.com/Aniu456/party_hub/releases/latest/download/party-hub.apk">下载 Android APK</a>
+    <p id="loading-status">正在打开下载页…</p>
+    <noscript><p>完整页面需要 JavaScript，你也可以直接使用上方下载链接。</p></noscript>
+  </div>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      document.getElementById('loading')?.remove();
+    });
+    window.setTimeout(function () {
+      const status = document.getElementById('loading-status');
+      if (status) status.textContent = '页面加载较慢，可以直接使用上方按钮下载。';
+    }, 15000);
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
