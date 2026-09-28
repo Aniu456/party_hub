@@ -74,7 +74,7 @@ class _UserCenterPageState extends State<UserCenterPage> {
                           '你的游戏名片',
                           style: TextStyle(
                             color: colors.primary,
-                            fontSize: 12,
+                            fontSize: 11,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -85,7 +85,7 @@ class _UserCenterPageState extends State<UserCenterPage> {
                               : widget.profile.nickname,
                           style: TextStyle(
                             color: colors.onSurface,
-                            fontSize: 20,
+                            fontSize: 19,
                             height: 1.25,
                             fontWeight: FontWeight.w700,
                           ),
@@ -94,7 +94,7 @@ class _UserCenterPageState extends State<UserCenterPage> {
                         Text(
                           '不用注册，也不用记密码',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 11,
                             color: colors.onSurfaceVariant,
                           ),
                         ),
@@ -127,7 +127,7 @@ class _UserCenterPageState extends State<UserCenterPage> {
               const SizedBox(height: 6),
               Text(
                 '设置一次昵称，下次开局直接用。',
-                style: TextStyle(fontSize: 13, color: colors.onSurfaceVariant),
+                style: TextStyle(fontSize: 12, color: colors.onSurfaceVariant),
               ),
               const SizedBox(height: 16),
               TextFormField(

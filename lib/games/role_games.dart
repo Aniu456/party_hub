@@ -283,11 +283,39 @@ class DeductionSession extends GameSession {
 
 /// 联机卧底按连接身份分发词语与选项，不使用同机交接顺序。
 class OnlineUndercoverSession extends DeductionSession {
-  OnlineUndercoverSession(super.game, super.players, {super.random});
+  OnlineUndercoverSession(super.game, super.players, {super.random}) {
+    candidates = List.of(alive);
+    _talk();
+  }
 
-  final confirmed = <int>{};
-  bool get concurrentActions =>
-      !finished && (phase == 'reveal' || phase == 'vote');
+  bool get concurrentActions => !finished && phase == 'vote';
+
+  @override
+  GameStep buildStep() {
+    if (phase == 'talk') {
+      return GameStep(
+        title: secondVote ? '平票 · 自由讨论' : '自由讨论',
+        body: secondVote
+            ? '${candidates.map(player).join('、')}最高票平票，线下补充讨论后再投一次。'
+            : '大家面对面自由讨论，准备好后由主持人发起投票。',
+        controller: moderatorSeat,
+        options: [GameOption('start_vote', secondVote ? '开始重投' : '发起投票')],
+      );
+    }
+    return super.buildStep();
+  }
+
+  @override
+  void handle(String action, String input, Duration elapsed) {
+    if (phase == 'talk') {
+      phase = 'vote';
+      votes.clear();
+      cursor = 0;
+      resetClock();
+    } else {
+      super.handle(action, input, elapsed);
+    }
+  }
 
   String? wordFor(int seat) => seat > 0 && seat < count
       ? (bad.contains(seat) ? pair.$2 : pair.$1)
@@ -296,21 +324,6 @@ class OnlineUndercoverSession extends DeductionSession {
   GameStep stepFor(int seat) {
     if (finished) {
       return step;
-    }
-    if (phase == 'reveal') {
-      final progress = '已确认 ${confirmed.length} / ${count - 1} 人';
-      if (seat == moderatorSeat || confirmed.contains(seat)) {
-        return GameStep(
-          title: seat == moderatorSeat ? '等待玩家查看词语' : '已记住词语',
-          body: '$progress，所有玩家确认后开始发言。',
-        );
-      }
-      return GameStep(
-        title: '查看你的词语',
-        body: '你的词语：${wordFor(seat)}\n不要直接说出词语，也不要给其他人看。',
-        privateFor: player(seat),
-        options: const [GameOption('confirm_word', '我记住了')],
-      );
     }
     if (phase == 'vote') {
       final progress = '已提交 ${votes.length} / ${alive.length} 票';
@@ -342,22 +355,14 @@ class OnlineUndercoverSession extends DeductionSession {
     if (!view.options.any((option) => option.id == action)) {
       return false;
     }
-    return concurrentActions ||
-        seat == (view.controller ?? moderatorSeat) ||
-        (phase == 'talk' && seat == moderatorSeat);
+    return concurrentActions || seat == (view.controller ?? moderatorSeat);
   }
 
   void actFor(int seat, String action, String input, Duration elapsed) {
     if (!canActFor(seat, action)) {
       throw StateError('当前不能执行此操作');
     }
-    if (phase == 'reveal') {
-      confirmed.add(seat);
-      if (confirmed.length == count - 1) {
-        candidates = List.of(alive);
-        _talk();
-      }
-    } else if (phase == 'vote') {
+    if (phase == 'vote') {
       votes[seat] = action == 'abstain' ? -1 : int.parse(action.substring(1));
       if (votes.length == alive.length) {
         _resolveVotes();

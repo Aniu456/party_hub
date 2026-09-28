@@ -115,9 +115,7 @@ class UndercoverSnapshot {
     : phase = wireString(data, 'phase'),
       tiebreak = data['tiebreak'] == true,
       round = wireInt(data, 'round'),
-      speaker = data['speaker'] == null ? null : wireInt(data, 'speaker'),
       alive = _seats(data, 'alive'),
-      confirmed = _seats(data, 'confirmed'),
       voted = _seats(data, 'voted'),
       roles = [
         for (final role in wireList(data, 'roles'))
@@ -135,9 +133,7 @@ class UndercoverSnapshot {
   final String phase;
   final bool tiebreak;
   final int round;
-  final int? speaker;
   final List<int> alive;
-  final List<int> confirmed;
   final List<int> voted;
   final List<UndercoverRole> roles;
 }

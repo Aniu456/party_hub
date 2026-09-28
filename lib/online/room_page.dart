@@ -133,7 +133,7 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
                       Text(
                         joining ? '朋友的邀请' : '即将开局',
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 11,
                           fontWeight: FontWeight.w600,
                           color: colors.primary,
                         ),
@@ -143,7 +143,7 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
                         joining ? '快乐，就差你了' : game.name,
                         style: TextStyle(
                           color: colors.onSurface,
-                          fontSize: 20,
+                          fontSize: 19,
                           height: 1.25,
                           fontWeight: FontWeight.w700,
                         ),
@@ -171,7 +171,7 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
             const SizedBox(height: 20),
             Text(
               joining ? '扫码或输入房间码，马上与朋友会合。' : '创建后邀请朋友扫码或输入房间码，大家准备好就能开始。',
-              style: TextStyle(fontSize: 13, color: colors.onSurfaceVariant),
+              style: TextStyle(fontSize: 12, color: colors.onSurfaceVariant),
             ),
             const SizedBox(height: 24),
             TextFormField(
@@ -194,7 +194,7 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
             const SizedBox(height: 10),
             Text(
               '昵称会保存在本机，下次自动填写。',
-              style: TextStyle(fontSize: 12, color: colors.onSurfaceVariant),
+              style: TextStyle(fontSize: 11, color: colors.onSurfaceVariant),
             ),
             if (joining) ...[
               const SizedBox(height: 24),
@@ -213,7 +213,7 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
                       '六位房间码',
                       style: TextStyle(
                         color: colors.onSecondaryContainer,
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -231,7 +231,7 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
                           ? null
                           : '请输入完整的 6 位房间码',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 19,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 4,
                         color: colors.primary,
@@ -248,7 +248,7 @@ class _RoomEntryPageState extends State<RoomEntryPage> {
                     Text(
                       '向开房的朋友获取',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 11,
                         color: colors.onSecondaryContainer,
                       ),
                     ),
@@ -457,7 +457,7 @@ class _RoomPageState extends State<RoomPage> {
                           semanticsLabel:
                               '房间码 ${state.code.split('').join(' ')}',
                           style: TextStyle(
-                            fontSize: 36,
+                            fontSize: 35,
                             letterSpacing: 6,
                             fontWeight: FontWeight.w800,
                             color: colors.onSecondaryContainer,
@@ -609,7 +609,6 @@ class _RoomPageState extends State<RoomPage> {
                   UndercoverGameView(
                     state: state,
                     enabled: enabled,
-                    remainingSeconds: displayedSeconds,
                     onAction: (action) => client.send('action', action: action),
                   )
                 else ...[

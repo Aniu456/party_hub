@@ -41,7 +41,7 @@ class RoomInviteDialog extends StatelessWidget {
           code,
           semanticsLabel: '房间码 ${code.split('').join(' ')}',
           style: const TextStyle(
-            fontSize: 24,
+            fontSize: 23,
             fontWeight: FontWeight.w700,
             letterSpacing: 4,
           ),

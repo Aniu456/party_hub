@@ -25,43 +25,50 @@ ThemeData partyTheme(Brightness brightness) {
   );
   final base = ThemeData(useMaterial3: true, colorScheme: scheme);
   final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(16));
+  final textTheme = base.textTheme.copyWith(
+    headlineLarge: TextStyle(
+      fontSize: 27,
+      fontWeight: FontWeight.w800,
+      letterSpacing: -1.2,
+      color: scheme.onSurface,
+    ),
+    headlineMedium: TextStyle(
+      fontSize: 25,
+      fontWeight: FontWeight.w800,
+      letterSpacing: -.8,
+      color: scheme.onSurface,
+    ),
+    headlineSmall: TextStyle(
+      fontSize: 21,
+      fontWeight: FontWeight.w700,
+      color: scheme.onSurface,
+    ),
+    titleLarge: TextStyle(
+      fontSize: 17,
+      fontWeight: FontWeight.w700,
+      color: scheme.onSurface,
+    ),
+    titleMedium: TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w600,
+      color: scheme.onSurface,
+    ),
+    bodyLarge: TextStyle(fontSize: 14, height: 1.55, color: scheme.onSurface),
+    bodyMedium: TextStyle(
+      fontSize: 13,
+      height: 1.5,
+      color: scheme.onSurfaceVariant,
+    ),
+    labelLarge: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+  );
+  final buttonTextStyle = textTheme.labelLarge?.copyWith(fontSize: 12);
   return base.copyWith(
     scaffoldBackgroundColor: dark ? const Color(0xFF131A2A) : Colors.white,
-    textTheme: base.textTheme.copyWith(
-      headlineLarge: TextStyle(
-        fontSize: 28,
-        fontWeight: FontWeight.w800,
-        letterSpacing: -1.2,
-        color: scheme.onSurface,
-      ),
-      headlineMedium: TextStyle(
-        fontSize: 26,
-        fontWeight: FontWeight.w800,
-        letterSpacing: -.8,
-        color: scheme.onSurface,
-      ),
-      headlineSmall: TextStyle(
-        fontSize: 22,
-        fontWeight: FontWeight.w700,
-        color: scheme.onSurface,
-      ),
-      titleLarge: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w700,
-        color: scheme.onSurface,
-      ),
-      titleMedium: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        color: scheme.onSurface,
-      ),
-      bodyLarge: TextStyle(fontSize: 15, height: 1.55, color: scheme.onSurface),
-      bodyMedium: TextStyle(
-        fontSize: 14,
-        height: 1.5,
-        color: scheme.onSurfaceVariant,
-      ),
-      labelLarge: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+    textTheme: textTheme,
+    typography: base.typography.copyWith(
+      englishLike: base.typography.englishLike.apply(fontSizeDelta: -1),
+      dense: base.typography.dense.apply(fontSizeDelta: -1),
+      tall: base.typography.tall.apply(fontSizeDelta: -1),
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: dark ? const Color(0xFF131A2A) : Colors.white,
@@ -71,12 +78,13 @@ ThemeData partyTheme(Brightness brightness) {
       elevation: 0,
       titleTextStyle: TextStyle(
         color: scheme.onSurface,
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: FontWeight.w600,
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
+        textStyle: buttonTextStyle,
         minimumSize: const Size(48, 54),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         shape: const StadiumBorder(),
@@ -84,6 +92,7 @@ ThemeData partyTheme(Brightness brightness) {
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
+        textStyle: buttonTextStyle,
         minimumSize: const Size(48, 52),
         foregroundColor: scheme.primary,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
@@ -93,6 +102,7 @@ ThemeData partyTheme(Brightness brightness) {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
+        textStyle: buttonTextStyle,
         minimumSize: const Size(48, 48),
         shape: shape,
       ),
@@ -119,6 +129,7 @@ ThemeData partyTheme(Brightness brightness) {
       errorMaxLines: 3,
     ),
     chipTheme: base.chipTheme.copyWith(
+      labelStyle: buttonTextStyle,
       shape: const StadiumBorder(),
       showCheckmark: false,
       selectedColor: scheme.primary,
@@ -345,7 +356,7 @@ class ScoreStrip extends StatelessWidget {
                   ? '${scores[i]} 分'
                   : '—'}',
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 12,
                 color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
@@ -382,7 +393,7 @@ class _TeamScore extends StatelessWidget {
           '$score',
           style: const TextStyle(
             color: partyInk,
-            fontSize: 30,
+            fontSize: 29,
             fontWeight: FontWeight.w800,
           ),
         ),

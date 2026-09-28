@@ -226,7 +226,7 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
                   '专属你的秘密',
                   style: TextStyle(
                     color: colors.onSecondaryContainer,
-                    fontSize: 13,
+                    fontSize: 12,
                     letterSpacing: 2,
                   ),
                 ),
@@ -288,7 +288,7 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
                           color: widget.finished
                               ? colors.onSecondaryContainer
                               : colors.primary,
-                          fontSize: 13,
+                          fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -430,7 +430,7 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
                               child: Text(
                                 '${index + 1}'.padLeft(2, '0'),
                                 style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 11,
                                   fontWeight: FontWeight.w700,
                                   color: widget.enabled
                                       ? colors.onPrimaryContainer
@@ -534,7 +534,7 @@ class _GameBoardState extends State<_GameBoard> {
                         textAlign: TextAlign.center,
                         textScaler: TextScaler.noScaling,
                         maxLines: 3,
-                        style: const TextStyle(fontSize: 14, color: partyInk),
+                        style: const TextStyle(fontSize: 12, color: partyInk),
                       ),
               ),
             ),

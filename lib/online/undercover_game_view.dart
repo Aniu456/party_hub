@@ -25,7 +25,7 @@ class UndercoverLobbyView extends StatelessWidget {
       children: [
         const SectionHeading('先选一位主持人'),
         Text(
-          '主持人查看全部身份，负责推进讨论与公布结果，不拿词、不发言、不投票。',
+          '主持人查看全部身份，负责发起投票与公布结果，不拿词、不发言、不投票。',
           style: theme.textTheme.bodyMedium,
         ),
         const SizedBox(height: 16),
@@ -127,13 +127,11 @@ class UndercoverGameView extends StatefulWidget {
     required this.state,
     required this.enabled,
     required this.onAction,
-    this.remainingSeconds,
   });
 
   final RoomSnapshot state;
   final bool enabled;
   final ValueChanged<String> onAction;
-  final int? remainingSeconds;
 
   @override
   State<UndercoverGameView> createState() => _UndercoverGameViewState();
@@ -142,7 +140,6 @@ class UndercoverGameView extends StatefulWidget {
 class _UndercoverGameViewState extends State<UndercoverGameView>
     with WidgetsBindingObserver {
   bool wordVisible = false;
-  bool hasViewedWord = false;
 
   @override
   void initState() {
@@ -156,7 +153,6 @@ class _UndercoverGameViewState extends State<UndercoverGameView>
     if (oldWidget.state.ownWord != widget.state.ownWord ||
         oldWidget.state.seat != widget.state.seat) {
       wordVisible = false;
-      hasViewedWord = false;
     }
   }
 
@@ -185,8 +181,7 @@ class _UndercoverGameViewState extends State<UndercoverGameView>
       return const InfoNote('正在等待游戏状态同步…', icon: Icons.sync_rounded);
     }
     final phaseTitle = switch (game.phase) {
-      'reveal' => '查看词语',
-      'talk' => game.tiebreak ? '平票 · 补充描述' : '轮流描述',
+      'talk' => game.tiebreak ? '平票 · 自由讨论' : '自由讨论',
       'vote' => game.tiebreak ? '平票 · 再投一次' : '找出卧底',
       'result' => '投票结果',
       'finished' => '本局结束',
@@ -196,10 +191,8 @@ class _UndercoverGameViewState extends State<UndercoverGameView>
       for (var i = 0; i < state.members.length; i++)
         if (i != state.moderatorSeat) i,
     ];
-    final confirmed = game.confirmed.contains(state.seat);
     final voted = game.voted.contains(state.seat);
     final active = game.alive.contains(state.seat);
-    final speaker = game.speaker;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -217,10 +210,7 @@ class _UndercoverGameViewState extends State<UndercoverGameView>
           runSpacing: 8,
           children: [
             Text(phaseTitle, style: theme.textTheme.headlineSmall),
-            Text(
-              '第 ${game.round} 轮${widget.remainingSeconds == null ? '' : ' · ${widget.remainingSeconds} 秒'}',
-              style: theme.textTheme.bodyMedium,
-            ),
+            Text('第 ${game.round} 轮', style: theme.textTheme.bodyMedium),
           ],
         ),
         const SizedBox(height: 20),
@@ -272,7 +262,6 @@ class _UndercoverGameViewState extends State<UndercoverGameView>
                 TextButton.icon(
                   onPressed: () => setState(() {
                     wordVisible = !wordVisible;
-                    hasViewedWord = true;
                   }),
                   icon: Icon(
                     wordVisible
@@ -286,57 +275,19 @@ class _UndercoverGameViewState extends State<UndercoverGameView>
           ),
           const SizedBox(height: 20),
         ],
-        if (game.phase == 'reveal') ...[
-          Text(
-            '看词进度 ${game.confirmed.length} / ${players.length}',
-            style: theme.textTheme.titleMedium,
-          ),
-          const SizedBox(height: 12),
-          for (final seat in players)
-            _PlayerStatus(
-              name: state.members[seat].name,
-              status: game.confirmed.contains(seat) ? '已记住词语' : '正在看词',
-              highlighted: game.confirmed.contains(seat),
-            ),
-          if (confirmed) const InfoNote('你已确认词语，等大家确认后开始描述。'),
-        ] else if (game.phase == 'talk') ...[
-          if (speaker != null && speaker >= 0 && speaker < state.members.length)
-            SurfaceCard(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '正在描述',
-                    style: theme.textTheme.labelLarge?.copyWith(
-                      color: colors.primary,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '${state.members[speaker].name}${speaker == state.seat ? '（你）' : ''}',
-                    style: theme.textTheme.headlineSmall,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '用一句话描述自己的词语，不要直接说出词语。',
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                ],
+        if (game.phase == 'talk') ...[
+          const SizedBox(height: 16),
+          Text(step.body, style: theme.textTheme.bodyMedium),
+          if (!moderator) ...[
+            const SizedBox(height: 16),
+            Text('本局玩家', style: theme.textTheme.titleMedium),
+            for (final seat in players)
+              _PlayerStatus(
+                name: state.members[seat].name,
+                status: game.alive.contains(seat) ? '场上' : '已出局',
+                highlighted: false,
               ),
-            ),
-          const SizedBox(height: 12),
-          Text('场上玩家', style: theme.textTheme.titleMedium),
-          for (final seat in players)
-            _PlayerStatus(
-              name: state.members[seat].name,
-              status: !game.alive.contains(seat)
-                  ? '已出局'
-                  : seat == speaker
-                  ? '正在描述'
-                  : '场上',
-              highlighted: seat == speaker,
-            ),
+          ],
         ] else if (game.phase == 'vote') ...[
           Text(
             '已投票 ${game.voted.length} / ${game.alive.length}',
@@ -379,23 +330,10 @@ class _UndercoverGameViewState extends State<UndercoverGameView>
                       child: Text(option.label),
                     )
                   : FilledButton(
-                      onPressed:
-                          widget.enabled &&
-                              (game.phase != 'reveal' ||
-                                  moderator ||
-                                  hasViewedWord)
-                          ? () {
-                              if (game.phase == 'reveal') {
-                                setState(() => wordVisible = false);
-                              }
-                              widget.onAction(option.id);
-                            }
+                      onPressed: widget.enabled
+                          ? () => widget.onAction(option.id)
                           : null,
-                      child: Text(
-                        moderator && game.phase == 'talk'
-                            ? '结束当前发言'
-                            : option.label,
-                      ),
+                      child: Text(option.label),
                     ),
             ),
         ],

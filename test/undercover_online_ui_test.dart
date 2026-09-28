@@ -13,8 +13,7 @@ RoomSnapshot snapshot({
   GameStep? step,
   String? ownWord,
   String? overview,
-  String phase = 'reveal',
-  List<int> confirmed = const [],
+  String phase = 'talk',
 }) => RoomSnapshot({
   'room': '123456',
   'gameId': 'undercover',
@@ -34,9 +33,7 @@ RoomSnapshot snapshot({
       : {
           'phase': phase,
           'round': 1,
-          'speaker': phase == 'talk' ? 2 : null,
           'alive': [1, 2, 3],
-          'confirmed': confirmed,
           'voted': <int>[],
           'roles': overview == null
               ? <Object>[]
@@ -78,7 +75,7 @@ class TestRoomClient extends RoomClient {
   }
 }
 
-const waiting = GameStep(title: '正在发词', body: '等待所有玩家确认词语。');
+const waiting = GameStep(title: '自由讨论', body: '大家面对面自由讨论，准备好后由主持人发起投票。');
 
 Future<void> showRoom(WidgetTester tester, TestRoomClient client) async {
   tester.view.physicalSize = const Size(390, 1200);
@@ -132,43 +129,37 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
-  testWidgets('发词阶段用自己的词语卡，查看后才能确认', (tester) async {
-    await showRoom(
-      tester,
-      TestRoomClient(
-        snapshot(
-          ownWord: '牛奶',
-          step: const GameStep(
-            title: '你的词语',
-            body: '你的词语：牛奶',
-            privateFor: '房主',
-            options: [GameOption('seen', '记住了')],
-          ),
-        ),
-      ),
-    );
-    expect(find.text('查看我的词语'), findsOneWidget);
-    expect(find.textContaining('请交给'), findsNothing);
-    expect(find.textContaining('牛奶'), findsNothing);
-    expect(find.byType(GameSurface), findsNothing);
-    expect(
-      tester
-          .widget<FilledButton>(find.widgetWithText(FilledButton, '记住了'))
-          .onPressed,
-      isNull,
-    );
+  testWidgets('自由讨论无需看词确认，不显示发言人和倒计时', (tester) async {
+    final client = TestRoomClient(snapshot(ownWord: '牛奶', step: waiting));
+    await showRoom(tester, client);
+    expect(find.text('自由讨论'), findsOneWidget);
+    expect(find.textContaining('看词进度'), findsNothing);
+    expect(find.textContaining('正在描述'), findsNothing);
+    expect(find.textContaining('记住了'), findsNothing);
+    expect(find.textContaining('秒'), findsNothing);
+    expect(find.text('发起投票'), findsNothing);
     await tester.tap(find.text('查看我的词语'));
     await tester.pump();
     expect(find.text('牛奶'), findsOneWidget);
-    expect(
-      tester
-          .widget<FilledButton>(find.widgetWithText(FilledButton, '记住了'))
-          .onPressed,
-      isNotNull,
+    expect(client.commands, isEmpty);
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('主持人直接发起投票，无需等待玩家逐个确认或发言', (tester) async {
+    final client = TestRoomClient(
+      snapshot(
+        seat: 0,
+        overview: '身份',
+        step: const GameStep(
+          title: '自由讨论',
+          body: '面对面讨论',
+          options: [GameOption('start_vote', '发起投票')],
+        ),
+      ),
     );
-    await tester.tap(find.text('记住了'));
-    await tester.pump();
-    expect(find.text('牛奶'), findsNothing);
+    await showRoom(tester, client);
+    await tester.tap(find.text('发起投票'));
+    expect(client.actions, ['start_vote']);
     await tester.pumpWidget(const SizedBox());
   });
 
@@ -197,7 +188,7 @@ void main() {
     expect(find.byType(DropdownButton<int>), findsNothing);
     await tester.pumpWidget(const SizedBox());
   });
-  testWidgets('投票卡使用服务端选项标识提交，已确认玩家不再重复确认', (tester) async {
+  testWidgets('投票卡使用服务端选项标识提交，词语默认隐藏', (tester) async {
     final client = TestRoomClient(
       snapshot(
         phase: 'vote',

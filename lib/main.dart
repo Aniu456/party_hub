@@ -288,7 +288,7 @@ class _GameLobbyPageState extends State<GameLobbyPage> {
                 style: TextButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   textStyle: Theme.of(context).textTheme.labelLarge
-                      ?.copyWith(fontSize: 12, fontWeight: FontWeight.w600),
+                      ?.copyWith(fontSize: 10, fontWeight: FontWeight.w600),
                 ),
                 icon: const Icon(Icons.tune_rounded, size: 16),
                 label: Text(partySize == null ? '按人数挑游戏' : '$partySize 人可玩'),
@@ -338,7 +338,7 @@ class _GameLobbyPageState extends State<GameLobbyPage> {
                                 fontWeight: category == item
                                     ? FontWeight.w700
                                     : FontWeight.w500,
-                                fontSize: 13,
+                                fontSize: 11,
                               ),
                         ),
                       ),
@@ -421,7 +421,7 @@ class _GameCard extends StatelessWidget {
                           Text(
                             '${playerCountLabel(game)}  ·  ${look.category}',
                             style: Theme.of(context).textTheme.labelSmall
-                                ?.copyWith(color: colors.primary, fontSize: 11),
+                                ?.copyWith(color: colors.primary, fontSize: 10),
                           ),
                         ],
                       ),
@@ -430,7 +430,7 @@ class _GameCard extends StatelessWidget {
                         look.teaser,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: colors.onSurfaceVariant,
-                          fontSize: 12,
+                          fontSize: 11,
                         ),
                       ),
                     ],
@@ -582,7 +582,7 @@ class _DetailTag extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.primary,
           ),
