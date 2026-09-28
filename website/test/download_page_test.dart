@@ -17,7 +17,14 @@ void main() {
       expect(tester.takeException(), isNull);
       final links = tester.widgetList<Link>(find.byType(Link));
       expect(links.where((link) => link.uri.toString() == apkUrl).length, 3);
-      expect(links.every((link) => link.uri?.scheme == 'https'), isTrue);
+      expect(
+        links.every(
+          (link) =>
+              link.uri?.hasScheme == false &&
+              link.uri?.path.startsWith('downloads/') == true,
+        ),
+        isTrue,
+      );
       expect(find.text('iPhone 可以下载吗？'), findsOneWidget);
 
       await tester.ensureVisible(find.text('iPhone 可以下载吗？'));

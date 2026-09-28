@@ -2,7 +2,7 @@
 
 Flutter 聚会游戏 App，支持 iOS、Android，包含 26 款已接入对局的游戏。
 
-用户下载网站位于 [`website/`](website/README.md)，使用独立 Flutter Web 项目实现。构建后可将 `website/build/web/` 内的文件放入 1Panel 静态网站目录，Android 下载按钮始终指向最新 GitHub Release。
+用户下载网站位于 [`website/`](website/README.md)，使用独立 Flutter Web 项目实现。通过 `python3 tool/build_release.py` 将网站、正式 APK 和 OTA 清单打包为后台上传 ZIP，下载与更新均使用自有服务器。
 
 人数按各游戏分别设置；**谁是卧底至少 1 名主持人 + 3 名玩家，五子棋和反应力对决恰好 2 人**。
 
@@ -20,7 +20,7 @@ flutter pub get
 flutter run
 ```
 
-联机地址由构建配置 `PARTY_HUB_WS` 注入；源码默认指向本机测试地址。正式发布由 GitHub Actions Secret 提供 WSS 地址。服务端代码、部署文件和生产配置不在公开仓库中。同机游戏无需服务端。
+联机地址由构建配置 `PARTY_HUB_WS` 注入；源码默认指向本机测试地址。正式发布由本机 `.env.production.json` 注入 WSS 和下载站点地址。服务端代码、部署文件和生产配置不在公开仓库中。同机游戏无需服务端。
 
 ```sh
 flutter run --dart-define=PARTY_HUB_WS=wss://example.invalid/ws
@@ -37,13 +37,13 @@ flutter test
 
 已实现 26 款首版对局；不是所有经典桌游的全部扩展规则。具体玩法在 App 游戏详情页查看。
 
-房间保存在服务内存，重启服务会清空；会话令牌只在 App 内存中，杀进程不能恢复旧座位。断网后可在 App 内自动重连。没有内置语音、历史战绩或题库 OTA 服务。Android 已接入 GitHub Release 更新代码和签名发布工作流，实际发行与真机覆盖安装需另行验证；iOS 暂未接入更新。正式上架前仍需确认应用标识、渠道签名，并进行 Android/iOS 多人真机测试。
+房间保存在服务内存，重启服务会清空；会话令牌只在 App 内存中，杀进程不能恢复旧座位。断网后可在 App 内自动重连。没有内置语音、历史战绩或题库 OTA 服务。Android 已接入自有服务器更新代码和本机签名发布流程，实际发行与真机覆盖安装需另行验证；iOS 暂未接入更新。正式上架前仍需确认应用标识、渠道签名，并进行 Android/iOS 多人真机测试。
 
 ## Android 更新发布
 
-推送与 `pubspec.yaml` 版本一致的 tag（例如 `v1.0.0+1`）触发 GitHub Actions：检查、测试、签名构建 APK，发布到 [GitHub Releases](https://github.com/Aniu456/party_hub/releases)。正式版启动后自动检查更新，用户中心可手动检查；确认下载后校验文件并交给系统安装。iOS 暂不接入。
+提高 `pubspec.yaml` 构建号后运行 `python3 tool/build_release.py`，将生成的整站 ZIP 上传后台原作品。正式版启动后从配置的服务器检查更新，用户中心也可手动检查；下载并校验 APK 后由系统确认安装。GitHub Actions 保留为可选构建备份，不是发布的必要环节。
 
-签名配置、版本规则和发行步骤见 [Android 发布说明](docs/android-releases.md)。
+签名、版本规则、旧版迁移和发布步骤见 [Android 发布说明](docs/android-releases.md)。
 
 ## 本次验证记录（2026-09-28）
 

@@ -83,6 +83,7 @@ id_ed25519*
 /tool/*
 !/tool/release_metadata.py
 !/tool/check_public_files.py
+!/tool/build_release.py
 /play.md
 /AGENTS.md
 /docs/*

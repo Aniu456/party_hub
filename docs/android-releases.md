@@ -1,58 +1,57 @@
-# Android 自动更新
+# Android 本机发布与 OTA
 
-发布仓库：[Aniu456/party_hub](https://github.com/Aniu456/party_hub)。仅接入 Android；iOS 暂不接更新渠道。
+默认使用本机构建、后台上传。GitHub 可保留源码和构建备份，用户下载与更新不依赖 GitHub。仅 Android 支持 APK 覆盖安装，iOS 暂不接入。
 
-## 用户怎么更新
+## 一次配置
 
-正式版冷启动进入大厅后检查一次 GitHub 最新 Release；用户中心也可点击「检查应用更新」。只有更高的 Android 构建号才提示更新。用户确认后下载完整 APK，显示进度，校验 SHA-256，再打开系统安装界面由用户确认。首次安装此来源时可能需要系统授权。下载安装不会静默执行，也不是 Dart 热补丁。
+继续使用已有 `android/release.jks` 和 `android/key.properties`，不要重新生成签名密钥。两者均被 Git 忽略；发布脚本会核对 APK 签名与首个正式版相同，并检查包名、版本号。
 
-自动检查失败时不影响游戏；用户主动检查失败会明确提示。网络请求返回时若已离开大厅或 App 在后台，不弹出更新窗口。正在对局时不会检查、下载或替换代码。未发布首版时显示「暂未发布可用更新」。GitHub 无法连接时可继续使用原版本。
+在被忽略的 `.env.production.json` 中配置：
 
-## 首次配置
-
-Actions 需要以下仓库 Secrets（Settings → Secrets and variables → Actions）：
-
-| Secret | 内容 |
-| --- | --- |
-| `ANDROID_KEYSTORE_BASE64` | 正式签名 JKS 文件的 Base64 |
-| `ANDROID_KEYSTORE_PASSWORD` | JKS 密码 |
-| `ANDROID_KEY_ALIAS` | 签名别名 |
-| `ANDROID_KEY_PASSWORD` | 私钥密码 |
-| `PARTY_HUB_WS` | 正式联机 WSS 地址（构建时注入） |
-
-签名密钥必须备份并长期复用，不能在每次 CI 中重新生成。`android/release.jks` 和 `android/key.properties` 已被 Git 忽略。后者使用下列格式（真实密码不要提交）：
-
-```properties
-storeFile=release.jks
-storePassword=YOUR_STORE_PASSWORD
-keyAlias=partyhub
-keyPassword=YOUR_KEY_PASSWORD
+```json
+{
+  "PARTY_HUB_WS": "wss://example.invalid/party-hub/ws",
+  "PARTY_HUB_DOWNLOAD_BASE": "https://example.invalid/work/party-hub/downloads"
+}
 ```
 
-公开仓库仅包含 App、公开测试与发布工具。服务端、部署目录、内部规划、运维工具、iOS 团队标识和本地配置均被忽略。提交前运行 `python3 tool/check_public_files.py`，该检查读取 Git 暂存区而非只看 `.gitignore`。本地正式地址保存在被忽略的 `.env.production.json`，可用 `flutter run --dart-define-from-file=.env.production.json` 运行；iOS 本机签名团队保存在 `ios/Flutter/Signing.local.xcconfig`。不要使用 `git add -f` 强行加入这些文件。
-
-构建注入只避免生产地址出现在公开源码；联网 APK 中的连接地址仍可被提取，不能把它当作访问凭证。
-
-安装包沿用项目当前应用 ID `com.example.party_hub`。之后更改应用 ID 将被系统视为另一个应用。原先使用调试签名安装的版本无法被正式签名覆盖；测试设备需卸载调试版后安装首个正式版（卸载会删除本机昵称）。后续正式版之间用同一签名覆盖安装，保留本机数据。
+下载地址必须是 HTTPS，不带结尾斜杠。该路径应为后台已发布作品的地址加 `/downloads`；作品 slug 发布后保持不变，否则已安装 App 的更新地址会失效。
 
 ## 发布新版
 
-1. 修改 `pubspec.yaml` 的 `version`，例如 `1.0.1+2`。`+` 后的构建号必须严格大于已发布版本；同一版本名也可提高构建号。
-2. 提交并推送代码，然后创建和推送完全匹配的 tag：
+1. 提高 `pubspec.yaml` 的版本号，例如 `1.0.1+2`。构建号必须大于服务器已发布版本。
+2. 在项目根目录执行：
 
    ```sh
-   git tag v1.0.1+2
-   git push origin main
-   git push origin v1.0.1+2
+   python3 tool/build_release.py
    ```
 
-3. [Android Release 工作流](https://github.com/Aniu456/party_hub/actions/workflows/android-release.yml) 自动校验版本、检查源码、运行测试、签名打包并发布 Release。也可在 Actions 手动执行，输入已经推送的 tag。
-4. Release 包含 `party-hub.apk`、`update.json` 和 `SHA256SUMS`。先以草稿上传完整文件，再公开并标记 latest，避免客户端拿到半成品。重跑可以续传同一草稿；已公开版本禁止覆盖，应提高构建号重新发布。
+3. 脚本检查线上版本，构建正式签名 APK，验证签名与版本，构建网站，再检查线上版本是否变化，生成 `build/releases/v版本+构建号/party-hub-v版本+构建号-website-android.zip`。
+4. 在后台编辑**原来的作品**，上传该 ZIP 并保存。不要新建作品或更改 slug。后台校验并解压完成后才切换整个站点，因此网站、APK、校验文件和更新清单一起生效。构建脚本不会自动上传。
+5. 上传后检查网站下载、`downloads/update.json` 与 `downloads/SHA256SUMS.txt`，并在 Android 真机验证更新。
 
-首次发行使用 `v1.0.0+1`。首次安装从 [Releases](https://github.com/Aniu456/party_hub/releases) 下载 `party-hub.apk`；以后由 App 提示升级。仅推送普通代码不会发布安装包。
+ZIP 包含：
+
+- 网站完整资源，小熊图标与本站下载按钮。
+- `downloads/v版本+构建号/party-hub.apk`：正式安装包。
+- `downloads/update.json`：版本、构建号、版本对应的 APK 地址与 SHA-256。
+- `downloads/SHA256SUMS.txt`：便于人工核验。
+- `downloads/release.txt`：当前版本信息。
+
+不要再上传仅含网页的旧 ZIP，否则会把 OTA 文件一起替换掉。每次整站包只携带当前 APK，不是历史版本仓库；如果恰逢发布切换导致正在进行的旧版本下载失败，重新检查更新后再下载即可。脚本会检查后台的 100 MB 压缩包、200 MB 解压大小和 5000 文件限制。
+
+## 旧版迁移与更新行为
+
+`1.0.0+1` 仍检查 GitHub。用户须从官网手动下载安装一次新版本，之后由 App 访问配置的服务器更新。正式签名一致可覆盖安装并保留本机昵称；调试签名不能覆盖正式签名，不要为绕过签名冲突贸然卸载而丢失数据。
+
+正式版冷启动时自动检查；用户中心也可手动检查。仅更高构建号提示更新。用户确认后下载 APK，校验 SHA-256，再交给系统确认安装。这不是静默更新或 Dart 热补丁。对局中不自动更新。
+
+App 只接受构建时指定的 HTTPS 下载目录和清单版本对应的 APK 路径，不能被清单引导到任意源。网络错误或损坏清单会报告检查失败，不会伪装成最新版。
+
+## 可选 GitHub Actions
+
+原 Android Release 工作流保留为可选构建/备份渠道，不负责更新你的服务器。使用前除原签名 Secrets、`PARTY_HUB_WS` 外，还须配置 `PARTY_HUB_DOWNLOAD_BASE`。推送与版本一致的标签可生成 GitHub Release；仅生成 GitHub Release 不会让服务器出现新版。本机发布不需要推送标签或配置 Actions。
 
 ## 验证边界
 
-静态检查和模拟原生事件的测试不能证明系统安装成功。完整验收需要：在 Android 真机安装首版 → 发布更高构建号 → 打开旧版收到提示 → 下载校验 → 系统确认覆盖安装 → 检查版本与昵称保留。还应检查取消下载、拒绝安装权限、安装界面取消以及网络不可用后的重试。
-
-参考：[Flutter Android 发布与签名](https://docs.flutter.dev/deployment/android)、[ota_update 插件](https://pub.dev/packages/ota_update)、[GitHub Release 下载链接](https://docs.github.com/en/repositories/releasing-projects-on-github/linking-to-releases)。
+打包、签名核对和组件测试不等于真机覆盖安装验收。完整验证需要：旧正式版 → 官网安装迁移版 → 发布更高构建号 → App 检查、下载、校验 → 系统确认覆盖安装 → 检查版本与昵称保留。

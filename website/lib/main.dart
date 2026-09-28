@@ -3,11 +3,12 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 
-const apkUrl =
-    'https://github.com/Aniu456/party_hub/releases/latest/download/party-hub.apk';
-const releasesUrl = 'https://github.com/Aniu456/party_hub/releases';
-const checksumUrl =
-    'https://github.com/Aniu456/party_hub/releases/latest/download/SHA256SUMS';
+const apkUrl = String.fromEnvironment(
+  'PARTY_HUB_APK_PATH',
+  defaultValue: 'downloads/party-hub.apk',
+);
+const releasesUrl = 'downloads/release.txt';
+const checksumUrl = 'downloads/SHA256SUMS.txt';
 const blue = Color(0xFF3155E7);
 const ink = Color(0xFF182343);
 const muted = Color(0xFF59647B);
@@ -247,7 +248,7 @@ class _DownloadPageState extends State<DownloadPage> {
                                   width: width,
                                   number: '1',
                                   title: '下载 Android 安装包',
-                                  body: '点击下载按钮，从 GitHub Release 获取最新正式版 APK。',
+                                  body: '点击下载按钮，从本站获取最新正式版 APK。',
                                 ),
                                 _Step(
                                   width: width,
@@ -307,7 +308,7 @@ class _DownloadPageState extends State<DownloadPage> {
                       ),
                       const _Question(
                         title: '下载按钮打开的是哪里？',
-                        answer: '安装包保存在项目的 GitHub Release 中，下载按钮始终指向最新正式版。若下载较慢，可稍后重试，或打开“版本记录”选择对应版本的 party-hub.apk。',
+                        answer: '安装包由本站提供，下载按钮对应当前正式版，无需访问 GitHub。若下载较慢，可切换网络后重试；版本信息和校验文件也可在本站查看。',
                       ),
                       const SizedBox(height: 40),
                       Container(
@@ -375,7 +376,7 @@ class _DownloadPageState extends State<DownloadPage> {
                         '康师傅 · 为朋友间的快乐而做',
                         style: TextStyle(color: muted, fontSize: 13),
                       ),
-                      _WebLink(url: releasesUrl, label: '版本记录', plain: true),
+                      _WebLink(url: releasesUrl, label: '版本信息', plain: true),
                       _WebLink(url: checksumUrl, label: '安装包校验文件', plain: true),
                     ],
                   ),
@@ -430,7 +431,7 @@ class _DownloadPageState extends State<DownloadPage> {
             ),
             _WebLink(
               url: releasesUrl,
-              label: '版本记录',
+              label: '版本信息',
               icon: Icons.north_east_rounded,
               outlined: true,
             ),
@@ -452,7 +453,7 @@ class _DownloadPageState extends State<DownloadPage> {
         title: const Text('下载与安装帮助'),
         content: const SingleChildScrollView(
           child: Text(
-            '下载没有开始？\n在手机的系统浏览器中打开本页，或进入版本记录，点击 Assets 中的 party-hub.apk。\n\n系统不允许安装？\n打开“设置 → 应用 → 特殊应用权限 → 安装未知应用”，为你正在使用的浏览器或文件管理器授权。不同手机的菜单名称可能不同；安装后可以关闭此权限。\n\n仍然安装失败？\n确认设备是 Android，存储空间充足，APK 已完整下载。若提示签名冲突，请先确认旧包来源，不要贸然卸载以免丢失本地数据。',
+            '下载没有开始？\n在手机的系统浏览器中打开本页，再点击下载 Android 版；也可切换网络后重试。\n\n系统不允许安装？\n打开“设置 → 应用 → 特殊应用权限 → 安装未知应用”，为你正在使用的浏览器或文件管理器授权。不同手机的菜单名称可能不同；安装后可以关闭此权限。\n\n仍然安装失败？\n确认设备是 Android，存储空间充足，APK 已完整下载。若提示签名冲突，请先确认旧包来源，不要贸然卸载以免丢失本地数据。',
           ),
         ),
         actions: [
