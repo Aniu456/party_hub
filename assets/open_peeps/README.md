@@ -10,4 +10,4 @@
 
 蓝色为 `#3659E3`，对应 `lib/app_style.dart` 的 `partyBlue`。白色衣物使用选区补色；黑色衣物在原 Ink 内部补蓝并保留黑色边界，头部、表情和配饰不参与着色。原图和生成脚本不进入 Flutter 资源包。
 
-`lib/open_peeps.dart` 提供全部分类清单，`PeepPortrait(index: ..., pose: PeepPose.standing)` 可显示站姿，坐姿同理；默认半身，前 12 个角色索引与旧版保持一致。`PlayerAvatar` 共用半身人物、浅蓝背景和圆形裁切。
+`lib/open_peeps.dart` 提供全部分类清单，`PeepPortrait(index: ..., pose: PeepPose.standing)` 可显示站姿，坐姿同理；默认半身，前 12 个角色索引与旧版保持一致。`PlayerAvatar` 共用透明背景的半身人物和圆形裁切。

@@ -232,6 +232,7 @@ class _LocalGamePageState extends State<LocalGamePage>
   final clock = Stopwatch();
   Timer? timer;
   int version = 0;
+  int? displayedSeconds;
   bool exiting = false;
   @override
   void initState() {
@@ -246,7 +247,9 @@ class _LocalGamePageState extends State<LocalGamePage>
       final seconds = session.step.seconds;
       if (seconds != null && clock.elapsedMilliseconds >= seconds * 1000) {
         act('timeout', '');
-      } else if (seconds != null) {
+      } else if (seconds != null &&
+          max(0, seconds - clock.elapsed.inSeconds) != displayedSeconds) {
+        // 保留 100 ms 的超时检测，仅在显示秒数变化时刷新界面。
         setState(() {});
       }
     });
@@ -303,6 +306,9 @@ class _LocalGamePageState extends State<LocalGamePage>
   @override
   Widget build(BuildContext context) {
     final step = session.step;
+    displayedSeconds = step.seconds == null
+        ? null
+        : max(0, step.seconds! - clock.elapsed.inSeconds);
     return PopScope(
       canPop: exiting,
       onPopInvokedWithResult: (didPop, result) {
@@ -365,13 +371,7 @@ class _LocalGamePageState extends State<LocalGamePage>
               canDraw: step.drawing,
               onAction: act,
               onInkChanged: () => setState(() {}),
-              remainingSeconds: step.seconds == null
-                  ? null
-                  : max(
-                      0,
-                      step.seconds! -
-                          (clock.elapsedMilliseconds / 1000).floor(),
-                    ),
+              remainingSeconds: displayedSeconds,
               hideClock: session is ReactionSession,
               finished: session.finished,
             ),

@@ -254,15 +254,29 @@ class RoomPage extends StatefulWidget {
 
 class _RoomPageState extends State<RoomPage> {
   Timer? timer;
+  int? displayedSeconds;
   bool exiting = false;
   RoomClient get client => widget.client;
+  int? get remainingSeconds {
+    final state = client.state;
+    final seconds = state?.step?.seconds;
+    if (state == null || seconds == null) {
+      return null;
+    }
+    return max(
+      0,
+      seconds -
+          (state.elapsedMs + client.snapshotAge.elapsedMilliseconds) ~/ 1000,
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     client.addListener(changed);
     unawaited(client.connect());
     timer = Timer.periodic(const Duration(milliseconds: 250), (_) {
-      if (mounted && client.state?.step?.seconds != null) {
+      if (mounted && remainingSeconds != displayedSeconds) {
         setState(() {});
       }
     });
@@ -305,6 +319,7 @@ class _RoomPageState extends State<RoomPage> {
   @override
   Widget build(BuildContext context) {
     final state = client.state;
+    displayedSeconds = remainingSeconds;
     final game = state == null
         ? null
         : plannedGames.firstWhere((game) => game.id == state.gameId);
@@ -570,18 +585,7 @@ class _RoomPageState extends State<RoomPage> {
                   onAction: (action, input) =>
                       client.send('action', action: action, input: input),
                   onInkChanged: () => client.send('ink', ink: state.ink),
-                  remainingSeconds: state.step!.seconds == null
-                      ? null
-                      : max(
-                          0,
-                          state.step!.seconds! -
-                              ((state.elapsedMs +
-                                          client
-                                              .snapshotAge
-                                              .elapsedMilliseconds) /
-                                      1000)
-                                  .floor(),
-                        ),
+                  remainingSeconds: displayedSeconds,
                   hideClock: game.id == 'reaction_duel',
                 ),
                 if (!state.finished &&
