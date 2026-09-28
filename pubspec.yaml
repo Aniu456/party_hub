@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.5.5
   ota_update: ^7.1.0
   package_info_plus: ^10.2.1
+  flutter_svg: ^2.3.0
 
 dev_dependencies:
   flutter_test:
@@ -63,7 +64,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/open_peeps/
+    - assets/open_peeps/blue/busts/
+    - assets/open_peeps/blue/standing/
+    - assets/open_peeps/blue/sitting/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

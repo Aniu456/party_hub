@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'game_catalog.dart';
+import 'open_peeps.dart';
 
 const partyInk = Color(0xFF1C2540);
 const partyMist = Color(0xFFEBEFFF);
@@ -253,25 +255,17 @@ class PlayerAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ExcludeSemantics(
     child: ClipOval(
-      child: ColoredBox(
-        color: const [
-          Color(0xFFFFE4D7),
-          Color(0xFFE5ECFF),
-          Color(0xFFDDF3EB),
-          Color(0xFFFFEFC6),
-        ][index % 4],
-        child: SizedBox(
-          width: size,
-          height: size,
-          child: OverflowBox(
-            alignment: const Alignment(0, -.6),
-            maxWidth: size * 2.3,
-            maxHeight: size * 2.3 * 4 / 3,
-            child: SizedBox(
-              width: size * 2.3,
-              height: size * 2.3 * 4 / 3,
-              child: PeepPortrait(index: index),
-            ),
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: OverflowBox(
+          alignment: const Alignment(0, -.35),
+          maxWidth: size * 1.5,
+          maxHeight: size * 1.5 * 4 / 3,
+          child: SizedBox(
+            width: size * 1.5,
+            height: size * 1.5 * 4 / 3,
+            child: PeepPortrait(index: index),
           ),
         ),
       ),
@@ -279,19 +273,26 @@ class PlayerAvatar extends StatelessWidget {
   );
 }
 
-/// Pablo Stanley 的 Open Peeps 原始插画，随包离线加载。
+/// Open Peeps 蓝色衣物版本；保留人物的黑色线稿和白色肤色。
 class PeepPortrait extends StatelessWidget {
-  const PeepPortrait({super.key, required this.index});
+  const PeepPortrait({
+    super.key,
+    required this.index,
+    this.pose = PeepPose.busts,
+  });
   final int index;
+  final PeepPose pose;
+
   @override
-  Widget build(BuildContext context) => ExcludeSemantics(
-    child: Image.asset(
-      'assets/open_peeps/peep_${(index % 12).toString().padLeft(2, '0')}.png',
-      fit: BoxFit.contain,
-      gaplessPlayback: true,
-      filterQuality: FilterQuality.medium,
-    ),
-  );
+  Widget build(BuildContext context) {
+    final assets = peepAssets[pose]!;
+    return ExcludeSemantics(
+      child: SvgPicture.asset(
+        assets[index % assets.length],
+        fit: BoxFit.contain,
+      ),
+    );
+  }
 }
 
 class ScoreStrip extends StatelessWidget {

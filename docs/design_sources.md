@@ -21,9 +21,10 @@
 
 - 官方网站：[Open Peeps](https://www.openpeeps.com/)。
 - 官方声明的许可：[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)。官网明确允许个人与商业用途，并允许复制、修改和分发。
-- 本项目实际随包接入官网提供的 12 张 PNG 半身人物插画，位于 `assets/open_peeps/peep_00.png` 至 `peep_11.png`。用于玩家头像、大厅人物插画及部分游戏封面，离线加载，不要求用户联网获取头像。
-- 每张图的官网 CDN 来源与文件大小见 [sources.json](../assets/open_peeps/sources.json)。原图保留透明背景；头像的缩放、裁切和背景色由 Flutter 布局决定。
-- 本次没有引入全部 Open Peeps 组合库、Blush 服务或其他插画包。CC0 的使用说明仅对应这些来源明确的 Open Peeps 插画。
+- 已导入官网 Grab and go 三个下载区的 **93 个独立 SVG**：半身 49、站姿 30、坐姿 14。官网有 94 个链接，其中 `peep-58` 重复一次；这里的“全部”指这三个现成人物下载区，不包括组合库的所有排列。
+- 旧黑白 SVG 在蓝色版本验收后已删除；官方来源 URL、原始 SHA-256、原始路径、尺寸、分类和图层信息仍保留在 [catalog.json](../assets/open_peeps/catalog.json)，需要再次加工时可据此恢复源文件。此前的 12 个 PNG 和来源记录继续保留。
+- App 使用 `assets/open_peeps/blue/` 下的蓝色服装版本，色值沿用 `partyBlue`（`#3659E3`），配浅蓝底（`#EBEFFF`）。头发、脸、手部、轮廓保留黑白；衣物区域按身体模板单独处理，不使用整图染色。SVG 离线随包加载。
+- [open_peeps.dart](../lib/open_peeps.dart) 提供三类人物清单；半身人物前 12 个索引保持原来的角色对应。玩家头像、大厅人物和游戏封面共用渲染组件。
 
 ## 验证边界
 
@@ -41,3 +42,10 @@
 ## 正式 App Icon
 
 用户选定 C + A 融合版：橙白双卡牌与两位击掌朋友。使用内置 imagegen 创作，提示词及候选记录仅本地保留。1024px 主图见 [app_icon.png](../assets/branding/app_icon.png)；已按现有 iOS AppIcon 目录和 Android 五档 mipmap 密度导出。仅做尺寸转换，保留选定画面，不预裁外圆角。全部平台文件经尺寸及不透明 RGB 检查。本轮未构建安装包，实际桌面显示待重新安装验收。
+
+## Open Peeps 扩充验收（2026-09-28）
+
+- 93 份官方 SVG 的 SHA-256 与导入清单一致；蓝色衍生版的头部、表情、胡须、配饰图层逐项保持原始内容。
+- 全部 93 份衍生 SVG 已通过 Flutter 解码并渲染三类联系表，另已检查前 12 个头像的圆形裁切预览。
+- 修改涉及的 Dart 文件静态检查通过；人物渲染、头像预览和既有大厅/房间布局等共 17 项测试通过。
+- 预览是 Flutter 组件渲染，不是真机或模拟器截图；本轮未构建安装包、未安装或部署。

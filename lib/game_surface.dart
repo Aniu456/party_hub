@@ -196,12 +196,7 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
                   child: Stack(
                     children: [
                       Positioned.fill(
-                        child: ClipOval(
-                          child: ColoredBox(
-                            color: colors.surface,
-                            child: const PeepPortrait(index: 0),
-                          ),
-                        ),
+                        child: ClipOval(child: const PeepPortrait(index: 0)),
                       ),
                       Positioned(
                         right: 0,

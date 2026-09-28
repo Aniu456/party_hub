@@ -1,0 +1,5941 @@
+{
+  "source": "https://www.openpeeps.com/",
+  "collection": "Grab and go",
+  "author": "Pablo Stanley",
+  "license": "CC0-1.0",
+  "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "sourceEntryCount": 94,
+  "uniqueAssetCount": 93,
+  "categories": {
+    "busts": 49,
+    "standing": 30,
+    "sitting": 14
+  },
+  "duplicateSourceEntries": [
+    {
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5358707371bb635d9f3338_peep-58.svg",
+      "category": "busts",
+      "firstPosition": 23,
+      "duplicatePosition": 24
+    }
+  ],
+  "identicalContentGroups": [],
+  "assets": [
+    {
+      "id": "peep-59",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5358878e2493fbea064dd9_peep-59.svg",
+      "path": "assets/open_peeps/originals/busts/peep-59.svg",
+      "sha256": "e8a000aeb56760898371869e628eec79f7860714fba02cd740833780ecea2e08",
+      "sizeBytes": 46705,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Coffee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Twists-2",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Cheeky",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-44",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5356be67293a8a335c71b0_peep-44.svg",
+      "path": "assets/open_peeps/originals/busts/peep-44.svg",
+      "sha256": "2c595bff2332bb1e052185b3e8330cefd914b87277836c88be05c16d42b72b19",
+      "sizeBytes": 38704,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Whatever",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Shaved-2",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Eyes-Closed",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Eyepatch",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-2",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e532a4c258ffe237b8ef2c1_peep-2.svg",
+      "path": "assets/open_peeps/originals/busts/peep-2.svg",
+      "sha256": "6dcdec15ec142e1bbb7c22b4eb3c78fa4da8922d7b65e9315da42b9d856e6b34",
+      "sizeBytes": 40682,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Whatever",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-beanie",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "Path",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Tired",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-80",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535b00550b76252bf719e6_peep-80.svg",
+      "path": "assets/open_peeps/originals/busts/peep-80.svg",
+      "sha256": "b69c383e1e104ea8a8606d49d19b0a8d86452c00682693c287e3c192db716ff3",
+      "sizeBytes": 32961,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Tee-2",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Cornrows",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Solemn",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-68",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535997e35d380ada67ad80_peep-68.svg",
+      "path": "assets/open_peeps/originals/busts/peep-68.svg",
+      "sha256": "9e02010a5eb09f22a12a34e048f912d7f03247d46f5a59c21d0e2f9f9a1b0ba7",
+      "sizeBytes": 34372,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Whatever",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Flat-Top",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-83",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535b57f5fa1ab5dbfc2764_peep-83.svg",
+      "path": "assets/open_peeps/originals/busts/peep-83.svg",
+      "sha256": "bfb840d675d998a92cf28515362877e973e10ebbb2d58f9e0e88af13471add3c",
+      "sizeBytes": 50226,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Shirt-and-Coat",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/No-Hair-1",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Awe",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-4",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53505d9588e04da17ab336_peep-4.svg",
+      "path": "assets/open_peeps/originals/busts/peep-4.svg",
+      "sha256": "2e354cb71804158d4b5fa9ab8a6721c5cff1b74461990e911e1b2a2cf2e79ef0",
+      "sizeBytes": 44256,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Explaining",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/No-Hair-2",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Goatee-1",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-75",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535a648e249323fd077d2b_peep-75.svg",
+      "path": "assets/open_peeps/originals/busts/peep-75.svg",
+      "sha256": "813c9a0692f3e8c19436a31adf2e50d842642d60e3c1f90497e0035f3047d87e",
+      "sizeBytes": 26810,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Tee-Selena",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-beanie",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "Path",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Tired",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-21",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53533367293a3e5c5a8b35_peep-21.svg",
+      "path": "assets/open_peeps/originals/busts/peep-21.svg",
+      "sha256": "602faa9d3d23de106b4d9b2a2042a2eeb480372d072be92a26cbcce0353af574",
+      "sizeBytes": 37283,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Striped-Pocket-Tee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Flat-Top-Long",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-37",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5355ed4600809f5a8dad51_peep-37.svg",
+      "path": "assets/open_peeps/originals/busts/peep-37.svg",
+      "sha256": "b0043fdd7c6d83d0b01399b5557a16cf34efb6f9ebc85ddc2f153e6e28c6bee3",
+      "sizeBytes": 32739,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Button-Shirt-1",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Medium-2",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-76",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535a83d3992372c25556b9_peep-76.svg",
+      "path": "assets/open_peeps/originals/busts/peep-76.svg",
+      "sha256": "e7271636a5b07e15b9b4e12aaf8d43e5cc45a2aecbf8381314cad65bf704810e",
+      "sizeBytes": 48567,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Button-Shirt-1",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-beanie",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "Path",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Happy-Grin",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/Glasses",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-12",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535195d87131f9760b1c69_peep-12.svg",
+      "path": "assets/open_peeps/originals/busts/peep-12.svg",
+      "sha256": "aec461d88d45338a178f1df67f8739f16a9a6ab0fe342d2240de3fbcfc92e74c",
+      "sizeBytes": 38153,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Striped-Tee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Short-5",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Eyepatch",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-100",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535d4c5197057a87a74020_peep-100.svg",
+      "path": "assets/open_peeps/originals/busts/peep-100.svg",
+      "sha256": "4150e0848d754a87d58f3c5dc9bff778d9297de982407972d6f1784ec9a7ee3b",
+      "sizeBytes": 39250,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Button-Shirt-1",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/No-Hair-3",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Moustache-9",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "accessories/Glasses-3",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-73",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535a2b8e24938384074dac_peep-73.svg",
+      "path": "assets/open_peeps/originals/busts/peep-73.svg",
+      "sha256": "9e43b37c06d5feb90a89f09738935e6a9df84294697331edc7dfa7de93a6fb64",
+      "sizeBytes": 32134,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Blazer-Black-Tee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-beanie",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "Path",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Eating-Happy",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-24",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53537dd39923575a522de0_peep-24.svg",
+      "path": "assets/open_peeps/originals/busts/peep-24.svg",
+      "sha256": "a97770395a496399fc290eb3773aa63ac2e6e8c22ca94d817e1032e88a5d15a6",
+      "sizeBytes": 73311,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Striped-Tee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full-2",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-38",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53560d9b55b04007535350_peep-38.svg",
+      "path": "assets/open_peeps/originals/busts/peep-38.svg",
+      "sha256": "42a701bf2209d33883c9d6d858616f2ecec208efdd3e27349187c05492730b60",
+      "sizeBytes": 39422,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Coffee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Hijab",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "Path-2",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-2",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-18",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535256550b761288f23a7b_peep-18.svg",
+      "path": "assets/open_peeps/originals/busts/peep-18.svg",
+      "sha256": "ecec146f973847117ef332b24639d58421ba7015ef3f363cc96a92f1b5af4b45",
+      "sizeBytes": 39986,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Fur-Jacket",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Short-4",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "Fill-4",
+              "fill": "#4F66AF"
+            },
+            {
+              "id": "Fill-6",
+              "fill": "#4F66AF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Loving-Grin-1",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-27",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5354037488c27f4c47477f_peep-27.svg",
+      "path": "assets/open_peeps/originals/busts/peep-27.svg",
+      "sha256": "e3fa24cfda8c95fac37702cd0154bdd92128129dc057d417f284111c23333754",
+      "sizeBytes": 30978,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Hoodie",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Medium-3",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Chin",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-20",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5352b1c99250785ac5ab18_peep-20.svg",
+      "path": "assets/open_peeps/originals/busts/peep-20.svg",
+      "sha256": "5cd5841f9012e412bdbbd12fcb60274c78631e29184da53da505f31cdad39e18",
+      "sizeBytes": 81301,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Striped-Pocket-Tee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Monster",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-3",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-85",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535b9746008059478ec0d0_peep-85.svg",
+      "path": "assets/open_peeps/originals/busts/peep-85.svg",
+      "sha256": "aac1d6ed140ad2e1839f86d2e41c56a176de84d266bb6fe81d6ccc0146a9573a",
+      "sizeBytes": 40352,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Sweater-Dots",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Turban",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Old",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/Sunglasses",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-101",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535d68c6b2498a0c2cbf6a_peep-101.svg",
+      "path": "assets/open_peeps/originals/busts/peep-101.svg",
+      "sha256": "74834e65b7f19779bb13bd8de53c31e45d5548ecab47d1c7a9eff65b11a30fbd",
+      "sizeBytes": 24175,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Blazer-Black-Tee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Gray-Medium",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#221E1F"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-57",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535858f5fa1a45cdfa3a07_peep-57.svg",
+      "path": "assets/open_peeps/originals/busts/peep-57.svg",
+      "sha256": "e20a986aedfa69f78e70bc772a0aa38c90e3a93ae6bb18f2e6879129c235eebe",
+      "sizeBytes": 47565,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Explaining",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long-Curly",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Old",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-58",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5358707371bb635d9f3338_peep-58.svg",
+      "path": "assets/open_peeps/originals/busts/peep-58.svg",
+      "sha256": "2d70c105a846c5bd54f835e1baec976f464331ce017059589826bd2965c6d6b4",
+      "sizeBytes": 29372,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Fur-Jacket",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-hip",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Moustache-4",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-25",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535398d87131adfd0c974a_peep-25.svg",
+      "path": "assets/open_peeps/originals/busts/peep-25.svg",
+      "sha256": "076176d83b23a9004f8727f7b0d491a66c504c6038c2af514c98fd0ff188f42e",
+      "sizeBytes": 56341,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Gaming",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Mohawk-2",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Sunglasses",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-86",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535bb6e35d38cae7684f8c_peep-86.svg",
+      "path": "assets/open_peeps/originals/busts/peep-86.svg",
+      "sha256": "09325d3be08eb7377e1749485a72ce4275365b41842c00a8cf33788408f7e155",
+      "sizeBytes": 24017,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Gym-Shirt",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Medium-Straight",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            },
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "id": "face/Very-Angry",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Sunglasses",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-69",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5359b47371bb97b7a01b27_peep-69.svg",
+      "path": "assets/open_peeps/originals/busts/peep-69.svg",
+      "sha256": "598ae625e2d292bb925b22dc87d3b9b697602d182aac7cba1897dbbcc4ab3335",
+      "sizeBytes": 42878,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Sporty-Tee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Cornrows-2",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "Path",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Cyclops",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-99",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535d314600800f758ffa34_peep-99.svg",
+      "path": "assets/open_peeps/originals/busts/peep-99.svg",
+      "sha256": "57861083037183f819e28739836545e55c56934bb60bf13c6205ccab6b84f9f5",
+      "sizeBytes": 35406,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Polo-and-Sweater",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Gray-Short",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full-4",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "accessories/Glasses",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-15",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5351f351970522b7a2499d_peep-15.svg",
+      "path": "assets/open_peeps/originals/busts/peep-15.svg",
+      "sha256": "3c23f9a330824091b3f315ef770f2063d1e7d0976fa4ca09a0f92ac494d200fb",
+      "sizeBytes": 36514,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Gym-Shirt",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Cornrows",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Moustache-4",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/Sunglasses",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-35",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53552ff5fa1a9d22f727e2_peep-35.svg",
+      "path": "assets/open_peeps/originals/busts/peep-35.svg",
+      "sha256": "29cb60cb74484833d78767c58372ee07a86980b968ee7d0134f90f0927eb915e",
+      "sizeBytes": 56521,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Tee-Arms-Crossed",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-66",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535956e35d380d2b67a11f_peep-66.svg",
+      "path": "assets/open_peeps/originals/busts/peep-66.svg",
+      "sha256": "36db1f3cfe411bbcd429d87fd182623dd8ede51139dcaa01cb2387e1d1dafbda",
+      "sizeBytes": 48801,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Tee-Arms-Crossed",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Buns",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Calm",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-3",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-105",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535dd92b568a729c1c42f5_peep-105.svg",
+      "path": "assets/open_peeps/originals/busts/peep-105.svg",
+      "sha256": "c590bb4b6893779edc11dfebdc0d398788bffec885540c75020e9f751515c5b7",
+      "sizeBytes": 24606,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Blazer-Black-Tee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Gray-Bun",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Loving-Grin-1",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-60",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5358a764109d50aa01705d_peep-60.svg",
+      "path": "assets/open_peeps/originals/busts/peep-60.svg",
+      "sha256": "fbd20a46bf879a58328e9879cb24fecfbb94da196426e09e854b2850773c6c97",
+      "sizeBytes": 54194,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Pointing-Up",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun-2",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Cyclops",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-62",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5358df64109d4cdc019647_peep-62.svg",
+      "path": "assets/open_peeps/originals/busts/peep-62.svg",
+      "sha256": "2a799636dfc685d0fe9f51fd69c95467d5ecdf21c3c366523d5082c12c597cc0",
+      "sizeBytes": 47742,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Explaining",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Medium-2",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Happy-Grin",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Sunglasses",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-52",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5357a8c992500f5fc84f40_peep-52.svg",
+      "path": "assets/open_peeps/originals/busts/peep-52.svg",
+      "sha256": "fc9e20365c5c0536e0527f94f1ede60b2977e827c36655c8eabc358017a21a73",
+      "sizeBytes": 61830,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Polka-Dot-Jacket",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Shaved-3",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-78",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535ac39b55b0379854a1d8_peep-78.svg",
+      "path": "assets/open_peeps/originals/busts/peep-78.svg",
+      "sha256": "42793dce2038fc955974cb33fb75369531213f121274eba7aad620292dcf49c0",
+      "sizeBytes": 51250,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Device",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Short-3",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/Glasses-2",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-9",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53513d5197058658a1dc94_peep-9.svg",
+      "path": "assets/open_peeps/originals/busts/peep-9.svg",
+      "sha256": "480ea502ee15b5520e039934a519a5b23fe4f791f7a9fe491265c1e9eed83b75",
+      "sizeBytes": 26784,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Tee-1",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Medium-Bangs-3",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Moustache-8",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-5",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53508c8becbf15dd4f829c_peep-5.svg",
+      "path": "assets/open_peeps/originals/busts/peep-5.svg",
+      "sha256": "faefcf18701164e09c98a4c69e39a890c61bb72050c79e5a6d6173384f31612e",
+      "sizeBytes": 37202,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Sweater-Dots",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Turban",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Happy-Grin",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-7",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5350f9d399238698511b2f_peep-7.svg",
+      "path": "assets/open_peeps/originals/busts/peep-7.svg",
+      "sha256": "78085be066372871820677b3b8cd0c02d5593a7ba7b0eb3862c6bf3cae21ca8f",
+      "sizeBytes": 39808,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Whatever",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Flat-Top-Long",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Cheeky",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Moustache-4",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/Glasses-5",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-63",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5358fb9b55b0b0f453f5f5_peep-63.svg",
+      "path": "assets/open_peeps/originals/busts/peep-63.svg",
+      "sha256": "fd24acbb3b165d54a6a5c1dacd2e75ebfbff832d134c6f6d0f437c83fd1bb2f2",
+      "sizeBytes": 25184,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Blazer-Black-Tee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Hijab",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "Path-2",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-77",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535aa1d871310896104715_peep-77.svg",
+      "path": "assets/open_peeps/originals/busts/peep-77.svg",
+      "sha256": "9c1935886c53729ee963017bcc9805df46d0e40e015713f5fa3078f4cb3b6e2c",
+      "sizeBytes": 35721,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Killer",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Afro",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Awe",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-89",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535c03c6b24912b82c061d_peep-89.svg",
+      "path": "assets/open_peeps/originals/busts/peep-89.svg",
+      "sha256": "fb34679ccdced9f30dd58922ea262d47753737faa257820e3817e6cd462e2e40",
+      "sizeBytes": 35784,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Killer",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-93",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535c7a550b76084df7d544_peep-93.svg",
+      "path": "assets/open_peeps/originals/busts/peep-93.svg",
+      "sha256": "20e93812e570df9531ec6921ac82a29e8c91dfe0b1c565b295c87755cac5d62f",
+      "sizeBytes": 35673,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Sporty-Tee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Blank",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-6",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5350dd2b568a1afd157d3d_peep-6.svg",
+      "path": "assets/open_peeps/originals/busts/peep-6.svg",
+      "sha256": "d8fc09b02400946a0b764d2fe77f02c0e8c2c422cabde8f558913e544a1b82c5",
+      "sizeBytes": 21329,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Tee-Arms-Crossed",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Hijab",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "Path-2",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-2",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-51",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53578d550b76b873f53c46_peep-51.svg",
+      "path": "assets/open_peeps/originals/busts/peep-51.svg",
+      "sha256": "63dc0870b362b0f66616f5f667d8faf3818007cc87f257e76c7de099a2e92088",
+      "sizeBytes": 28834,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Hoodie",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/No-Hair-1",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full-3",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-34",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5355117488c21dec47cfba_peep-34.svg",
+      "path": "assets/open_peeps/originals/busts/peep-34.svg",
+      "sha256": "213ee336c2b39f43283e914cfee8027c8f3b0cd39663e5e97472785b2310b72b",
+      "sizeBytes": 39672,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Coffee",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-hip",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Moustache-4",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-43",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5356a1c992503c9ac79686_peep-43.svg",
+      "path": "assets/open_peeps/originals/busts/peep-43.svg",
+      "sha256": "4332ef782164940c187328f55c0abba29f5640150263236b24983f6e77f079d3",
+      "sizeBytes": 53547,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Device",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Twists-2",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Blank",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full-3",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-96",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535cd6c67e798b229699d1_peep-96.svg",
+      "path": "assets/open_peeps/originals/busts/peep-96.svg",
+      "sha256": "ddf366f94a172a7bafc08eea0ff5e318e71dfb8d5b513e589859caf1fae4d5a5",
+      "sizeBytes": 47403,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Shirt-and-Coat",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long-Curly",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-13",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5351b17371bb6c489ad0cc_peep-13.svg",
+      "path": "assets/open_peeps/originals/busts/peep-13.svg",
+      "sha256": "829e09851dee7485d0e77dea6c3f2487ecf87b64dd76ff2609d2f7738e805d8c",
+      "sizeBytes": 32739,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Button-Shirt-1",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Medium-2",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-61",
+      "category": "busts",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5358c38e249393f1066ab8_peep-61.svg",
+      "path": "assets/open_peeps/originals/busts/peep-61.svg",
+      "sha256": "04baf6adc89dac2fed643ea4fef9e28bdb0ab16ab74c4aa938683a36f93258a2",
+      "sizeBytes": 26531,
+      "width": "240px",
+      "height": "324px",
+      "viewBox": "0 0 240 324",
+      "layers": [
+        {
+          "id": "body/Thunder-T-Shirt",
+          "transform": "translate(31.056338, 135.052838)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long-Bangs",
+          "transform": "translate(78.591549, 38.043053)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smiling",
+          "transform": "translate(112.183099, 77.354207)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(104.577451, 109.479380)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(88.521127, 88.978474)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-8",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53612767293a6c4f619687_peep-standing-8.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-8.svg",
+      "sha256": "5eec9e6928e6357e266439e081413e792a0458189364c0fba078067d98d3c049",
+      "sizeBytes": 45541,
+      "width": "249px",
+      "height": "679px",
+      "viewBox": "0 0 249 679",
+      "layers": [
+        {
+          "id": "pose/standing/blazer-2",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Gray-Bun",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Big",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Sunglasses-2",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-4",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5360ba550b761a0bfabd32_peep-standing-4.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-4.svg",
+      "sha256": "43be974ee3561925b6e7f669bc29fb2744edb605db797b476e6b3ff9173f730f",
+      "sizeBytes": 38893,
+      "width": "304px",
+      "height": "681px",
+      "viewBox": "0 0 304 681",
+      "layers": [
+        {
+          "id": "pose/standing/resting-2",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Explaining",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-9",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5361568e2493c0fa0ae191_peep-standing-9.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-9.svg",
+      "sha256": "604e17c6380d4b2de328ff1d325ae9ae588f59ea8a62fcce567bc195e793a973",
+      "sizeBytes": 36626,
+      "width": "249px",
+      "height": "672px",
+      "viewBox": "0 0 249 672",
+      "layers": [
+        {
+          "id": "pose/standing/blazer-3",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-25",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53633a7371bbe22da4c986_peep-standing-25.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-25.svg",
+      "sha256": "0c33051d7b39f72328403bd39159a82e44aaef45520f28178914caf0fd3d176d",
+      "sizeBytes": 42154,
+      "width": "246px",
+      "height": "713px",
+      "viewBox": "0 0 246 713",
+      "layers": [
+        {
+          "id": "pose/standing/walking-2",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long-Afro",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-6",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5360ee67293aa268617c67_peep-standing-6.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-6.svg",
+      "sha256": "8f779463fb2f05b1cc1f54859d53d3fe2d81c636f55092fc34d540e415124ad1",
+      "sizeBytes": 43018,
+      "width": "304px",
+      "height": "677px",
+      "viewBox": "0 0 304 677",
+      "layers": [
+        {
+          "id": "pose/standing/resting-2",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Medium-Bangs",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-3",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-1",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536061519705b96fa8d804_peep-standing-1.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-1.svg",
+      "sha256": "e1407cb746080b97d0e8b73bd2919979148ac13e5312b446b22d669b8013e449",
+      "sizeBytes": 67527,
+      "width": "213px",
+      "height": "715px",
+      "viewBox": "0 0 213 715",
+      "layers": [
+        {
+          "id": "pose/standing/shirt-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long-Curly",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-4",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-23",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5362fa8becbf1d50570b23_peep-standing-23.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-23.svg",
+      "sha256": "b25c09bd3f2c2f5538f490bffce60f22caa954acd0da4cd010b3872c83c719fe",
+      "sizeBytes": 53996,
+      "width": "321px",
+      "height": "699px",
+      "viewBox": "0 0 321 699",
+      "layers": [
+        {
+          "id": "pose/standing/robot_dance-3",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-hip",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Calm",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-5",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5360d39b55b049be5795a1_peep-standing-5.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-5.svg",
+      "sha256": "48ee978f47511ff66a373dd527072f02da57232edffceb37d0d108bbdc007c8a",
+      "sizeBytes": 34651,
+      "width": "304px",
+      "height": "680px",
+      "viewBox": "0 0 304 680",
+      "layers": [
+        {
+          "id": "pose/standing/resting-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Hijab",
+          "transform": null,
+          "paths": [
+            {
+              "id": "Path-2",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-7",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53610ed3992333c259150c_peep-standing-7.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-7.svg",
+      "sha256": "5c2bca5a4b7f0a196fc5bc22d9fd4a60f113d35489a6b22246c4ad62ec022b30",
+      "sizeBytes": 66003,
+      "width": "249px",
+      "height": "686px",
+      "viewBox": "0 0 249 686",
+      "layers": [
+        {
+          "id": "pose/standing/blazer-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Buns",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Teeth-Gap",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-30",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53665cc67e79756a9d2d1a_peep-standing-30.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-30.svg",
+      "sha256": "e0308b16a69b44afc97bb89cd8b24cdc6101e4e3bd3068d53aaf53d84000639d",
+      "sizeBytes": 46912,
+      "width": "213px",
+      "height": "701px",
+      "viewBox": "0 0 213 701",
+      "layers": [
+        {
+          "id": "pose/standing/shirt-3",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Short-4",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "Fill-4",
+              "fill": "#4F66AF"
+            },
+            {
+              "id": "Fill-6",
+              "fill": "#4F66AF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Old",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Moustache-7",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-27",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536601c67e7916da9d1aa5_peep-standing-27.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-27.svg",
+      "sha256": "d7ac4962484f1d73708e4f69260e8f60f97decf37e1513d17a534cf8faa45a6c",
+      "sizeBytes": 42903,
+      "width": "246px",
+      "height": "713px",
+      "viewBox": "0 0 246 713",
+      "layers": [
+        {
+          "id": "pose/standing/walking-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long-Afro",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Moustache-7",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-18",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536266c99250fe47cebfc0_peep-standing-18.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-18.svg",
+      "sha256": "319de94001c0d9293e1697428a35baad5f8c2f8189ebbb21e6de3777eccb24a6",
+      "sizeBytes": 46669,
+      "width": "249px",
+      "height": "680px",
+      "viewBox": "0 0 249 680",
+      "layers": [
+        {
+          "id": "pose/standing/blazer-4",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Twists",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-5",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-29",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53663e7488c27c5e4d068c_peep-standing-29.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-29.svg",
+      "sha256": "4d5802ad15444ee86652be7cefa08a917932019a0e0a6c512682d14bf153bada",
+      "sizeBytes": 53100,
+      "width": "213px",
+      "height": "689px",
+      "viewBox": "0 0 213 689",
+      "layers": [
+        {
+          "id": "pose/standing/shirt-2",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Short-2",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-5",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-2",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53607bc67e7906ad99cf5a_peep-standing-2.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-2.svg",
+      "sha256": "8829176407a2667abe2973fdd8cc12f1edb0b166d35642c1aaa84b5fbca5a276",
+      "sizeBytes": 64570,
+      "width": "213px",
+      "height": "733px",
+      "viewBox": "0 0 213 733",
+      "layers": [
+        {
+          "id": "pose/standing/shirt-2",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long-Afro",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Loving-Grin-1",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-5",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-11",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5361909b55b0502657e357_peep-standing-11.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-11.svg",
+      "sha256": "ae98aefaf10d95878bfeed159173064b276aa3746e40f3cae62125cd305ddfff",
+      "sizeBytes": 35861,
+      "width": "260px",
+      "height": "674px",
+      "viewBox": "0 0 260 674",
+      "layers": [
+        {
+          "id": "pose/standing/crossed_arms-2",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-beanie",
+          "transform": null,
+          "paths": [
+            {
+              "id": "Path",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Loving-Grin-1",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-15",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536210c67e798fb29b1e94_peep-standing-15.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-15.svg",
+      "sha256": "887a47e61a3be67ad9fac118d8d78469300258bcc01003de378643318332c060",
+      "sizeBytes": 54693,
+      "width": "256px",
+      "height": "682px",
+      "viewBox": "0 0 256 682",
+      "layers": [
+        {
+          "id": "pose/standing/easing-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Gray-Short",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Sunglasses-2",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-21",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5362c164109d10570651c3_peep-standing-21.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-21.svg",
+      "sha256": "5f3b379be2cf13fbcb7d0be93c86c7e6b69e7618c29dc5f4f2d3b4fe754e4b53",
+      "sizeBytes": 38011,
+      "width": "198px",
+      "height": "669px",
+      "viewBox": "0 0 198 669",
+      "layers": [
+        {
+          "id": "pose/standing/polka_dots",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Short-5",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-19",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536281c992503d98cecdc1_peep-standing-19.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-19.svg",
+      "sha256": "3757c5e903835bba718d27f4606ca186f33c5b1b0ed1c40c3d98bca6cf8e9cef",
+      "sizeBytes": 44505,
+      "width": "198px",
+      "height": "670px",
+      "viewBox": "0 0 198 670",
+      "layers": [
+        {
+          "id": "pose/standing/polka_dots",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-beanie",
+          "transform": null,
+          "paths": [
+            {
+              "id": "Path",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Full",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/Sunglasses-2",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-3",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536097c6b24990d02eef77_peep-standing-3.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-3.svg",
+      "sha256": "eeecd4f64dc85e88072f9533073da90df4b17683875e7a26a988fd23264d050f",
+      "sizeBytes": 38146,
+      "width": "213px",
+      "height": "701px",
+      "viewBox": "0 0 213 701",
+      "layers": [
+        {
+          "id": "pose/standing/shirt-3",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-hip",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Teeth-Gap",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/Moustache-7",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-10",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53613f9b55b0a5a457c452_peep-standing-10.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-10.svg",
+      "sha256": "dbb5094014315744cca7e73d3387722df73bdb1a5be8007a9c208b9710042b28",
+      "sizeBytes": 47567,
+      "width": "255px",
+      "height": "688px",
+      "viewBox": "0 0 255 688",
+      "layers": [
+        {
+          "id": "pose/standing/crossed_arms-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Cornrows",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Big",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-14",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5361e9f3aa4be48230418f_peep-standing-14.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-14.svg",
+      "sha256": "36f34dd417a5a839102e983396872459fc46abc77428f3470eac02c0048ec781",
+      "sizeBytes": 57232,
+      "width": "256px",
+      "height": "687px",
+      "viewBox": "0 0 256 687",
+      "layers": [
+        {
+          "id": "pose/standing/easing-2",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Big",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-3",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-17",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53624b9b55b0127f5851cf_peep-standing-17.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-17.svg",
+      "sha256": "7025ce2684ffcfff2f2017ffc332ae807e95d3b8befa266ebe66a186d3c03414",
+      "sizeBytes": 50041,
+      "width": "309px",
+      "height": "617px",
+      "viewBox": "0 0 309 617",
+      "layers": [
+        {
+          "id": "pose/standing/pointing_finger-2",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Medium-Bangs-2",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Teeth-Gap",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-12",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5361abc992503993ce737e_peep-standing-12.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-12.svg",
+      "sha256": "8a9529aaf258ad2ace3adf3625b2a6b9ddf8bcdc6a8d8313aea0bcb90193fc21",
+      "sizeBytes": 74095,
+      "width": "255px",
+      "height": "710px",
+      "viewBox": "0 0 255 710",
+      "layers": [
+        {
+          "id": "pose/standing/crossed_arms-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Big",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-16",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53622ec67e7957fc9b32e0_peep-standing-16.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-16.svg",
+      "sha256": "4776a6f7d5eeda7bbe5282f87cd3f1a3eb0f3853755d3562ce871c9ff1e1d9cc",
+      "sizeBytes": 51322,
+      "width": "309px",
+      "height": "652px",
+      "viewBox": "0 0 309 652",
+      "layers": [
+        {
+          "id": "pose/standing/pointing_finger-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun-2",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Calm",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-28",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536624f5fa1ac60201cc6b_peep-standing-28.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-28.svg",
+      "sha256": "ee8c08ca99ecdea7775b9fb27e4ff87bf556088fd1ba3ad6c98311ff4afb576d",
+      "sizeBytes": 61171,
+      "width": "213px",
+      "height": "694px",
+      "viewBox": "0 0 213 694",
+      "layers": [
+        {
+          "id": "pose/standing/shirt-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Flat-Top",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Contempt",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Sunglasses",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-13",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5361ccd3992383f7595afc_peep-standing-13.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-13.svg",
+      "sha256": "a8a87c1247b6b54d7319cba4f95c83a46385d1b0f9250054960719941989146b",
+      "sizeBytes": 46063,
+      "width": "256px",
+      "height": "679px",
+      "viewBox": "0 0 256 679",
+      "layers": [
+        {
+          "id": "pose/standing/easing-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/No-Hair-1",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-22",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5362e2f5fa1aefa7ffe47c_peep-standing-22.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-22.svg",
+      "sha256": "f1a8454d3348651609893139485cddd3f9f7a784e9c144393e3079ca819a3664",
+      "sizeBytes": 49850,
+      "width": "321px",
+      "height": "691px",
+      "viewBox": "0 0 321 691",
+      "layers": [
+        {
+          "id": "pose/standing/robot_dance-2",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Medium-Bangs",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Big",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/Glasses-5",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-24",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5363188becbffe8c57172c_peep-standing-24.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-24.svg",
+      "sha256": "bf37099a78c2831bea2b775d7f432ea97fb8504a9e56c6c4f18caccd9f0ff878",
+      "sizeBytes": 46092,
+      "width": "321px",
+      "height": "692px",
+      "viewBox": "0 0 321 692",
+      "layers": [
+        {
+          "id": "pose/standing/robot_dance-1",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bangs-2",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Explaining",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-26",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5365e367293a5eb7630824_peep-standing-26.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-26.svg",
+      "sha256": "b501d2c2552b3a7d461402788892318f55cedfce9881c6ce8cb1246acc17ca01",
+      "sizeBytes": 31195,
+      "width": "246px",
+      "height": "677px",
+      "viewBox": "0 0 246 677",
+      "layers": [
+        {
+          "id": "pose/standing/walking-3",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Loving-Grin-1",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-standing-20",
+      "category": "standing",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5362a27488c217864c784d_peep-standing-20.svg",
+      "path": "assets/open_peeps/originals/standing/peep-standing-20.svg",
+      "sha256": "ba347f6a55ae2a4bf3e9e0b61d6e1aadfa250037396d1b6f844dc0d92dc75c19",
+      "sizeBytes": 33028,
+      "width": "213px",
+      "height": "706px",
+      "viewBox": "0 0 213 706",
+      "layers": [
+        {
+          "id": "pose/standing/shirt-4",
+          "transform": "translate(-28.736217, 150.264357)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Flat-Top-Long",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(37.760814, 44.083865)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(29.211196, 80.109389)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.162002, 57.119417)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-2",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535e2ce35d38156a694f11_peep-sitting-2.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-2.svg",
+      "sha256": "c247b61de194ffad2b14cd7256c724480995a16b95c2a31540d1958e49bea8b8",
+      "sizeBytes": 45338,
+      "width": "346px",
+      "height": "521px",
+      "viewBox": "0 0 346 521",
+      "layers": [
+        {
+          "id": "pose/sitting/closed_legs-1",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-10",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535f0d9b55b01d2056cf00_peep-sitting-10.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-10.svg",
+      "sha256": "af8d7e0044c1fe1608bfa2754d0aaedbe812b5b9fe2ac74655242bf1b9d6f871",
+      "sizeBytes": 55765,
+      "width": "324px",
+      "height": "484px",
+      "viewBox": "0 0 324 484",
+      "layers": [
+        {
+          "id": "pose/sitting/hands_back-1",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Teeth-Gap",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-14",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535f7d9b55b097be57089f_peep-sitting-14.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-14.svg",
+      "sha256": "32d3b9a600c33f1666541dcd96ce90563d1188b6e8c82638655b3f6a071a761b",
+      "sizeBytes": 79121,
+      "width": "462px",
+      "height": "603px",
+      "viewBox": "0 0 462 603",
+      "layers": [
+        {
+          "id": "pose/sitting/wheelchair",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Gray-Short",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Big",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-5",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535e838e249316920983c3_peep-sitting-5.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-5.svg",
+      "sha256": "9eed8e2fbe71e1351bd203e4b3fe292df1e4d4efa551b973128ec37ef99c1a5f",
+      "sizeBytes": 44296,
+      "width": "340px",
+      "height": "469px",
+      "viewBox": "0 0 340 469",
+      "layers": [
+        {
+          "id": "pose/sitting/mid-1",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/hat-beanie",
+          "transform": null,
+          "paths": [
+            {
+              "id": "Path",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Eating-Happy",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-9",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535ef19b55b0b01256c383_peep-sitting-9.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-9.svg",
+      "sha256": "3f9c4836141437ba9dcceb8e90b09a9bf7cc9e36900170af27c457a52768457f",
+      "sizeBytes": 38536,
+      "width": "324px",
+      "height": "467px",
+      "viewBox": "0 0 324 467",
+      "layers": [
+        {
+          "id": "pose/sitting/hands_back-2",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-12",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535f438becbf2fab5619bb_peep-sitting-12.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-12.svg",
+      "sha256": "1ec3e10269037194259dc76a43aca43e5f41129702b7ad0a1e2cabe6a0c36b5f",
+      "sizeBytes": 39008,
+      "width": "336px",
+      "height": "504px",
+      "viewBox": "0 0 336 504",
+      "layers": [
+        {
+          "id": "pose/sitting/one_leg_up-1",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "Fill-1",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Afro",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Calm",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-17",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535fd95197054606a88bd2_peep-sitting-17.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-17.svg",
+      "sha256": "2070e61ed1381d132709429127a866d8bff509c4a480d8f0770c2b1e936815f3",
+      "sizeBytes": 33443,
+      "width": "365px",
+      "height": "576px",
+      "viewBox": "0 0 365 576",
+      "layers": [
+        {
+          "id": "pose/sitting/crossed_legs",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/No-Hair-3",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-11",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535f2ad39923f7d558435b_peep-sitting-11.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-11.svg",
+      "sha256": "08417fc682525035adc2c3a06929aa297149a446d779e88e2d3c46fc192e6ccf",
+      "sizeBytes": 37756,
+      "width": "335px",
+      "height": "495px",
+      "viewBox": "0 0 335 495",
+      "layers": [
+        {
+          "id": "pose/sitting/one_leg_up-2",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "Fill-1",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "Fill-1",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Flat-Top",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Teeth-Gap",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-7",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535eb7550b76782df9e820_peep-sitting-7.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-7.svg",
+      "sha256": "ab23b97b0ec13ea7a1bca9f04492b862fd1676eb3562818b65fa69628a88a116",
+      "sizeBytes": 42150,
+      "width": "367px",
+      "height": "620px",
+      "viewBox": "0 0 367 620",
+      "layers": [
+        {
+          "id": "pose/sitting/crossed_legs",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Long-Afro",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-15",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535f96c67e7961f5994532_peep-sitting-15.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-15.svg",
+      "sha256": "a63c4b9b071ad62a75cf841224c3ea38617bb4eabbfbcdaaed4988237b466964",
+      "sizeBytes": 78845,
+      "width": "462px",
+      "height": "625px",
+      "viewBox": "0 0 462 625",
+      "layers": [
+        {
+          "id": "pose/sitting/wheelchair",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Bun",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-6",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535e9fc992502f35cd7902_peep-sitting-6.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-6.svg",
+      "sha256": "a0e20fa8e8c6afac16466a432315a46f14816e7db9d886cfc340157f621f8e65",
+      "sizeBytes": 42072,
+      "width": "365px",
+      "height": "577px",
+      "viewBox": "0 0 365 577",
+      "layers": [
+        {
+          "id": "pose/sitting/crossed_legs",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Gray-Short",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Big",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-18",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536006c67e7976719986dc_peep-sitting-18.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-18.svg",
+      "sha256": "fdd2238d466b12e13c391eff502f6131a08e45a428a8e9864a0c3239b8cd79b3",
+      "sizeBytes": 35923,
+      "width": "346px",
+      "height": "501px",
+      "viewBox": "0 0 346 501",
+      "layers": [
+        {
+          "id": "pose/sitting/closed_legs-1",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Flat-Top",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-4",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535e658e24935b1b096148_peep-sitting-4.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-4.svg",
+      "sha256": "923eec36d10fc37583a8e6c934eb43b7b31368552668bf9c87ad3f2cbabcabc2",
+      "sizeBytes": 40062,
+      "width": "340px",
+      "height": "465px",
+      "viewBox": "0 0 340 465",
+      "layers": [
+        {
+          "id": "pose/sitting/mid-1",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/No-Hair-1",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Smile-Teeth-Gap",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    },
+    {
+      "id": "peep-sitting-1",
+      "category": "sitting",
+      "sourceURL": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e532c65d871315ee7fcae9e_peep-sitting-1.svg",
+      "path": "assets/open_peeps/originals/sitting/peep-sitting-1.svg",
+      "sha256": "50dee3a8f1a82d2b7d4fc0fc8a6325b5432e08f9256cdd3eb5921390eaa41fac",
+      "sizeBytes": 38279,
+      "width": "346px",
+      "height": "510px",
+      "viewBox": "0 0 346 510",
+      "layers": [
+        {
+          "id": "pose/sitting/closed_legs-2",
+          "transform": "translate(-20.311475, 159.504800)",
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "head/Afro",
+          "transform": null,
+          "paths": [
+            {
+              "id": "🎨-Background",
+              "fill": "#FFFFFF"
+            },
+            {
+              "id": "🖍-Ink",
+              "fill": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "face/Calm",
+          "transform": "translate(39.870674, 46.574400)",
+          "paths": [
+            {
+              "id": "🖍-Ink",
+              "fill": null
+            }
+          ]
+        },
+        {
+          "id": "facial-hair/*-None",
+          "transform": "translate(30.843352, 84.635200)",
+          "paths": []
+        },
+        {
+          "id": "accessories/*-None",
+          "transform": "translate(11.785671, 60.346400)",
+          "paths": []
+        }
+      ]
+    }
+  ]
+}
