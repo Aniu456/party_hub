@@ -127,48 +127,19 @@ class UndercoverGameView extends StatefulWidget {
     required this.state,
     required this.enabled,
     required this.onAction,
+    this.showActions = true,
   });
 
   final RoomSnapshot state;
   final bool enabled;
   final ValueChanged<String> onAction;
+  final bool showActions;
 
   @override
   State<UndercoverGameView> createState() => _UndercoverGameViewState();
 }
 
-class _UndercoverGameViewState extends State<UndercoverGameView>
-    with WidgetsBindingObserver {
-  bool wordVisible = false;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void didUpdateWidget(UndercoverGameView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.state.ownWord != widget.state.ownWord ||
-        oldWidget.state.seat != widget.state.seat) {
-      wordVisible = false;
-    }
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state != AppLifecycleState.resumed && mounted) {
-      setState(() => wordVisible = false);
-    }
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
+class _UndercoverGameViewState extends State<UndercoverGameView> {
   @override
   Widget build(BuildContext context) {
     final state = widget.state;
@@ -196,102 +167,100 @@ class _UndercoverGameViewState extends State<UndercoverGameView>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          moderator
-              ? '主持人 · 掌握全局'
-              : '${state.members[state.seat].name} · ${active ? '正在参与' : '已出局'}',
-          style: theme.textTheme.labelLarge?.copyWith(color: colors.primary),
-        ),
-        const SizedBox(height: 8),
-        Wrap(
-          alignment: WrapAlignment.spaceBetween,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          spacing: 12,
-          runSpacing: 8,
+        Row(
           children: [
-            Text(phaseTitle, style: theme.textTheme.headlineSmall),
-            Text('第 ${game.round} 轮', style: theme.textTheme.bodyMedium),
-          ],
-        ),
-        const SizedBox(height: 20),
-        if (moderator) ...[
-          const SectionHeading('全部身份 · 仅主持人可见'),
-          for (final role in game.roles) ...[
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 4,
-                    children: [
-                      Text(role.name, style: theme.textTheme.titleMedium),
-                      Text(
-                        '${role.role} · ${role.alive ? '场上' : '已出局'}',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: colors.primary,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Text('词语：${role.word}', style: theme.textTheme.bodyLarge),
-                ],
+            PlayerAvatar(index: state.seat, size: 32),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                '${state.members[state.seat].name} · ${moderator
+                    ? '主持人'
+                    : active
+                    ? '玩家'
+                    : '已出局'}',
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: colors.primary,
+                ),
               ),
             ),
-            const Divider(height: 1),
+            Text('第 ${game.round} 轮', style: theme.textTheme.bodySmall),
           ],
-        ],
+        ),
+        const SizedBox(height: 16),
+        Text(phaseTitle, style: theme.textTheme.headlineSmall),
+        const SizedBox(height: 10),
+        if (game.phase == 'talk')
+          Container(
+            padding: const EdgeInsets.only(left: 12),
+            decoration: BoxDecoration(
+              border: Border(left: BorderSide(color: colors.primary, width: 2)),
+            ),
+            child: Text(step.body, style: theme.textTheme.bodyMedium),
+          ),
+        const SizedBox(height: 24),
         if (!moderator && state.ownWord != null && !state.finished) ...[
-          SurfaceCard(
+          Container(
             padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              border: Border.all(color: colors.primary.withValues(alpha: .35)),
+              borderRadius: BorderRadius.circular(18),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text('我的词语', style: theme.textTheme.titleMedium),
-                const SizedBox(height: 8),
-                if (wordVisible)
-                  Text(state.ownWord!, style: theme.textTheme.headlineMedium)
-                else
-                  Text(
-                    '仅在你的设备上查看，别让其他玩家看到。',
-                    style: theme.textTheme.bodyMedium,
+                Text(
+                  '我的词语',
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: colors.onSurface,
                   ),
-                const SizedBox(height: 8),
-                TextButton.icon(
-                  onPressed: () => setState(() {
-                    wordVisible = !wordVisible;
-                  }),
-                  icon: Icon(
-                    wordVisible
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  state.ownWord!,
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    color: colors.primary,
+                    letterSpacing: 1,
                   ),
-                  label: Text(wordVisible ? '收起我的词语' : '查看我的词语'),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
         ],
-        if (game.phase == 'talk') ...[
-          const SizedBox(height: 16),
-          Text(step.body, style: theme.textTheme.bodyMedium),
-          if (!moderator) ...[
-            const SizedBox(height: 16),
-            Text('本局玩家', style: theme.textTheme.titleMedium),
-            for (final seat in players)
-              _PlayerStatus(
-                name: state.members[seat].name,
-                status: game.alive.contains(seat) ? '场上' : '已出局',
-                highlighted: false,
+        if (moderator) ...[
+          Text('全部身份 · 仅主持人可见', style: theme.textTheme.titleMedium),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14),
+            decoration: BoxDecoration(
+              border: Border.all(color: colors.outlineVariant),
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Column(
+              children: [
+                for (var i = 0; i < game.roles.length; i++) ...[
+                  if (i > 0) const Divider(height: 1),
+                  _RoleRow(role: game.roles[i]),
+                ],
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+        ],
+        if (game.phase == 'vote') ...[
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  moderator || voted || !active ? '投票进度' : '选出你怀疑的人',
+                  style: theme.textTheme.titleMedium,
+                ),
               ),
-          ],
-        ] else if (game.phase == 'vote') ...[
-          Text(
-            '已投票 ${game.voted.length} / ${game.alive.length}',
-            style: theme.textTheme.titleMedium,
+              Text(
+                '${game.voted.length} / ${game.alive.length} 已投',
+                style: theme.textTheme.bodySmall,
+              ),
+            ],
           ),
           const SizedBox(height: 8),
           Text(
@@ -300,41 +269,117 @@ class _UndercoverGameViewState extends State<UndercoverGameView>
                 : !active
                 ? '你已出局，可以继续观看这一局。'
                 : voted
-                ? '你已提交投票，等待其他玩家。'
-                : '谁的描述最可疑？点击一位玩家提交投票。',
+                ? '投票已提交，等大家一起揭晓。'
+                : '点击玩家提交，投票后不能更改。',
             style: theme.textTheme.bodyMedium,
           ),
-          const SizedBox(height: 12),
-          if (step.options.isEmpty)
-            for (final seat in game.alive)
-              _PlayerStatus(
-                name: state.members[seat].name,
-                status: game.voted.contains(seat) ? '已投票' : '思考中',
-                highlighted: game.voted.contains(seat),
-              ),
-        ] else ...[
-          Text(step.title, style: theme.textTheme.titleLarge),
-          const SizedBox(height: 12),
-          Text(step.body, style: theme.textTheme.bodyLarge),
-        ],
-        if (step.options.isNotEmpty) ...[
           const SizedBox(height: 16),
+          if (step.options.isNotEmpty)
+            _PlayerGrid(
+              children: [
+                for (final option in step.options.where(
+                  (o) => o.id != 'abstain',
+                ))
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 16,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      side: BorderSide(
+                        color: colors.primary.withValues(alpha: .4),
+                      ),
+                    ),
+                    onPressed: widget.enabled
+                        ? () => widget.onAction(option.id)
+                        : null,
+                    child: Column(
+                      children: [
+                        if (int.tryParse(
+                              option.id.replaceFirst(RegExp(r'^p'), ''),
+                            )
+                            case final int seat)
+                          PlayerAvatar(index: seat, size: 42)
+                        else
+                          const Icon(Icons.person_outline_rounded, size: 42),
+                        const SizedBox(height: 10),
+                        Text(option.label, textAlign: TextAlign.center),
+                      ],
+                    ),
+                  ),
+              ],
+            )
+          else
+            _PlayerGrid(
+              children: [
+                for (final seat in game.alive)
+                  _PlayerTile(
+                    seat: seat,
+                    name: state.members[seat].name,
+                    status: game.voted.contains(seat) ? '已投票' : '待投票',
+                    highlighted: game.voted.contains(seat),
+                  ),
+              ],
+            ),
+          for (final option in step.options.where((o) => o.id == 'abstain'))
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: TextButton(
+                onPressed: widget.enabled
+                    ? () => widget.onAction(option.id)
+                    : null,
+                child: Text(option.label),
+              ),
+            ),
+        ] else if (game.phase == 'talk' && !moderator) ...[
+          Row(
+            children: [
+              Expanded(child: Text('本局玩家', style: theme.textTheme.titleMedium)),
+              Text(
+                '${game.alive.length} 人在场',
+                style: theme.textTheme.bodySmall,
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          _PlayerGrid(
+            children: [
+              for (final seat in players)
+                _PlayerTile(
+                  seat: seat,
+                  name:
+                      '${state.members[seat].name}${seat == state.seat ? '（你）' : ''}',
+                  status: !game.alive.contains(seat)
+                      ? '已出局'
+                      : !state.members[seat].online
+                      ? '离线'
+                      : '场上',
+                  highlighted: seat == state.seat,
+                ),
+            ],
+          ),
+        ] else if (game.phase != 'talk') ...[
+          SurfaceCard(
+            padding: const EdgeInsets.all(16),
+            child: Text(step.body, style: theme.textTheme.bodyLarge),
+          ),
+        ],
+        if (widget.showActions &&
+            game.phase != 'vote' &&
+            step.options.isNotEmpty) ...[
+          const SizedBox(height: 24),
           for (final option in step.options)
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
-              child: game.phase == 'vote'
-                  ? OutlinedButton(
-                      onPressed: widget.enabled
-                          ? () => widget.onAction(option.id)
-                          : null,
-                      child: Text(option.label),
-                    )
-                  : FilledButton(
-                      onPressed: widget.enabled
-                          ? () => widget.onAction(option.id)
-                          : null,
-                      child: Text(option.label),
-                    ),
+              child: FilledButton(
+                onPressed: widget.enabled
+                    ? () => widget.onAction(option.id)
+                    : null,
+                child: Text(option.label),
+              ),
             ),
         ],
       ],
@@ -342,36 +387,127 @@ class _UndercoverGameViewState extends State<UndercoverGameView>
   }
 }
 
-class _PlayerStatus extends StatelessWidget {
-  const _PlayerStatus({
+class _RoleRow extends StatelessWidget {
+  const _RoleRow({required this.role});
+  final UndercoverRole role;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          PlayerAvatar(index: role.seat, size: 40),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(role.name, style: theme.textTheme.titleMedium),
+                const SizedBox(height: 4),
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 4,
+                  children: [
+                    Text(
+                      role.role,
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                    Text(
+                      role.alive ? '场上' : '已出局',
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          Flexible(
+            child: Text(
+              '词语：${role.word}',
+              textAlign: TextAlign.end,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.primary,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PlayerGrid extends StatelessWidget {
+  const _PlayerGrid({required this.children});
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, constraints) {
+      final scale = MediaQuery.textScalerOf(context).scale(13) / 13;
+      final columns = (constraints.maxWidth / (104 * scale)).floor().clamp(
+        1,
+        3,
+      );
+      final width = (constraints.maxWidth - (columns - 1) * 10) / columns;
+      return Wrap(
+        spacing: 10,
+        runSpacing: 10,
+        children: [
+          for (final child in children) SizedBox(width: width, child: child),
+        ],
+      );
+    },
+  );
+}
+
+class _PlayerTile extends StatelessWidget {
+  const _PlayerTile({
+    required this.seat,
     required this.name,
     required this.status,
     required this.highlighted,
   });
+  final int seat;
   final String name;
   final String status;
   final bool highlighted;
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Text(name, style: Theme.of(context).textTheme.bodyLarge),
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: highlighted
+              ? theme.colorScheme.primary.withValues(alpha: .4)
+              : theme.colorScheme.outlineVariant,
         ),
-        const SizedBox(width: 12),
-        Flexible(
-          child: Text(
-            status,
-            textAlign: TextAlign.end,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: highlighted ? Theme.of(context).colorScheme.primary : null,
+      ),
+      child: Column(
+        children: [
+          PlayerAvatar(index: seat, size: 40),
+          const SizedBox(height: 10),
+          Text(
+            name,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: theme.colorScheme.onSurface,
             ),
           ),
-        ),
-      ],
-    ),
-  );
+          const SizedBox(height: 4),
+          Text(status, style: theme.textTheme.bodySmall),
+        ],
+      ),
+    );
+  }
 }

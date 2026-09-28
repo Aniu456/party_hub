@@ -110,7 +110,7 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
-  testWidgets('普通房主不展示主持人身份表且自己的词默认隐藏', (tester) async {
+  testWidgets('普通房主不展示主持人身份表，自己的词始终显示', (tester) async {
     await showRoom(
       tester,
       TestRoomClient(
@@ -118,13 +118,12 @@ void main() {
       ),
     );
     expect(find.text('不能展示的全员身份'), findsNothing);
-    expect(find.textContaining('牛奶'), findsNothing);
-    await tester.tap(find.text('查看我的词语'));
-    await tester.pump();
+    expect(find.text('查看我的词语'), findsNothing);
+    expect(find.text('收起我的词语'), findsNothing);
     expect(find.text('牛奶'), findsOneWidget);
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
     await tester.pump();
-    expect(find.textContaining('牛奶'), findsNothing);
+    expect(find.text('牛奶'), findsOneWidget);
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     await tester.pumpWidget(const SizedBox());
   });
@@ -138,8 +137,6 @@ void main() {
     expect(find.textContaining('记住了'), findsNothing);
     expect(find.textContaining('秒'), findsNothing);
     expect(find.text('发起投票'), findsNothing);
-    await tester.tap(find.text('查看我的词语'));
-    await tester.pump();
     expect(find.text('牛奶'), findsOneWidget);
     expect(client.commands, isEmpty);
     await tester.pumpWidget(const SizedBox());
@@ -188,7 +185,7 @@ void main() {
     expect(find.byType(DropdownButton<int>), findsNothing);
     await tester.pumpWidget(const SizedBox());
   });
-  testWidgets('投票卡使用服务端选项标识提交，词语默认隐藏', (tester) async {
+  testWidgets('投票卡使用服务端选项标识提交，词语持续显示', (tester) async {
     final client = TestRoomClient(
       snapshot(
         phase: 'vote',
@@ -207,7 +204,23 @@ void main() {
     await tester.tap(find.text('投给小明'));
     expect(client.commands, [('action', '')]);
     expect(client.actions, ['choice_2']);
-    expect(find.textContaining('牛奶'), findsNothing);
+    expect(find.text('牛奶'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('房主结束操作收进菜单，仍保留退出确认', (tester) async {
+    final client = TestRoomClient(snapshot(step: waiting, ownWord: '牛奶'));
+    await showRoom(tester, client);
+    expect(find.text('结束本局，返回房间'), findsNothing);
+    await tester.tap(find.byTooltip('房间操作'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('结束本局，返回房间'));
+    await tester.pumpAndSettle();
+    expect(find.text('结束当前对局，让所有玩家返回准备房间？'), findsOneWidget);
+    expect(client.commands, isEmpty);
+    await tester.tap(find.text('继续玩'));
+    await tester.pumpAndSettle();
+    expect(client.commands, isEmpty);
     await tester.pumpWidget(const SizedBox());
   });
 
@@ -216,23 +229,33 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: partyTheme(Brightness.light),
-        builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(context)
-              .copyWith(textScaler: const TextScaler.linear(2.4)),
-          child: child!,
-        ),
-        home: RoomPage(
-          client: TestRoomClient(
-            snapshot(seat: 0, step: waiting, overview: '身份'),
-          ),
+    for (final state in [
+      snapshot(seat: 0, step: waiting, overview: '身份'),
+      snapshot(step: waiting, ownWord: '牛奶'),
+      snapshot(
+        phase: 'vote',
+        ownWord: '牛奶',
+        step: const GameStep(
+          title: '投票',
+          body: '',
+          options: [GameOption('p2', '小明'), GameOption('abstain', '弃票')],
         ),
       ),
-    );
-    await tester.pump();
-    expect(tester.takeException(), isNull);
-    await tester.pumpWidget(const SizedBox());
+    ]) {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: partyTheme(Brightness.light),
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: const TextScaler.linear(2.4)),
+            child: child!,
+          ),
+          home: RoomPage(client: TestRoomClient(state)),
+        ),
+      );
+      await tester.pump();
+      expect(tester.takeException(), isNull);
+      await tester.pumpWidget(const SizedBox());
+    }
   });
 }

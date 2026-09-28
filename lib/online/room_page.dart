@@ -373,6 +373,31 @@ class _RoomPageState extends State<RoomPage> {
             onStart: () => client.send('start'),
           )
         : null;
+    final undercoverPlaying = game?.id == 'undercover' && state?.step != null;
+    final dockGameAction =
+        undercoverPlaying &&
+        dockControls &&
+        state!.undercover?.phase != 'vote' &&
+        state.step!.options.length == 1;
+    final bottomControls = dockGameAction
+        ? Padding(
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+            child: SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                onPressed: enabled
+                    ? () => client.send(
+                        'action',
+                        action: state.step!.options.single.id,
+                      )
+                    : null,
+                child: Text(state.step!.options.single.label),
+              ),
+            ),
+          )
+        : dockControls
+        ? controls
+        : null;
     return PopScope(
       canPop: exiting,
       onPopInvokedWithResult: (didPop, result) {
@@ -383,13 +408,29 @@ class _RoomPageState extends State<RoomPage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(state == null ? '连接房间' : game!.name),
+          actions: [
+            if (undercoverPlaying &&
+                !state!.finished &&
+                state.host == state.seat)
+              PopupMenuButton<String>(
+                tooltip: '房间操作',
+                onSelected: (_) => reset(),
+                itemBuilder: (_) => [
+                  PopupMenuItem(
+                    value: 'reset',
+                    enabled: enabled,
+                    child: const Text('结束本局，返回房间'),
+                  ),
+                ],
+              ),
+          ],
           leading: IconButton(
             onPressed: leave,
             tooltip: '离开房间',
             icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
           ),
         ),
-        bottomNavigationBar: dockControls && controls != null
+        bottomNavigationBar: bottomControls != null
             ? ColoredBox(
                 color: colors.surface,
                 child: SafeArea(
@@ -398,7 +439,7 @@ class _RoomPageState extends State<RoomPage> {
                     heightFactor: 1,
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 760),
-                      child: controls,
+                      child: bottomControls,
                     ),
                   ),
                 ),
@@ -418,23 +459,48 @@ class _RoomPageState extends State<RoomPage> {
                 label: const Text('重新连接'),
               ),
             if (state != null) ...[
-              Wrap(
-                spacing: 8,
-                runSpacing: 4,
-                children: [
-                  Icon(
-                    client.connected
-                        ? Icons.wifi_rounded
-                        : Icons.wifi_off_rounded,
-                    size: 18,
-                    color: colors.onSurfaceVariant,
-                  ),
-                  Text(
-                    '你是 ${state.members[state.seat].name} · ${client.connected ? '已连接' : '离线'}',
-                  ),
-                  if (state.step != null) Text('房间 ${state.code}'),
-                ],
-              ),
+              if (undercoverPlaying)
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '房间 ${state.code}',
+                        style: Theme.of(context).textTheme.bodySmall
+                            ?.copyWith(color: colors.onSurfaceVariant),
+                      ),
+                    ),
+                    Icon(
+                      client.connected
+                          ? Icons.wifi_rounded
+                          : Icons.wifi_off_rounded,
+                      size: 14,
+                      color: colors.onSurfaceVariant,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      client.connected ? '已连接' : '离线',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                )
+              else
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 4,
+                  children: [
+                    Icon(
+                      client.connected
+                          ? Icons.wifi_rounded
+                          : Icons.wifi_off_rounded,
+                      size: 18,
+                      color: colors.onSurfaceVariant,
+                    ),
+                    Text(
+                      '你是 ${state.members[state.seat].name} · ${client.connected ? '已连接' : '离线'}',
+                    ),
+                    if (state.step != null) Text('房间 ${state.code}'),
+                  ],
+                ),
               if (state.message.isNotEmpty) InfoNote(state.message),
               const SizedBox(height: 20),
               if (state.step == null) ...[
@@ -609,6 +675,7 @@ class _RoomPageState extends State<RoomPage> {
                   UndercoverGameView(
                     state: state,
                     enabled: enabled,
+                    showActions: !dockGameAction,
                     onAction: (action) => client.send('action', action: action),
                   )
                 else ...[
@@ -638,17 +705,23 @@ class _RoomPageState extends State<RoomPage> {
                   GameSurface(
                     step: state.step!,
                     ink: state.ink,
-                    version: state.revision,
+                    version: game.id == 'draw_guess'
+                        ? state.clockRevision
+                        : state.revision,
                     canDraw: state.canDraw,
                     enabled: enabled,
                     finished: state.finished,
                     onAction: (action, input) =>
                         client.send('action', action: action, input: input),
                     onInkChanged: () => client.send('ink', ink: state.ink),
+                    onInkProgress: game.id == 'draw_guess'
+                        ? () => client.send('ink', ink: state.ink)
+                        : null,
                     remainingSeconds: displayedSeconds,
                     hideClock: game.id == 'reaction_duel',
                   ),
                   if (!state.finished &&
+                      !(game.id == 'draw_guess' && state.step!.drawing) &&
                       state.step!.options.isEmpty &&
                       state.step!.cells.every((cell) => cell.id.isEmpty))
                     const InfoNote(
@@ -657,7 +730,8 @@ class _RoomPageState extends State<RoomPage> {
                     ),
                 ],
                 const SizedBox(height: 20),
-                if (state.host == state.seat)
+                if (state.host == state.seat &&
+                    (!undercoverPlaying || state.finished))
                   OutlinedButton(
                     onPressed: enabled ? reset : null,
                     child: Text(state.finished ? '返回房间，再来一局' : '结束本局，返回房间'),
