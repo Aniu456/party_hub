@@ -23,41 +23,62 @@ class RoomInviteDialog extends StatelessWidget {
   final String code;
 
   @override
-  Widget build(BuildContext context) => AlertDialog(
-    scrollable: true,
-    title: const Text('邀请朋友扫码加入'),
-    content: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        QrImageView(
-          data: roomInviteData(code),
-          size: min(220, MediaQuery.sizeOf(context).width - 96),
-          padding: const EdgeInsets.all(28),
-          backgroundColor: Colors.white,
-          semanticsLabel: '房间 $code 的加入二维码',
-        ),
-        const SizedBox(height: 16),
-        Text(
-          code,
-          semanticsLabel: '房间码 ${code.split('').join(' ')}',
-          style: const TextStyle(
-            fontSize: 23,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 4,
+  Widget build(BuildContext context) => Dialog(
+    constraints: const BoxConstraints(maxWidth: 280),
+    insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              const Expanded(
+                child: Text(
+                  '邀请朋友',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+              ),
+              IconButton(
+                tooltip: '关闭',
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.close_rounded, size: 20),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 12),
-        const Text(
-          '朋友打开 App → 加入房间 → 扫码加入\n也可以输入上方六位房间码',
-          textAlign: TextAlign.center,
-        ),
-      ],
-    ),
-    actions: [
-      TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: const Text('关闭'),
+          LayoutBuilder(
+            builder: (context, constraints) => QrImageView(
+              data: roomInviteData(code),
+              size: min(168, constraints.maxWidth),
+              padding: const EdgeInsets.all(20),
+              backgroundColor: Colors.white,
+              semanticsLabel: '房间 $code 的加入二维码',
+            ),
+          ),
+          const SizedBox(height: 8),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              code,
+              semanticsLabel: '房间码 ${code.split('').join(' ')}',
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 3,
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            '打开 App 扫码加入',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 12,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
       ),
-    ],
+    ),
   );
 }

@@ -131,7 +131,7 @@ void main() {
       '房间 012345 的加入二维码',
     );
     expect(tester.takeException(), isNull);
-    await tester.tap(find.text('关闭'));
+    await tester.tap(find.byTooltip('关闭'));
     await tester.pumpAndSettle();
     expect(find.byType(RoomInviteDialog), findsNothing);
   });
