@@ -10,6 +10,14 @@ spec.loader.exec_module(release_metadata)
 
 
 class ReleaseVersionTest(unittest.TestCase):
+    def test_download_base_requires_https_and_no_extra_url_components(self):
+        base = "https://example.com/work/party-hub/downloads"
+        self.assertEqual(release_metadata.validate_download_base(base), base)
+        for value in ["http://example.com", base + "/", base + "?x=1", base + "#x",
+                      "https://user:secret@localhost", "https:///downloads", base + "/../other"]:
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                release_metadata.validate_download_base(value)
+
     def test_matches_pubspec(self):
         self.assertEqual(
             release_metadata.release_version("version: 1.2.3+42\n", "v1.2.3+42"),

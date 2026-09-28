@@ -10,9 +10,7 @@ import 'package:party_hub/update/app_update.dart';
 Map<String, Object> manifest({String version = '1.2.0', int build = 12}) => {
   'version': version,
   'build_number': build,
-  'apk_url':
-      'https://github.com/Aniu456/party_hub/releases/download/'
-      'v$version+$build/party-hub.apk',
+  'apk_url': '$updateBaseUrl/v$version+$build/party-hub.apk',
   'sha256': 'a' * 64,
 };
 
@@ -28,7 +26,7 @@ void main() {
     expect(AppRelease.fromJson(manifest(build: 13)).isNewerThan('12'), isTrue);
   });
 
-  test('拒绝缺失校验值、预发布版本、错误构建号和跨仓库下载地址', () {
+  test('拒绝缺失校验值、预发布版本、错误构建号和非指定站点下载地址', () {
     for (final invalid in [
       null,
       {...manifest()}..remove('sha256'),

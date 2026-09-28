@@ -7,10 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:ota_update/ota_update.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-const updateRepository = 'Aniu456/party_hub';
-final updateManifestUri = Uri.parse(
-  'https://github.com/$updateRepository/releases/latest/download/update.json',
+const updateBaseUrl = String.fromEnvironment(
+  'PARTY_HUB_DOWNLOAD_BASE',
+  defaultValue: 'https://example.invalid/downloads',
 );
+final updateManifestUri = Uri.parse('$updateBaseUrl/update.json');
 
 class AppRelease {
   const AppRelease({
@@ -44,12 +45,9 @@ class AppRelease {
       throw const FormatException('更新信息不完整');
     }
     final uri = Uri.parse(url);
-    // 只允许当前仓库、当前版本的安装包，不能由清单跳转到任意下载源。
-    final expected = Uri.parse(
-      'https://github.com/$updateRepository/releases/download/'
-      'v$version+$build/party-hub.apk',
-    );
-    if (uri != expected) {
+    // 只允许构建时指定的下载站点与当前版本，不能跳转到任意下载源。
+    final expected = Uri.parse('$updateBaseUrl/v$version+$build/party-hub.apk');
+    if (uri.scheme != 'https' || uri != expected) {
       throw const FormatException('安装包地址不属于此版本');
     }
     return AppRelease(

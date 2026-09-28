@@ -24,6 +24,7 @@ jobs:
     timeout-minutes: 45
     env:
       RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+      DOWNLOAD_BASE: ${{ secrets.PARTY_HUB_DOWNLOAD_BASE }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -39,7 +40,8 @@ jobs:
           PARTY_HUB_WS: ${{ secrets.PARTY_HUB_WS }}
         run: |
           python3 tool/check_public_files.py
-          python3 tool/release_metadata.py --tag "$RELEASE_TAG" --check-remote
+          test -n "$DOWNLOAD_BASE" || { echo '::error::Missing PARTY_HUB_DOWNLOAD_BASE secret'; exit 1; }
+          python3 tool/release_metadata.py --tag "$RELEASE_TAG" --download-base "$DOWNLOAD_BASE" --check-remote
           test -n "$KEYSTORE" && test -n "$STORE_PASSWORD" && test -n "$KEY_ALIAS" && test -n "$KEY_PASSWORD" || {
             echo '::error::Missing Android signing secrets. See docs/android-releases.md.'
             exit 1
@@ -91,10 +93,10 @@ jobs:
         env:
           PARTY_HUB_WS: ${{ secrets.PARTY_HUB_WS }}
         run: |
-          flutter build apk --release --dart-define="PARTY_HUB_WS=$PARTY_HUB_WS"
+          flutter build apk --release --dart-define="PARTY_HUB_WS=$PARTY_HUB_WS" --dart-define="PARTY_HUB_DOWNLOAD_BASE=$DOWNLOAD_BASE"
           mkdir -p build/release
           cp build/app/outputs/flutter-apk/app-release.apk build/release/party-hub.apk
-          python3 tool/release_metadata.py --tag "$RELEASE_TAG" --apk build/release/party-hub.apk
+          python3 tool/release_metadata.py --tag "$RELEASE_TAG" --download-base "$DOWNLOAD_BASE" --apk build/release/party-hub.apk
 
       - name: Publish complete release
         env:
@@ -102,7 +104,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           # Recheck after building; fail closed if latest changed during this run.
-          python3 tool/release_metadata.py --tag "$RELEASE_TAG" --check-remote
+          python3 tool/release_metadata.py --tag "$RELEASE_TAG" --download-base "$DOWNLOAD_BASE" --check-remote
           if gh release view "$RELEASE_TAG" --json isDraft > build/release-state.json 2> build/release-error.txt; then
             python3 -c 'import json; assert json.load(open("build/release-state.json"))["isDraft"], "Published releases must never be replaced"'
           else

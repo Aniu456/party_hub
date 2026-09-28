@@ -6,10 +6,20 @@ import json
 import re
 from pathlib import Path
 from urllib.error import HTTPError
+from urllib.parse import urlsplit
 from urllib.request import urlopen
 
 REPOSITORY = "Aniu456/party_hub"
 ROOT = Path(__file__).resolve().parent.parent
+
+
+def validate_download_base(value):
+    url = urlsplit(value)
+    if (url.scheme != "https" or not url.hostname or url.username or url.password
+            or url.query or url.fragment or value.endswith("/")
+            or any(part in {".", ".."} for part in url.path.split("/"))):
+        raise ValueError("Download base must be an HTTPS URL without credentials, query, fragment or trailing slash")
+    return value
 
 
 def release_version(pubspec, tag):
@@ -29,12 +39,14 @@ def main():
     parser.add_argument("--tag", required=True)
     parser.add_argument("--check-remote", action="store_true")
     parser.add_argument("--apk", type=Path)
+    parser.add_argument("--download-base", type=validate_download_base)
     parser.add_argument("--output-dir", type=Path, default=ROOT / "build/release")
     args = parser.parse_args()
     version, build = release_version((ROOT / "pubspec.yaml").read_text(), args.tag)
     if args.check_remote:
         # Only 404 means no release exists; network failures must stop publication.
-        url = f"https://github.com/{REPOSITORY}/releases/latest/download/update.json"
+        url = (f"{args.download_base}/update.json" if args.download_base else
+               f"https://github.com/{REPOSITORY}/releases/latest/download/update.json")
         try:
             with urlopen(url, timeout=20) as response:
                 previous = json.load(response)
@@ -51,7 +63,7 @@ def main():
         manifest = {
             "version": version,
             "build_number": build,
-            "apk_url": f"https://github.com/{REPOSITORY}/releases/download/{args.tag}/party-hub.apk",
+            "apk_url": f"{args.download_base or f'https://github.com/{REPOSITORY}/releases/download'}/{args.tag}/party-hub.apk",
             "sha256": checksum,
         }
         args.output_dir.mkdir(parents=True, exist_ok=True)
