@@ -603,6 +603,14 @@ class _SketchBoard extends StatefulWidget {
 }
 
 class _SketchBoardState extends State<_SketchBoard> {
+  final repaint = ValueNotifier(0);
+
+  @override
+  void dispose() {
+    repaint.dispose();
+    super.dispose();
+  }
+
   Point<double> point(Offset offset, double width, double height) =>
       Point((offset.dx / width).clamp(0, 1), (offset.dy / height).clamp(0, 1));
   @override
@@ -622,7 +630,7 @@ class _SketchBoardState extends State<_SketchBoard> {
                     constraints.maxHeight,
                   ),
                 ]);
-                setState(() {});
+                repaint.value++;
               }
             : null,
         onPanUpdate: widget.editable
@@ -638,16 +646,18 @@ class _SketchBoardState extends State<_SketchBoard> {
                     constraints.maxHeight,
                   ),
                 );
-                setState(() {});
+                repaint.value++;
               }
             : null,
         onPanEnd: widget.editable ? (_) => widget.onChanged() : null,
         onPanCancel: widget.editable ? widget.onChanged : null,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(18),
-          child: CustomPaint(
-            painter: _SketchPainter(widget.sketch),
-            child: const SizedBox.expand(),
+          child: RepaintBoundary(
+            child: CustomPaint(
+              painter: _SketchPainter(widget.sketch, repaint: repaint),
+              child: const SizedBox.expand(),
+            ),
           ),
         ),
       ),
@@ -656,7 +666,7 @@ class _SketchBoardState extends State<_SketchBoard> {
 }
 
 class _SketchPainter extends CustomPainter {
-  _SketchPainter(this.sketch);
+  _SketchPainter(this.sketch, {super.repaint});
   final Sketch sketch;
   @override
   void paint(Canvas canvas, Size size) {
