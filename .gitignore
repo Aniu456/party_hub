@@ -85,6 +85,7 @@ id_ed25519*
 !/tool/check_public_files.py
 /play.md
 /AGENTS.md
-/docs/private/
-/docs/previews/
+/docs/*
+!/docs/android-releases.md
+!/docs/design_sources.md
 /ios/Flutter/Signing.local.xcconfig

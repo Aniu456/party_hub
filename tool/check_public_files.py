@@ -15,6 +15,7 @@ PRIVATE_FILES = {
     "ios/Flutter/Signing.local.xcconfig",
 }
 PUBLIC_TOOLS = {"tool/release_metadata.py", "tool/check_public_files.py"}
+PUBLIC_DOCS = {"docs/android-releases.md", "docs/design_sources.md"}
 PRIVATE_SUFFIXES = {".jks", ".keystore", ".pem", ".key", ".p8", ".p12", ".pfx", ".mobileprovision", ".db", ".sqlite", ".sql"}
 PATTERNS = {
     "private key": r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----",
@@ -37,6 +38,7 @@ def main():
         path = Path(name)
         if (name.startswith(PRIVATE_PREFIXES) or name in PRIVATE_FILES
                 or path.name.startswith(".env") or path.suffix in PRIVATE_SUFFIXES
+                or (name.startswith("docs/") and name not in PUBLIC_DOCS)
                 or (name.startswith("tool/") and name not in PUBLIC_TOOLS)):
             failures.append((name, "private file tracked by Git"))
             continue
