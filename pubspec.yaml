@@ -64,8 +64,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/open_peeps/blue/busts/
-    - assets/open_peeps/blue/standing/
-    - assets/open_peeps/blue/sitting/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

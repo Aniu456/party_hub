@@ -1,13 +1,20 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'app_style.dart';
 import 'games/session.dart';
 
+export 'game_dialogs.dart';
+
+part 'game_board.dart';
+part 'sketch_board.dart';
+
 /// 同机与联机共用对局界面；联机传入的 step 已在服务器按玩家权限过滤。
 class GameSurface extends StatefulWidget {
+  // remainingSeconds 映射私有字段，使 getter 能优先读 remainingClock。
   const GameSurface({
     super.key,
     required this.step,
@@ -17,11 +24,13 @@ class GameSurface extends StatefulWidget {
     required this.canDraw,
     required this.version,
     this.onInkProgress,
-    this.remainingSeconds,
+    int? remainingSeconds,
+    this.remainingClock,
     this.hideClock = false,
     this.enabled = true,
     this.finished = false,
-  });
+    // ignore: prefer_initializing_formals
+  }) : _remainingSeconds = remainingSeconds;
   final GameStep step;
   final Sketch ink;
   final void Function(String, String) onAction;
@@ -29,10 +38,17 @@ class GameSurface extends StatefulWidget {
   final VoidCallback? onInkProgress;
   final bool canDraw;
   final int version;
-  final int? remainingSeconds;
+  final int? _remainingSeconds;
+
+  /// 倒计时独立刷新；有值时秒数变化不必重建整个 [GameSurface]。
+  final ValueListenable<int?>? remainingClock;
   final bool hideClock;
   final bool enabled;
   final bool finished;
+
+  /// 当前剩余秒数；优先读 [remainingClock]，供测试与静态传入共用。
+  int? get remainingSeconds => remainingClock?.value ?? _remainingSeconds;
+
   @override
   State<GameSurface> createState() => _GameSurfaceState();
 }
@@ -68,6 +84,18 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
     input.dispose();
     super.dispose();
+  }
+
+  /// 仅倒计时子树监听秒数；其余对局 UI 不随每秒刷新。
+  Widget listenRemaining(Widget Function(int? seconds) builder) {
+    final clock = widget.remainingClock;
+    if (clock != null) {
+      return ListenableBuilder(
+        listenable: clock,
+        builder: (context, _) => builder(clock.value),
+      );
+    }
+    return builder(widget.remainingSeconds);
   }
 
   void act(String action) {
@@ -132,8 +160,11 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
-            if (widget.remainingSeconds case final seconds?)
-              Chip(
+            listenRemaining((seconds) {
+              if (seconds == null) {
+                return const SizedBox.shrink();
+              }
+              return Chip(
                 avatar: Icon(
                   Icons.timer_outlined,
                   size: 18,
@@ -145,7 +176,8 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
                     color: seconds <= 10 ? colors.error : colors.primary,
                   ),
                 ),
-              ),
+              );
+            }),
           ],
         ),
         Text(
@@ -332,9 +364,11 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (widget.remainingSeconds case final remaining?
-            when !widget.hideClock)
-          Padding(
+        listenRemaining((remaining) {
+          if (remaining == null || widget.hideClock) {
+            return const SizedBox.shrink();
+          }
+          return Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: SurfaceCard(
               padding: const EdgeInsets.all(16),
@@ -404,7 +438,8 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
                 ],
               ),
             ),
-          ),
+          );
+        }),
         if (hidden) ...[
           SurfaceCard(
             color: colors.secondaryContainer,
@@ -680,389 +715,4 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
       ],
     );
   }
-}
-
-class _GameBoard extends StatefulWidget {
-  const _GameBoard({
-    required this.step,
-    required this.enabled,
-    required this.onAction,
-  });
-  final GameStep step;
-  final bool enabled;
-  final ValueChanged<String> onAction;
-  @override
-  State<_GameBoard> createState() => _GameBoardState();
-}
-
-class _GameBoardState extends State<_GameBoard> {
-  final transform = TransformationController();
-  bool zoomed = false;
-  @override
-  void dispose() {
-    transform.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final step = widget.step;
-    final gomoku = step.columns == 15;
-    final board = GridView.builder(
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: step.cells.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: step.columns,
-        crossAxisSpacing: gomoku ? 1 : 4,
-        mainAxisSpacing: gomoku ? 1 : 4,
-      ),
-      itemBuilder: (context, index) {
-        final cell = step.cells[index];
-        final canTap = cell.id.isNotEmpty && widget.enabled;
-        return Semantics(
-          label:
-              '第 ${index ~/ step.columns + 1} 行，第 ${index % step.columns + 1} 列 ${cell.label}',
-          button: cell.id.isNotEmpty,
-          enabled: canTap,
-          child: Material(
-            color: gomoku
-                ? const Color(0xFFF2E5C8)
-                : switch (cell.tone) {
-                    1 => const Color(0xFFF3D6C3),
-                    2 => const Color(0xFFDCE6F2),
-                    3 => const Color(0xFFD3D7CD),
-                    _ => const Color(0xFFE9EDDD),
-                  },
-            borderRadius: BorderRadius.circular(gomoku ? 0 : 8),
-            clipBehavior: Clip.antiAlias,
-            child: InkWell(
-              onTap: canTap ? () => widget.onAction(cell.id) : null,
-              child: Center(
-                child: gomoku && cell.tone > 0
-                    ? FractionallySizedBox(
-                        widthFactor: .76,
-                        heightFactor: .76,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: cell.tone == 1 ? partyInk : Colors.white,
-                            border: Border.all(color: partyInk),
-                          ),
-                        ),
-                      )
-                    : Text(
-                        cell.label,
-                        textAlign: TextAlign.center,
-                        textScaler: TextScaler.noScaling,
-                        maxLines: 3,
-                        style: const TextStyle(fontSize: 12, color: partyInk),
-                      ),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-    if (!gomoku) {
-      return board;
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          children: [
-            const Expanded(child: Text('可放大棋盘，拖动后落子')),
-            IconButton(
-              tooltip: zoomed ? '还原棋盘' : '放大棋盘',
-              onPressed: () => setState(() {
-                zoomed = !zoomed;
-                transform.value = zoomed
-                    ? Matrix4.diagonal3Values(2.5, 2.5, 1)
-                    : Matrix4.identity();
-              }),
-              icon: Icon(
-                zoomed ? Icons.zoom_out_rounded : Icons.zoom_in_rounded,
-              ),
-            ),
-          ],
-        ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: ColoredBox(
-              color: const Color(0xFFC6B58E),
-              child: InteractiveViewer(
-                transformationController: transform,
-                minScale: 1,
-                maxScale: 3,
-                panEnabled: zoomed,
-                onInteractionEnd: (_) => setState(
-                  () => zoomed = transform.value.getMaxScaleOnAxis() > 1,
-                ),
-                child: board,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _SketchBoard extends StatefulWidget {
-  const _SketchBoard({
-    required this.sketch,
-    required this.editable,
-    required this.onChanged,
-    this.onProgress,
-    this.version = 0,
-    this.color = 0xFF222222,
-  });
-  final Sketch sketch;
-  final bool editable;
-  final VoidCallback onChanged;
-  final VoidCallback? onProgress;
-  final int version;
-  final int color;
-  @override
-  State<_SketchBoard> createState() => _SketchBoardState();
-}
-
-class _SketchBoardState extends State<_SketchBoard> {
-  final repaint = ValueNotifier(0);
-  Timer? progressTimer;
-  List<Point<double>>? activeStroke;
-
-  void publishProgress() {
-    if (widget.onProgress == null || progressTimer != null) {
-      return;
-    }
-    progressTimer = Timer(const Duration(milliseconds: 80), () {
-      progressTimer = null;
-      widget.onProgress?.call();
-    });
-  }
-
-  void finishStroke() {
-    progressTimer?.cancel();
-    progressTimer = null;
-    if (activeStroke == null) {
-      return;
-    }
-    activeStroke = null;
-    widget.onChanged();
-  }
-
-  @override
-  void didUpdateWidget(_SketchBoard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.version != widget.version || !widget.editable) {
-      progressTimer?.cancel();
-      progressTimer = null;
-      activeStroke = null;
-    }
-  }
-
-  @override
-  void dispose() {
-    progressTimer?.cancel();
-    repaint.dispose();
-    super.dispose();
-  }
-
-  Point<double> point(Offset offset, double width, double height) =>
-      Point((offset.dx / width).clamp(0, 1), (offset.dy / height).clamp(0, 1));
-  @override
-  Widget build(BuildContext context) => AspectRatio(
-    aspectRatio: 1,
-    child: LayoutBuilder(
-      builder: (context, constraints) => GestureDetector(
-        onPanStart: widget.editable
-            ? (details) {
-                if (widget.sketch.length >= 300) {
-                  return;
-                }
-                final stroke = SketchStroke([
-                  point(
-                    details.localPosition,
-                    constraints.maxWidth,
-                    constraints.maxHeight,
-                  ),
-                ], color: widget.color);
-                activeStroke = stroke;
-                widget.sketch.add(stroke);
-                repaint.value++;
-                publishProgress();
-              }
-            : null,
-        onPanUpdate: widget.editable
-            ? (details) {
-                final stroke = activeStroke;
-                if (stroke == null ||
-                    !widget.sketch.contains(stroke) ||
-                    stroke.length >= 2000) {
-                  return;
-                }
-                stroke.add(
-                  point(
-                    details.localPosition,
-                    constraints.maxWidth,
-                    constraints.maxHeight,
-                  ),
-                );
-                repaint.value++;
-                publishProgress();
-              }
-            : null,
-        onPanEnd: widget.editable ? (_) => finishStroke() : null,
-        onPanCancel: widget.editable ? finishStroke : null,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(18),
-          child: RepaintBoundary(
-            child: CustomPaint(
-              painter: _SketchPainter(widget.sketch, repaint: repaint),
-              child: const SizedBox.expand(),
-            ),
-          ),
-        ),
-      ),
-    ),
-  );
-}
-
-class _SketchPainter extends CustomPainter {
-  _SketchPainter(this.sketch, {super.repaint});
-  final Sketch sketch;
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawRect(Offset.zero & size, Paint()..color = Colors.white);
-    final paint = Paint()
-      ..color = const Color(0xFF222222)
-      ..strokeWidth = 3
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
-    for (final stroke in sketch) {
-      if (stroke.isEmpty) {
-        continue;
-      }
-      paint.color = Color(
-        stroke is SketchStroke ? stroke.color : sketchColors.first,
-      );
-      final path = Path()
-        ..moveTo(stroke.first.x * size.width, stroke.first.y * size.height);
-      for (final point in stroke.skip(1)) {
-        path.lineTo(point.x * size.width, point.y * size.height);
-      }
-      if (stroke.length == 1) {
-        canvas.drawCircle(
-          Offset(stroke.first.x * size.width, stroke.first.y * size.height),
-          1.5,
-          Paint()..color = paint.color,
-        );
-      } else {
-        canvas.drawPath(path, paint);
-      }
-    }
-    canvas.drawRect(
-      Offset.zero & size,
-      Paint()
-        ..color = const Color(0xFFCCCCCC)
-        ..style = PaintingStyle.stroke,
-    );
-  }
-
-  @override
-  bool shouldRepaint(_SketchPainter oldDelegate) => true;
-}
-
-Future<bool> confirmExit(
-  BuildContext context, {
-  String message = '退出后本局进度不会保存。',
-}) async {
-  return await showDialog<bool>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('退出本局？'),
-          content: Text(message),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: const Text('继续玩'),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.pop(context, true),
-              child: const Text('退出'),
-            ),
-          ],
-        ),
-      ) ??
-      false;
-}
-
-Future<void> showModeratorOverview(
-  BuildContext context,
-  String name,
-  String overview,
-) async {
-  await showDialog<void>(
-    context: context,
-    builder: (_) => _ModeratorDialog(name: name, overview: overview),
-  );
-}
-
-class _ModeratorDialog extends StatefulWidget {
-  const _ModeratorDialog({required this.name, required this.overview});
-  final String name;
-  final String overview;
-  @override
-  State<_ModeratorDialog> createState() => _ModeratorDialogState();
-}
-
-class _ModeratorDialogState extends State<_ModeratorDialog>
-    with WidgetsBindingObserver {
-  bool visible = false;
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state != AppLifecycleState.resumed && mounted) {
-      setState(() => visible = false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) => AlertDialog(
-    icon: const Icon(Icons.visibility_outlined, size: 32),
-    title: Text(visible ? '主持人上帝视角' : '请交给主持人 ${widget.name}'),
-    content: SingleChildScrollView(
-      child: Text(
-        visible ? widget.overview : '此处包含全部身份和词语，请勿让玩家看到屏幕。',
-        style: Theme.of(context).textTheme.bodyLarge,
-      ),
-    ),
-    actions: [
-      if (!visible)
-        FilledButton(
-          onPressed: () => setState(() => visible = true),
-          child: const Text('我是主持人，查看'),
-        ),
-      TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: const Text('关闭'),
-      ),
-    ],
-  );
 }

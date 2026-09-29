@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:party_hub/online/room_invite.dart';
-import 'package:party_hub/online/room_page.dart';
+import 'package:party_hub/online/room_entry_page.dart';
 import 'package:party_hub/online/room_scan_page.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 

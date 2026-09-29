@@ -5,7 +5,7 @@ import 'package:party_hub/app_style.dart';
 import 'package:party_hub/game_catalog.dart';
 import 'package:party_hub/local_game_page.dart';
 import 'package:party_hub/main.dart';
-import 'package:party_hub/online/room_page.dart';
+import 'package:party_hub/online/room_entry_page.dart';
 import 'package:party_hub/profile/user_center_page.dart';
 import 'package:party_hub/profile/user_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';

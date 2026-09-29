@@ -21,7 +21,7 @@
 
 - 官方网站：[Open Peeps](https://www.openpeeps.com/)。
 - 官方声明的许可：[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)。官网明确允许个人与商业用途，并允许复制、修改和分发。
-- 已导入官网 Grab and go 三个下载区的 **93 个独立 SVG**：半身 49、站姿 30、坐姿 14。官网有 94 个链接，其中 `peep-58` 重复一次；这里的“全部”指这三个现成人物下载区，不包括组合库的所有排列。
+- 已导入官网 Grab and go 三个下载区的 **93 个独立 SVG**：半身 49、站姿 30、坐姿 14。 **当前 App 资源包仅打包蓝色半身 49 张**；站姿 / 坐姿已从 `pubspec` 与 `blue/` 移除以减小安装体积，清单仍见 `catalog.json`。官网有 94 个链接，其中 `peep-58` 重复一次；这里的“全部”指这三个现成人物下载区，不包括组合库的所有排列。
 - 旧黑白 SVG 在蓝色版本验收后已删除；官方来源 URL、原始 SHA-256、原始路径、尺寸、分类和图层信息仍保留在 [catalog.json](../assets/open_peeps/catalog.json)，需要再次加工时可据此恢复源文件。此前的 12 个 PNG 和来源记录继续保留。
 - App 使用 `assets/open_peeps/blue/` 下的蓝色服装版本，色值沿用 `partyBlue`（`#3659E3`），配浅蓝底（`#EBEFFF`）。头发、脸、手部、轮廓保留黑白；衣物区域按身体模板单独处理，不使用整图染色。SVG 离线随包加载。
 - [open_peeps.dart](../lib/open_peeps.dart) 提供三类人物清单；半身人物前 12 个索引保持原来的角色对应。玩家头像、大厅人物和游戏封面共用渲染组件。

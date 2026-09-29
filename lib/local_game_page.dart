@@ -230,15 +230,27 @@ class _LocalGamePageState extends State<LocalGamePage>
     with WidgetsBindingObserver {
   late GameSession session;
   final clock = Stopwatch();
+  final remaining = ValueNotifier<int?>(null);
   Timer? timer;
   int version = 0;
-  int? displayedSeconds;
   bool exiting = false;
+
+  void syncRemaining() {
+    final seconds = session.step.seconds;
+    final next = seconds == null
+        ? null
+        : max(0, seconds - clock.elapsed.inSeconds);
+    if (remaining.value != next) {
+      remaining.value = next;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     session = widget.session;
     clock.start();
+    syncRemaining();
     WidgetsBinding.instance.addObserver(this);
     timer = Timer.periodic(const Duration(milliseconds: 100), (_) {
       if (!mounted || session.finished || !clock.isRunning) {
@@ -247,10 +259,9 @@ class _LocalGamePageState extends State<LocalGamePage>
       final seconds = session.step.seconds;
       if (seconds != null && clock.elapsedMilliseconds >= seconds * 1000) {
         act('timeout', '');
-      } else if (seconds != null &&
-          max(0, seconds - clock.elapsed.inSeconds) != displayedSeconds) {
-        // 保留 100 ms 的超时检测，仅在显示秒数变化时刷新界面。
-        setState(() {});
+      } else {
+        // 保留 100 ms 的超时检测；秒数变化只通知倒计时子树，不重建整页。
+        syncRemaining();
       }
     });
   }
@@ -263,6 +274,7 @@ class _LocalGamePageState extends State<LocalGamePage>
         clock.reset();
       }
       setState(() => version++);
+      syncRemaining();
     } on ArgumentError catch (error) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('${error.message}')));
@@ -282,6 +294,7 @@ class _LocalGamePageState extends State<LocalGamePage>
         (session as ReactionSession).cancelRound();
         clock.reset();
         setState(() => version++);
+        syncRemaining();
       }
     }
   }
@@ -289,6 +302,7 @@ class _LocalGamePageState extends State<LocalGamePage>
   @override
   void dispose() {
     timer?.cancel();
+    remaining.dispose();
     clock.stop();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
@@ -306,9 +320,6 @@ class _LocalGamePageState extends State<LocalGamePage>
   @override
   Widget build(BuildContext context) {
     final step = session.step;
-    displayedSeconds = step.seconds == null
-        ? null
-        : max(0, step.seconds! - clock.elapsed.inSeconds);
     return PopScope(
       canPop: exiting,
       onPopInvokedWithResult: (didPop, result) {
@@ -371,7 +382,7 @@ class _LocalGamePageState extends State<LocalGamePage>
               canDraw: step.drawing,
               onAction: act,
               onInkChanged: () => setState(() {}),
-              remainingSeconds: displayedSeconds,
+              remainingClock: remaining,
               hideClock: session is ReactionSession,
               finished: session.finished,
             ),
@@ -385,6 +396,7 @@ class _LocalGamePageState extends State<LocalGamePage>
                     clock.start();
                     version++;
                   });
+                  syncRemaining();
                 },
                 child: const Text('再来一局'),
               ),

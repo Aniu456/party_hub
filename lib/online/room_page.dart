@@ -8,277 +8,11 @@ import '../app_style.dart';
 import '../game_catalog.dart';
 import '../game_surface.dart';
 import '../games/create_session.dart';
-import '../profile/user_profile.dart';
 import 'room_client.dart';
-import 'undercover_game_view.dart';
 import 'room_invite.dart';
-import 'room_scan_page.dart';
+import 'undercover_game_view.dart';
 
-class RoomEntryPage extends StatefulWidget {
-  const RoomEntryPage({super.key, this.game});
-  final PartyGame? game;
-  @override
-  State<RoomEntryPage> createState() => _RoomEntryPageState();
-}
-
-class _RoomEntryPageState extends State<RoomEntryPage> {
-  final form = GlobalKey<FormState>();
-  final name = TextEditingController();
-  final code = TextEditingController();
-  bool entering = false;
-  String? saveError;
-  bool scanning = false;
-  @override
-  void initState() {
-    super.initState();
-    name.text = UserProfileScope.read(context)?.nickname ?? '';
-  }
-
-  @override
-  void dispose() {
-    name.dispose();
-    code.dispose();
-    super.dispose();
-  }
-
-  Future<void> enter() async {
-    if (entering || !form.currentState!.validate()) {
-      return;
-    }
-    FocusScope.of(context).unfocus();
-    setState(() {
-      entering = true;
-      saveError = null;
-    });
-    final profile = UserProfileScope.read(context);
-    try {
-      if (profile != null && !await profile.saveNickname(name.text)) {
-        if (mounted) {
-          setState(() => saveError = profile.storageError);
-        }
-        return;
-      }
-      if (!mounted) {
-        return;
-      }
-      final client = RoomClient(
-        name: name.text.trim(),
-        gameId: widget.game?.id,
-        joinCode: code.text.trim(),
-      );
-      await Navigator.push(
-        context,
-        MaterialPageRoute<void>(builder: (_) => RoomPage(client: client)),
-      );
-    } finally {
-      if (mounted) {
-        setState(() => entering = false);
-      }
-    }
-  }
-
-  Future<void> scan() async {
-    if (entering || scanning) {
-      return;
-    }
-    FocusScope.of(context).unfocus();
-    setState(() => scanning = true);
-    final result = await Navigator.push<String>(
-      context,
-      MaterialPageRoute(builder: (_) => const RoomScanPage()),
-    );
-    if (!mounted) {
-      return;
-    }
-    setState(() {
-      scanning = false;
-      if (result != null) {
-        code.text = result;
-      }
-    });
-    if (result != null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('已识别房间码，确认昵称后点击加入房间')));
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-    final game = widget.game;
-    final joining = game == null;
-    return Scaffold(
-      appBar: AppBar(title: Text(joining ? '加入房间' : '创建房间')),
-      body: Form(
-        key: form,
-        child: PageContent(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final artwork = SizedBox(
-                    width: 68,
-                    height: 68,
-                    child: joining
-                        ? const PlayerAvatar(index: 2, size: 68)
-                        : ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: GameArtwork(game: game, height: 68),
-                          ),
-                  );
-                  final details = Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        joining ? '朋友的邀请' : '即将开局',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: colors.primary,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        joining ? '快乐，就差你了' : game.name,
-                        style: TextStyle(
-                          color: colors.onSurface,
-                          fontSize: 19,
-                          height: 1.25,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  );
-                  if (MediaQuery.textScalerOf(context).scale(16) > 24) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [artwork, const SizedBox(height: 14), details],
-                    );
-                  }
-                  return Row(
-                    children: [
-                      artwork,
-                      const SizedBox(width: 16),
-                      Expanded(child: details),
-                    ],
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Divider(height: 1),
-            const SizedBox(height: 20),
-            Text(
-              joining ? '扫码或输入房间码，马上与朋友会合。' : '创建后邀请朋友扫码或输入房间码，大家准备好就能开始。',
-              style: TextStyle(fontSize: 12, color: colors.onSurfaceVariant),
-            ),
-            const SizedBox(height: 24),
-            TextFormField(
-              controller: name,
-              enabled: !entering,
-              maxLength: 20,
-              textInputAction: joining
-                  ? TextInputAction.next
-                  : TextInputAction.done,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: UserProfile.validateNickname,
-              decoration: const InputDecoration(
-                labelText: '你的昵称',
-                hintText: '朋友们怎么称呼你',
-                counterText: '',
-                errorMaxLines: 4,
-                prefixIcon: Icon(Icons.person_outline_rounded, size: 20),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              '昵称会保存在本机，下次自动填写。',
-              style: TextStyle(fontSize: 11, color: colors.onSurfaceVariant),
-            ),
-            if (joining) ...[
-              const SizedBox(height: 24),
-              OutlinedButton.icon(
-                onPressed: entering || scanning ? null : scan,
-                icon: const Icon(Icons.qr_code_scanner_rounded),
-                label: const Text('扫码加入'),
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: EdgeInsets.zero,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '六位房间码',
-                      style: TextStyle(
-                        color: colors.onSecondaryContainer,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    TextFormField(
-                      controller: code,
-                      enabled: !entering,
-                      maxLength: 6,
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) =>
-                          RegExp(r'^\d{6}$').hasMatch(value?.trim() ?? '')
-                          ? null
-                          : '请输入完整的 6 位房间码',
-                      style: TextStyle(
-                        fontSize: 19,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 4,
-                        color: colors.primary,
-                      ),
-                      decoration: const InputDecoration(
-                        hintText: '000000',
-                        prefixIcon: Icon(Icons.tag_rounded, size: 20),
-                        counterText: '',
-                        errorMaxLines: 4,
-                      ),
-                      onFieldSubmitted: (_) => enter(),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      '向开房的朋友获取',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: colors.onSecondaryContainer,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-            const SizedBox(height: 24),
-            if (saveError != null) InfoNote(saveError!, error: true),
-            FilledButton(
-              onPressed: entering ? null : enter,
-              child: Text(
-                entering
-                    ? '正在进入…'
-                    : joining
-                    ? '加入房间'
-                    : '创建房间',
-              ),
-            ),
-            const SizedBox(height: 12),
-            const InfoNote(
-              '每人使用自己的设备。讨论、口述和动作类玩法，需要面对面或自行语音通话。',
-              icon: Icons.chat_bubble_outline_rounded,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+part 'room_controls.dart';
 
 class RoomPage extends StatefulWidget {
   const RoomPage({super.key, required this.client});
@@ -289,10 +23,11 @@ class RoomPage extends StatefulWidget {
 
 class _RoomPageState extends State<RoomPage> {
   Timer? timer;
-  int? displayedSeconds;
+  final remaining = ValueNotifier<int?>(null);
   bool exiting = false;
   RoomClient get client => widget.client;
-  int? get remainingSeconds {
+
+  int? computeRemaining() {
     final state = client.state;
     final seconds = state?.step?.seconds;
     if (state == null || seconds == null) {
@@ -305,20 +40,30 @@ class _RoomPageState extends State<RoomPage> {
     );
   }
 
+  void syncRemaining() {
+    final next = computeRemaining();
+    if (remaining.value != next) {
+      remaining.value = next;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     client.addListener(changed);
     unawaited(client.connect());
+    syncRemaining();
     timer = Timer.periodic(const Duration(milliseconds: 250), (_) {
-      if (mounted && remainingSeconds != displayedSeconds) {
-        setState(() {});
+      // 秒数变化只通知倒计时子树，不重建整页 ScoreStrip / GameSurface。
+      if (mounted) {
+        syncRemaining();
       }
     });
   }
 
   void changed() {
     if (mounted) {
+      syncRemaining();
       setState(() {});
     }
   }
@@ -326,6 +71,7 @@ class _RoomPageState extends State<RoomPage> {
   @override
   void dispose() {
     timer?.cancel();
+    remaining.dispose();
     client.removeListener(changed);
     client.dispose();
     super.dispose();
@@ -354,7 +100,6 @@ class _RoomPageState extends State<RoomPage> {
   @override
   Widget build(BuildContext context) {
     final state = client.state;
-    displayedSeconds = remainingSeconds;
     final game = state == null
         ? null
         : plannedGames.firstWhere((game) => game.id == state.gameId);
@@ -717,7 +462,7 @@ class _RoomPageState extends State<RoomPage> {
                     onInkProgress: game.id == 'draw_guess'
                         ? () => client.send('ink', ink: state.ink)
                         : null,
-                    remainingSeconds: displayedSeconds,
+                    remainingClock: remaining,
                     hideClock: game.id == 'reaction_duel',
                   ),
                   if (!state.finished &&
@@ -740,95 +485,6 @@ class _RoomPageState extends State<RoomPage> {
             ],
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _RoomControls extends StatelessWidget {
-  const _RoomControls({
-    required this.state,
-    required this.game,
-    required this.connected,
-    required this.pending,
-    required this.onReady,
-    required this.onStart,
-  });
-  final RoomSnapshot state;
-  final PartyGame game;
-  final bool connected;
-  final bool pending;
-  final VoidCallback onReady;
-  final VoidCallback onStart;
-
-  @override
-  Widget build(BuildContext context) {
-    final ready = state.members[state.seat].ready;
-    final host = state.seat == state.host;
-    final missing = max(0, game.minPlayers - state.members.length);
-    final offline = state.members.where((member) => !member.online).length;
-    final unready = state.members
-        .where((member) => member.online && !member.ready)
-        .length;
-    final needsModerator =
-        game.id == 'undercover' && state.moderatorSeat == null;
-    final canStart =
-        !needsModerator &&
-        game.supportsPlayerCount(state.members.length) &&
-        offline == 0 &&
-        unready == 0;
-    final enabled = connected && !pending;
-    final status = !connected
-        ? '连接恢复后就能继续准备'
-        : pending
-        ? '正在同步，请稍候'
-        : needsModerator
-        ? '请先选择主持人'
-        : missing > 0
-        ? '再邀请 $missing 人，就能凑齐这一局'
-        : offline > 0
-        ? '$offline 位朋友暂时离线，等待重新连接'
-        : unready > 0
-        ? '还有 $unready 人未准备'
-        : host
-        ? '所有人已准备，好戏可以开场了'
-        : '全员已准备，等待房主开局';
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Semantics(
-            liveRegion: true,
-            child: Text(status, textAlign: TextAlign.center),
-          ),
-          const SizedBox(height: 10),
-          FilledButton(
-            onPressed: !enabled
-                ? null
-                : !ready
-                ? onReady
-                : host && canStart
-                ? onStart
-                : null,
-            child: Text(
-              pending
-                  ? '正在同步…'
-                  : !ready
-                  ? '我准备好了'
-                  : host
-                  ? '开始游戏'
-                  : '已准备，等待房主',
-              textAlign: TextAlign.center,
-            ),
-          ),
-          if (ready)
-            TextButton(
-              onPressed: enabled ? onReady : null,
-              child: const Text('取消准备'),
-            ),
-        ],
       ),
     );
   }
