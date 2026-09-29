@@ -223,7 +223,11 @@ void main() {
       tester.getCenter(drawingCanvas()),
     );
     await gesture.moveBy(const Offset(30, 0));
-    await tester.pump(const Duration(milliseconds: 80));
+    // 进度同步节流：间隔内不发送，到点才发送一次。
+    await tester.pump(inkProgressInterval - const Duration(milliseconds: 20));
+    expect(progress, 0);
+    await gesture.moveBy(const Offset(10, 0));
+    await tester.pump(const Duration(milliseconds: 20));
     expect(progress, 1);
     expect(finished, 0);
     expect((ink.single as SketchStroke).color, sketchColors[1]);

@@ -463,6 +463,7 @@ class _RoomPageState extends State<RoomPage> {
                         ? () => client.send('ink', ink: state.ink)
                         : null,
                     remainingClock: remaining,
+                    inkUpdates: client.inkUpdates,
                     hideClock: game.id == 'reaction_duel',
                   ),
                   if (!state.finished &&

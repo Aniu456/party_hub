@@ -12,6 +12,9 @@ export 'game_dialogs.dart';
 part 'game_board.dart';
 part 'sketch_board.dart';
 
+/// 画者拖动时同步进度的最短间隔；抬笔时仍会立即发送完整笔迹。
+const inkProgressInterval = Duration(milliseconds: 180);
+
 /// 同机与联机共用对局界面；联机传入的 step 已在服务器按玩家权限过滤。
 class GameSurface extends StatefulWidget {
   // remainingSeconds 映射私有字段，使 getter 能优先读 remainingClock。
@@ -26,6 +29,7 @@ class GameSurface extends StatefulWidget {
     this.onInkProgress,
     int? remainingSeconds,
     this.remainingClock,
+    this.inkUpdates,
     this.hideClock = false,
     this.enabled = true,
     this.finished = false,
@@ -42,6 +46,9 @@ class GameSurface extends StatefulWidget {
 
   /// 倒计时独立刷新；有值时秒数变化不必重建整个 [GameSurface]。
   final ValueListenable<int?>? remainingClock;
+
+  /// [ink] 被就地替换内容时触发，仅重绘画板。
+  final Listenable? inkUpdates;
   final bool hideClock;
   final bool enabled;
   final bool finished;
@@ -212,6 +219,7 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
                 width: size,
                 child: _SketchBoard(
                   sketch: widget.ink,
+                  inkUpdates: widget.inkUpdates,
                   editable: widget.canDraw && widget.enabled,
                   version: widget.version,
                   color: selectedColor,
@@ -576,6 +584,7 @@ class _GameSurfaceState extends State<GameSurface> with WidgetsBindingObserver {
           if (step.drawing) ...[
             _SketchBoard(
               sketch: widget.ink,
+              inkUpdates: widget.inkUpdates,
               editable: widget.canDraw && widget.enabled,
               version: widget.version,
               onProgress: widget.onInkProgress,

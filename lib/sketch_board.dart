@@ -8,8 +8,12 @@ class _SketchBoard extends StatefulWidget {
     this.onProgress,
     this.version = 0,
     this.color = 0xFF222222,
+    this.inkUpdates,
   });
   final Sketch sketch;
+
+  /// 联机时笔迹就地更新（不重建页面），由此通知画板重绘。
+  final Listenable? inkUpdates;
   final bool editable;
   final VoidCallback onChanged;
   final VoidCallback? onProgress;
@@ -28,7 +32,7 @@ class _SketchBoardState extends State<_SketchBoard> {
     if (widget.onProgress == null || progressTimer != null) {
       return;
     }
-    progressTimer = Timer(const Duration(milliseconds: 80), () {
+    progressTimer = Timer(inkProgressInterval, () {
       progressTimer = null;
       widget.onProgress?.call();
     });
@@ -111,7 +115,12 @@ class _SketchBoardState extends State<_SketchBoard> {
           borderRadius: BorderRadius.circular(18),
           child: RepaintBoundary(
             child: CustomPaint(
-              painter: _SketchPainter(widget.sketch, repaint: repaint),
+              painter: _SketchPainter(
+                widget.sketch,
+                repaint: widget.inkUpdates == null
+                    ? repaint
+                    : Listenable.merge([repaint, widget.inkUpdates]),
+              ),
               child: const SizedBox.expand(),
             ),
           ),

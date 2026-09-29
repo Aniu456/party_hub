@@ -157,6 +157,18 @@ class RoomClient extends ChangeNotifier {
   RoomSnapshot? state;
   final snapshotAge = Stopwatch();
 
+  /// 仅笔迹变化的回包不通知整页，只让画板重绘。
+  final inkUpdates = ValueNotifier<int>(0);
+  String? _stateKey;
+  String? _lastInkMessage;
+
+  /// 测试可覆盖；默认需要真实连接。
+  @protected
+  bool get canTransmit => connected && _socket != null;
+
+  @protected
+  void transmit(String message) => _socket?.add(message);
+
   Future<void> connect() async {
     if (_closed || connecting) {
       return;
@@ -172,6 +184,7 @@ class RoomClient extends ChangeNotifier {
         return;
       }
       _socket = socket;
+      _lastInkMessage = null;
       socket.pingInterval = const Duration(seconds: 20);
       connected = true;
       socket.listen(
@@ -180,39 +193,7 @@ class RoomClient extends ChangeNotifier {
             if (raw is! String) {
               throw const FormatException('服务器消息格式不正确');
             }
-            final data = wireMap(jsonDecode(raw));
-            switch (wireString(data, 'type')) {
-              case 'welcome':
-                _token = wireString(data, 'token');
-                _code = wireString(data, 'room');
-              case 'state':
-                final next = RoomSnapshot(data);
-                final previous = state;
-                // 同一画者回合内，服务器回包可能落后于手指；保留本机最新笔迹。
-                if (_preserveInk &&
-                    previous != null &&
-                    previous.gameId == 'draw_guess' &&
-                    previous.canDraw &&
-                    next.canDraw &&
-                    previous.clockRevision == next.clockRevision) {
-                  next.ink = previous.ink;
-                }
-                state = next;
-                _preserveInk = true;
-                snapshotAge
-                  ..reset()
-                  ..start();
-                pending = false;
-              case 'error':
-                _preserveInk = false;
-                error = wireString(data, 'message');
-                pending = false;
-              default:
-                throw const FormatException('未知服务器消息');
-            }
-            if (!_closed) {
-              notifyListeners();
-            }
+            handleMessage(wireMap(jsonDecode(raw)));
           } on FormatException catch (exception) {
             error = exception.message;
             pending = false;
@@ -254,6 +235,66 @@ class RoomClient extends ChangeNotifier {
     }
   }
 
+  /// 处理一条服务器消息；联机测试可直接调用。
+  @visibleForTesting
+  void handleMessage(Map<String, Object?> data) {
+    switch (wireString(data, 'type')) {
+      case 'welcome':
+        _token = wireString(data, 'token');
+        _code = wireString(data, 'room');
+      case 'state':
+        final next = RoomSnapshot(data);
+        final previous = state;
+        final key = jsonEncode(
+          {...data}
+            ..remove('ink')
+            ..remove('elapsedMs'),
+        );
+        // 同一画者回合内，服务器回包可能落后于手指；保留本机最新笔迹。
+        if (_preserveInk &&
+            previous != null &&
+            previous.gameId == 'draw_guess' &&
+            previous.canDraw &&
+            next.canDraw &&
+            previous.clockRevision == next.clockRevision) {
+          next.ink = previous.ink;
+        }
+        final inkOnly =
+            previous != null && !pending && error.isEmpty && key == _stateKey;
+        if (inkOnly && !identical(next.ink, previous.ink)) {
+          // 就地替换，让已构建的画板继续引用同一列表。
+          previous.ink
+            ..clear()
+            ..addAll(next.ink);
+          next.ink = previous.ink;
+        }
+        state = next;
+        _stateKey = key;
+        _preserveInk = true;
+        snapshotAge
+          ..reset()
+          ..start();
+        pending = false;
+        if (inkOnly) {
+          // 倒计时由页面定时器读取新快照，无需整页重建。
+          if (!_closed) {
+            inkUpdates.value++;
+          }
+          return;
+        }
+      case 'error':
+        _preserveInk = false;
+        _lastInkMessage = null;
+        error = wireString(data, 'message');
+        pending = false;
+      default:
+        throw const FormatException('未知服务器消息');
+    }
+    if (!_closed) {
+      notifyListeners();
+    }
+  }
+
   void _scheduleRetry() {
     if (!_closed && _token != null) {
       _retry?.cancel();
@@ -274,22 +315,27 @@ class RoomClient extends ChangeNotifier {
   }
 
   void send(String type, {String? action, String input = '', Sketch? ink}) {
-    if (!connected || _socket == null) {
+    if (!canTransmit) {
       return;
     }
-    if (type != 'ink') {
+    final message = jsonEncode({
+      'type': type,
+      'revision': state?.revision,
+      'action': ?action,
+      'input': input,
+      if (ink != null) 'ink': encodeSketch(ink),
+    });
+    if (type == 'ink') {
+      // 抬笔时的完整同步常与最后一次进度相同，不重复发送。
+      if (message == _lastInkMessage) {
+        return;
+      }
+      _lastInkMessage = message;
+    } else {
       pending = true;
     }
     error = '';
-    _socket!.add(
-      jsonEncode({
-        'type': type,
-        'revision': state?.revision,
-        'action': ?action,
-        'input': input,
-        if (ink != null) 'ink': encodeSketch(ink),
-      }),
-    );
+    transmit(message);
     if (type != 'ink') {
       notifyListeners();
     }
@@ -304,6 +350,7 @@ class RoomClient extends ChangeNotifier {
     }
     unawaited(_socket?.close() ?? Future<void>.value());
     snapshotAge.stop();
+    inkUpdates.dispose();
     super.dispose();
   }
 }
